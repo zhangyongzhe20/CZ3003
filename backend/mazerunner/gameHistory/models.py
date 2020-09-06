@@ -10,6 +10,4 @@ class gameHistory(models.Model):
     studentID = models.ForeignKey('Student', on_delete=models.CASCADE)
     timestamp = models.DateTimeField
     isAnsweredCorrect = models.BooleanField
-
-    #do we need this?
     questionAnswer = models.CharField(max_length=30)

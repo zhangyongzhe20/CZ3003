@@ -13,9 +13,7 @@ class User(models.Model):
 
 class Student(User):
 
-    #check
     isAdmin = models.BooleanField(default=False)
-
     distanceToNPC = models.IntegerField
     overallScore: models.IntegerField
     Ranking = models.IntegerField
