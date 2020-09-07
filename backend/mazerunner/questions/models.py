@@ -20,6 +20,6 @@ class Questions_student(Questions):
 
 class Questions_answer(Questions):
     #multiple possible foreign keys reference (question_teacher or question_student)?
-    questionID = models.ForeignKey([Questions_teacher, Questions_student], on_delete=models.CASCADE)
+    questionID = models.ForeignKey(Questions_teacher, on_delete=models.CASCADE)
     questionText = models.CharField(max_length=200)
     isCorrect = models.BooleanField
