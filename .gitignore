@@ -1,7 +1,0 @@
-venv/
-env/
-.venv/
-.env/
-.vscode/
-backend/localFile/
-**/migrations/
