@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'questions.apps.QuestionsConfig',
     'users.apps.UsersConfig',
     'gameHistory.apps.GamehistoryConfig',
+    ## dependencies
+    'nested_admin',
 
 ]
 
