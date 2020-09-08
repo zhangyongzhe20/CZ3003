@@ -3,6 +3,6 @@ env/
 .venv/
 .env/
 .vscode/
-backend/localFile/
+**/localFile/
 **/migrations/
 **/__pycache__/
