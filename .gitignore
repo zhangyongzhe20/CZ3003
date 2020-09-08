@@ -1,4 +1,7 @@
+venv/
+env/
+.venv/
+.env/
 .vscode/
-backend/localFile/bugFix.txt
-.pyc
-
+backend/localFile/
+**/migrations/
