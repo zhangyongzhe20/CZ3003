@@ -1,7 +1,40 @@
 from django.test import TestCase
 from questions.models import Questions_teacher, Questions_answer
+from users.models import Student
 
 class ModelTests(TestCase):
+
+    def test_create_player(self):
+        """Test of creating player"""
+        account = "yongzhe"
+        password = "user"
+        name = "zyz"
+        distanceToNPC=0
+        overallScore=0
+        Ranking=0
+        containBonus=False
+        role= "none"
+
+        player = Student.objects.create(
+            account = account,
+            password = password,
+            name = name,
+            distanceToNPC = distanceToNPC,
+            overallScore = overallScore,
+            Ranking = Ranking,
+            containBonus = containBonus,
+            role = role
+        )
+
+        self.assertEqual(player.account, account)
+        self.assertEqual(player.password, password)
+        self.assertEqual(player.name, name)
+        self.assertEqual(player.distanceToNPC, distanceToNPC)
+        self.assertEqual(player.overallScore, overallScore)
+        self.assertEqual(player.Ranking, Ranking)
+        self.assertEqual(player.containBonus, containBonus)
+        self.assertEqual(player.role, role)
+
 
     def test_create_Tquestions(self):
         """Test of creating teacher questions"""
