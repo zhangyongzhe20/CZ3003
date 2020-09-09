@@ -7,7 +7,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 
 from users.models import User , Student
-from .serializers import UserAccountSerializer,StudentAccountSerializer
+from .serializers import UserAccountSerializer,StudentAccountSerializer, StudentAccountLeaderBoardSerializer
 # Create your views here.
 
 class StudentAPIView(APIView):
@@ -23,6 +23,7 @@ class StudentAPIView(APIView):
             return Response(serializer.data , status = status.HTTP_201_CREATED)
         return Response(serializer.errors,status = status.HTTP_400_BAD_REQUEST)
 
+
 class LoginAPIView(APIView):
     def post(self , request): 
         try:
@@ -32,8 +33,12 @@ class LoginAPIView(APIView):
         except:
             return Response({'Error Message': 'incorrect username/password'})
     
-class QuestionAPIView(APIView):
+
+class LeaderBoardAPIView(APIView):
     def get(self , request):
+        students = Student.objects.all()
+        serializer = StudentAccountLeaderBoardSerializer(students , many = True)
+        return Response(serializer.data)
         
         
 

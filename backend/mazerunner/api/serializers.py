@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from users.models import Student , User
+from questions.models import Questions, Questions_student , Questions_teacher , Questions_answer
 
+## User
 class UserAccountSerializer(serializers.ModelSerializer):
     class Meta :
         model = User
@@ -22,8 +24,15 @@ class UserAccountSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
+
 class StudentAccountSerializer(serializers.ModelSerializer):
     class Meta :
         model = Student
         fields = UserAccountSerializer.Meta.fields + ('distanceToNPC','overallScore','Ranking','containBonus','role')
-        
+
+
+## LeaderBoard
+class StudentAccountLeaderBoardSerializer(serializers.ModelSerializer):
+    class Meta :
+        model = Student
+        fields = ('Ranking' , 'name' , 'overallScore' , 'containBonus')
