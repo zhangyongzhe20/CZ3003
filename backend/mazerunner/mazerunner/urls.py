@@ -20,4 +20,5 @@ from django.urls import path, include
 urlpatterns = [
     path('', admin.site.urls),
     path('nested_admin', include('nested_admin.urls')),
+    path('',include('api.urls')),
 ]
