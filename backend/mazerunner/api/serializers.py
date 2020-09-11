@@ -72,13 +72,39 @@ class QuestionHistorySerializer(serializers.ModelSerializer):
     
 
 class QuestionStudentSerializer(serializers.ModelSerializer):
+    questionAns = QuestionAnsSerializer(many = True)
     class Meta:
         model = Questions_student
-        fields = QuestionSerializer.Meta.fields + ('Proposer', 'isApproved')
-
-
-
+        fields = QuestionSerializer.Meta.fields + ('Proposer', 'isApproved' , 'questionAns')
     
+    def create(self , validated_data):
+        datas = validated_data.pop('questionAns')
+        questionStudent = Questions_student.objects.create(**validated_data)
+        for data in datas:
+            Questions_answer.objects.create(questionID = questionStudent , **data)
+        return questionStudent
+
+class gameSummaryAnsSerializer(serializers.ModelSerializer):
+    questionLevel = serializers.SerializerMethodField()
+    class Meta:
+        model = questionHistory
+        fields = ('gameHistory' , 'isAnsweredCorrect','questionLevel')
+    def get_questionLevel(self , obj):
+        return (Questions_teacher.objects.filter(id = obj.questionID.id).values('questionLevel')[0]['questionLevel'])
+
+
+class gameSummarySerializer(serializers.ModelSerializer):
+    questionHistory = serializers.SerializerMethodField()
+    class Meta:
+        model = Student
+        fields = ('Ranking' , 'overallScore' , 'questionHistory')
+
+    def get_questionHistory(self, obj):
+        print(obj.id)
+        qHistory = questionHistory.objects.filter(studentID = obj.id)
+        serializer= gameSummaryAnsSerializer (qHistory , many = True)
+        print(serializer)
+        return serializer.data
 
 
  
