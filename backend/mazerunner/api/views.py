@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
 from users.models import User , Student
-from .serializers import UserAccountSerializer,StudentAccountSerializer,StudentAccountLeaderBoardSerializer , QuestionTeacherSerializer, QuestionHistorySerializer, QuestionStudentSerializer
+from .serializers import UserAccountSerializer,StudentAccountSerializer,StudentAccountLeaderBoardSerializer ,QuestionTeacherSerializer, QuestionHistorySerializer, QuestionStudentSerializer, gameSummarySerializer
 from questions.models import Questions_teacher , Questions , Questions_answer
 # Create your views here.
 
@@ -56,4 +56,22 @@ class QuestionAPIView(APIView):
             return Response({'pass': True} , status = status.HTTP_201_CREATED)
         return Response({'pass':False},status = status.HTTP_400_BAD_REQUEST)
 
-#class CreateQuestionAPIView(APIView):
+class CreateQuestionAPIView(APIView):
+    def post(self , request):
+        serializer = QuestionStudentSerializer(data = request.data)
+        print(serializer.is_valid())
+        if(serializer.is_valid()):
+            serializer.save()
+            return Response({'pass': True} , status = status.HTTP_201_CREATED)
+        return Response({'pass':False},status = status.HTTP_400_BAD_REQUEST)
+
+class gameSummaryAPIView(APIView):
+    def get(get , request):
+        try:
+            student = Student.objects.filter(account = request.data['account'])
+            print(student)
+            serializer= gameSummarySerializer(student , many = True)       
+            return Response(serializer.data)   
+        except:
+            return Response({'Error Message': 'incorrect username/password'})
+        
