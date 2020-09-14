@@ -69,8 +69,21 @@ class QuestionTeacherSerializer(serializers.ModelSerializer):
 class QuestionHistorySerializer(serializers.ModelSerializer):
     class Meta:
         model = questionHistory
-        fields = ('gameHistory','questionID','studentID','isAnsweredCorrect','studentAnswer')
-    
+        fields = ('gameHistory','questionID','studentID','studentAnswer', 'isAnsweredCorrect')
+
+    def create(self , validated_data):
+        print(validated_data['questionID'].id)
+        questionAns = Questions_answer.objects.get(questionID = validated_data['questionID'].id , isCorrect = True)
+        qHistory = questionHistory(
+            gameHistory = validated_data['gameHistory'],
+            questionID = validated_data['questionID'],
+            studentID = validated_data['studentID'],
+            studentAnswer = validated_data['studentAnswer'],
+            isAnsweredCorrect = (questionAns.questionText == validated_data['studentAnswer'])
+        )
+        qHistory.save()
+        return qHistory
+
 
 class QuestionStudentSerializer(serializers.ModelSerializer):
     questionAns = QuestionAnsSerializer(many = True)

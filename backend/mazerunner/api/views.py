@@ -49,12 +49,12 @@ class QuestionAPIView(APIView):
             role = request.data['role'], questionLevel = request.data['questionLevel'])    
             serializer = QuestionTeacherSerializer(questions , many = True)
             return Response(serializer.data)
-    def post(self, request):
+    def post(self, request):    
         serializer = QuestionHistorySerializer(data = request.data)
         if(serializer.is_valid()):
             serializer.save()
-            return Response({'pass': True} , status = status.HTTP_201_CREATED)
-        return Response({'pass':False},status = status.HTTP_400_BAD_REQUEST)
+            return Response(({'pass': serializer.data['isAnsweredCorrect']}) , status = status.HTTP_201_CREATED)
+        return Response({'Error Message': 'Unable to insert new record'},status = status.HTTP_400_BAD_REQUEST)
 
 class CreateQuestionAPIView(APIView):
     def post(self , request):
@@ -62,8 +62,8 @@ class CreateQuestionAPIView(APIView):
         print(serializer.is_valid())
         if(serializer.is_valid()):
             serializer.save()
-            return Response({'pass': True} , status = status.HTTP_201_CREATED)
-        return Response({'pass':False},status = status.HTTP_400_BAD_REQUEST)
+            return Response({'submitted': True} , status = status.HTTP_201_CREATED)
+        return Response({'submitted':False},status = status.HTTP_400_BAD_REQUEST)
 
 class gameSummaryAPIView(APIView):
     def get(get , request):
