@@ -85,6 +85,7 @@ class QuestionStudentSerializer(serializers.ModelSerializer):
             Questions_answer.objects.create(questionID = questionStudent , **data)
         return questionStudent
 
+## Game Summary
 class gameSummarySerializer(serializers.ModelSerializer):
     questionHistory = serializers.SerializerMethodField()
     class Meta:
@@ -93,7 +94,7 @@ class gameSummarySerializer(serializers.ModelSerializer):
 
     def get_questionHistory(self, obj):
         print(obj.id)
-        qHistory = questionHistory.objects.values('gameHistory','questionID__questionLevel','isAnsweredCorrect').annotate(count=Count('isAnsweredCorrect'))
+        qHistory = questionHistory.objects.values('gameHistory','questionID__questionLevel','isAnsweredCorrect').annotate(count=Count('isAnsweredCorrect')).order_by('gameHistory','questionID__questionLevel')
         print(qHistory)
         return qHistory
 
