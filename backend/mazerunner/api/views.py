@@ -68,10 +68,10 @@ class CreateQuestionAPIView(APIView):
 class gameSummaryAPIView(APIView):
     def get(get , request):
         try:
-            student = Student.objects.filter(account = request.data['account'])
+            student = Student.objects.get(account = request.data['account'])
             print(student)
-            serializer= gameSummarySerializer(student , many = True)       
+            serializer= gameSummarySerializer(student)
             return Response(serializer.data)   
         except:
-            return Response({'Error Message': 'incorrect username/password'})
+            return Response({'Error Message': 'record not found'})
         
