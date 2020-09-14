@@ -2,6 +2,7 @@ from rest_framework import serializers
 from users.models import Student , User
 from questions.models import Questions_teacher , Questions , Questions_answer , Questions_student
 from gameHistory.models import questionHistory
+from django.db.models import Count
 ## User
 class UserAccountSerializer(serializers.ModelSerializer):
     class Meta :
@@ -84,15 +85,6 @@ class QuestionStudentSerializer(serializers.ModelSerializer):
             Questions_answer.objects.create(questionID = questionStudent , **data)
         return questionStudent
 
-class gameSummaryAnsSerializer(serializers.ModelSerializer):
-    questionLevel = serializers.SerializerMethodField()
-    class Meta:
-        model = questionHistory
-        fields = ('gameHistory' , 'isAnsweredCorrect','questionLevel')
-    def get_questionLevel(self , obj):
-        return (Questions_teacher.objects.filter(id = obj.questionID.id).values('questionLevel')[0]['questionLevel'])
-
-
 class gameSummarySerializer(serializers.ModelSerializer):
     questionHistory = serializers.SerializerMethodField()
     class Meta:
@@ -101,10 +93,8 @@ class gameSummarySerializer(serializers.ModelSerializer):
 
     def get_questionHistory(self, obj):
         print(obj.id)
-        qHistory = questionHistory.objects.filter(studentID = obj.id)
-        serializer= gameSummaryAnsSerializer (qHistory , many = True)
-        print(serializer)
-        return serializer.data
-
+        qHistory = questionHistory.objects.values('gameHistory','questionID__questionLevel','isAnsweredCorrect').annotate(count=Count('isAnsweredCorrect'))
+        print(qHistory)
+        return qHistory
 
  
