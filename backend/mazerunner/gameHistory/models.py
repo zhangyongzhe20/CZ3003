@@ -1,6 +1,6 @@
 from django.db import models
 from questions.models import Questions_teacher
-from users.models import Student
+from users.models import User
 # Create your models here.
 
 
@@ -29,7 +29,7 @@ class gameHistory(models.Model):
 class questionHistory(models.Model):
     gameHistory = models.ForeignKey(gameHistory, on_delete=models.CASCADE)
     questionID = models.ForeignKey(Questions_teacher, on_delete=models.CASCADE)
-    studentID = models.ForeignKey(Student, on_delete=models.CASCADE)
+    studentID = models.ForeignKey(User, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
     isAnsweredCorrect = models.BooleanField(default=False)
     studentAnswer = models.CharField(max_length=30, default ="1")

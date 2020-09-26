@@ -2,19 +2,35 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view
+from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
-from users.models import User , Student
-from .serializers import UserAccountSerializer,StudentAccountSerializer,StudentAccountLeaderBoardSerializer ,QuestionTeacherSerializer, QuestionHistorySerializer, QuestionStudentSerializer, gameSummarySerializer
+from users.models import User
+from .serializers import StudentAccountSerializer ,QuestionTeacherSerializer, QuestionHistorySerializer, QuestionStudentSerializer, gameSummarySerializer
 from questions.models import Questions_teacher , Questions , Questions_answer
 # Create your views here.
 
+
 class StudentAPIView(APIView):
+    serializer_class = StudentAccountSerializer
+
+    def get_queryset(self):
+        users = User.objects.all()
+        return users
+
     def get(self , request):
-        students = Student.objects.all()
-        serializer = StudentAccountSerializer(students , many = True)
+        try:
+            id = request.query_params["id"]
+            if id != None:
+                student = User.objects.get(id = id)
+                serializer = StudentAccountSerializer(student)
+        except:
+                students = User.objects.filter(is_staff = False)
+                serializer = StudentAccountSerializer(students , many = True)
+
         return Response(serializer.data)
+        
     def post(self , request):
         serializer = StudentAccountSerializer(data = request.data)
 
@@ -24,26 +40,21 @@ class StudentAPIView(APIView):
         return Response(serializer.errors,status = status.HTTP_400_BAD_REQUEST)
 
 
+
 class LoginAPIView(APIView):
     def post(self , request): 
         try:
-            student = Student.objects.get(account = request.data['account'] , password = request.data['password'])
+            student = User.objects.get(account = request.data['account'] , password = request.data['password'])
             print(request.data)
             serializer = StudentAccountSerializer(student)
             return Response(serializer.data)   
         except:
             return Response({'Error Message': 'incorrect username/password'})
     
-
-class LeaderBoardAPIView(APIView):
-    def get(self , request):
-        students = Student.objects.all()
-        serializer = StudentAccountLeaderBoardSerializer(students , many = True)
-        return Response(serializer.data)
     
 
 class QuestionAPIView(APIView):
-    def get(get , request):
+    def get(self , request):
             print(request.data)
             questions = Questions_teacher.objects.filter(world = request.data['world'], section  = request.data['section'],
             role = request.data['role'], questionLevel = request.data['questionLevel'])    
@@ -66,9 +77,9 @@ class CreateQuestionAPIView(APIView):
         return Response({'submitted':False},status = status.HTTP_400_BAD_REQUEST)
 
 class gameSummaryAPIView(APIView):
-    def get(get , request):
+    def get(self , request):
         try:
-            student = Student.objects.get(account = request.data['account'])
+            student = User.objects.get(account = request.data['account'])
             print(student)
             serializer= gameSummarySerializer(student)
             return Response(serializer.data)   
