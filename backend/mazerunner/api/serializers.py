@@ -4,11 +4,8 @@ from questions.models import Questions_teacher , Questions , Questions_answer , 
 from gameHistory.models import questionHistory
 from django.db.models import Count
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
 ## User
-
-
-
-
 class StudentAccountSerializer(serializers.ModelSerializer):
     class Meta :
         model = User
@@ -92,14 +89,9 @@ class TokenObtainPairPatchedSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         # The default result (access/refresh tokens)
         data = super(TokenObtainPairPatchedSerializer, self).validate(attrs)
-        
-        data.update({'id': self.user.id})
-        data.update({'email': self.user.email})
-        data.update({'name': self.user.name})
-        data.update({'distanceToNPC': self.user.distanceToNPC})
-        data.update({'overallScore': self.user.overallScore})
-        data.update({'containBonus': self.user.containBonus})
-        data.update({'role': self.user.role})
+        print(self.user)
+        student = StudentAccountSerializer(self.user)
+        data.update({'user': student.data})
         return data
 
   
