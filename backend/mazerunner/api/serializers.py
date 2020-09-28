@@ -1,11 +1,22 @@
 from rest_framework import serializers
 from users.models import User
+from django.contrib.auth import authenticate
 from questions.models import Questions_teacher , Questions , Questions_answer , Questions_student
 from gameHistory.models import questionHistory
 from django.db.models import Count
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
 
 ## User
+class LoginSerializer(serializers.Serializer):
+    email = serializers.CharField()
+    password = serializers.CharField()
+
+    def validate(self , data):
+        student = authenticate(**data)
+        if student:
+            return student
+        raise serializers.ValidateError("Incorrect Email/Password")
+
 class StudentAccountSerializer(serializers.ModelSerializer):
     class Meta :
         model = User
@@ -85,13 +96,6 @@ class gameSummarySerializer(serializers.ModelSerializer):
 
  
  
-class TokenObtainPairPatchedSerializer(TokenObtainPairSerializer):
-    def validate(self, attrs):
-        # The default result (access/refresh tokens)
-        data = super(TokenObtainPairPatchedSerializer, self).validate(attrs)
-        print(self.user)
-        student = StudentAccountSerializer(self.user)
-        data.update({'user': student.data})
-        return data
+
 
   

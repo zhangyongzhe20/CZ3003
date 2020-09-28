@@ -7,9 +7,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
 from users.models import User
-from .serializers import StudentAccountSerializer ,QuestionTeacherSerializer, QuestionHistorySerializer, QuestionStudentSerializer, gameSummarySerializer ,TokenObtainPairPatchedSerializer
+from .serializers import LoginSerializer ,StudentAccountSerializer ,QuestionTeacherSerializer, QuestionHistorySerializer, QuestionStudentSerializer, gameSummarySerializer
 from questions.models import Questions_teacher , Questions , Questions_answer
-from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework.authtoken.models import Token
 # Create your views here.
 
 
@@ -42,8 +42,21 @@ class StudentAPIView(APIView):
 
 
 #Login
-class TokenObtainPairPatchedView(TokenObtainPairView):
-    serializer_class = TokenObtainPairPatchedSerializer
+class LoginAPIView(APIView):
+    serializer_class = LoginSerializer
+
+    def post(self , request):
+        try:
+            serializer = LoginSerializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            student = serializer.validated_data
+            token, created = Token.objects.get_or_create(user=student)
+            return Response({
+                "user" : StudentAccountSerializer(student).data,
+                "token": token.key
+                })
+        except:
+            return Response({"Error Message" : "Incorrect Email/Password"})
     
     
 
