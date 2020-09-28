@@ -7,8 +7,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
 from users.models import User
-from .serializers import StudentAccountSerializer ,QuestionTeacherSerializer, QuestionHistorySerializer, QuestionStudentSerializer, gameSummarySerializer
+from .serializers import StudentAccountSerializer ,QuestionTeacherSerializer, QuestionHistorySerializer, QuestionStudentSerializer, gameSummarySerializer ,TokenObtainPairPatchedSerializer
 from questions.models import Questions_teacher , Questions , Questions_answer
+from rest_framework_simplejwt.views import TokenObtainPairView
 # Create your views here.
 
 
@@ -40,16 +41,9 @@ class StudentAPIView(APIView):
         return Response(serializer.errors,status = status.HTTP_400_BAD_REQUEST)
 
 
-
-class LoginAPIView(APIView):
-    def post(self , request): 
-        try:
-            student = User.objects.get(account = request.data['account'] , password = request.data['password'])
-            print(request.data)
-            serializer = StudentAccountSerializer(student)
-            return Response(serializer.data)   
-        except:
-            return Response({'Error Message': 'incorrect username/password'})
+#Login
+class TokenObtainPairPatchedView(TokenObtainPairView):
+    serializer_class = TokenObtainPairPatchedSerializer
     
     
 
@@ -86,3 +80,4 @@ class gameSummaryAPIView(APIView):
         except:
             return Response({'Error Message': 'record not found'})
         
+
