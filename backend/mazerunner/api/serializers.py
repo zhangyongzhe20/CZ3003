@@ -2,7 +2,7 @@ from rest_framework import serializers
 from users.models import User
 from django.contrib.auth import authenticate
 from questions.models import Questions_teacher , Questions , Questions_answer , Questions_student
-from gameHistory.models import questionHistory
+from gameHistory.models import questionHistory 
 from django.db.models import Count
 
 
@@ -21,7 +21,11 @@ class StudentAccountSerializer(serializers.ModelSerializer):
     class Meta :
         model = User
         fields = ('id','email','name','distanceToNPC','overallScore','containBonus','role')
-
+        
+class LeaderBoardSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('name' , 'overallScore')
 ##Question
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta :
@@ -49,23 +53,11 @@ class QuestionTeacherSerializer(serializers.ModelSerializer):
         fields = ('id','questionBody', 'isMCQ' , 'questionAns')
 
 
+    
 class QuestionHistorySerializer(serializers.ModelSerializer):
     class Meta:
         model = questionHistory
-        fields = ('gameHistory','questionID','studentID','studentAnswer', 'isAnsweredCorrect')
-
-    def create(self , validated_data):
-        print(validated_data['questionID'].id)
-        questionAns = Questions_answer.objects.get(questionID = validated_data['questionID'].id , isCorrect = True)
-        qHistory = questionHistory(
-            gameHistory = validated_data['gameHistory'],
-            questionID = validated_data['questionID'],
-            studentID = validated_data['studentID'],
-            studentAnswer = validated_data['studentAnswer'],
-            isAnsweredCorrect = (questionAns.questionText == validated_data['studentAnswer'])
-        )
-        qHistory.save()
-        return qHistory
+        fields = ('worldID' , 'sectionID','questionID','studentID','studentAnswer', 'isAnsweredCorrect')
 
 
 class QuestionStudentSerializer(serializers.ModelSerializer):
@@ -78,6 +70,7 @@ class QuestionStudentSerializer(serializers.ModelSerializer):
         datas = validated_data.pop('questionAns')
         questionStudent = Questions_student.objects.create(**validated_data)
         for data in datas:
+            print(data)
             Questions_answer.objects.create(questionID = questionStudent , **data)
         return questionStudent
 

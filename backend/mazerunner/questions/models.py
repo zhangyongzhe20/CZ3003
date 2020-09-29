@@ -18,7 +18,7 @@ class Questions_teacher(Questions):
 
 
 class Questions_student(Questions):
-    Proposer = models.CharField(max_length=30)
+    Proposer = models.CharField(max_length=100)
     isApproved = models.BooleanField(default=False)
 
     def __str__(self):
