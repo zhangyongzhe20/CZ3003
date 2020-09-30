@@ -3,7 +3,7 @@ from users.models import User
 from django.contrib.auth import authenticate
 from questions.models import Questions_teacher , Questions , Questions_answer , Questions_student
 from gameHistory.models import questionHistory 
-from django.db.models import Count
+from django.db.models import Count , F
 
 
 ## User
@@ -82,9 +82,12 @@ class gameSummarySerializer(serializers.ModelSerializer):
         fields = ('email', 'overallScore' , 'questionHistory')
 
     def get_questionHistory(self, obj):
-        print(obj.id)
-        qHistory = questionHistory.objects.values('worldID__name','sectionID__name','questionID__questionLevel','isAnsweredCorrect').annotate(count=Count('isAnsweredCorrect')).order_by('worldID__name','sectionID__name','questionID__questionLevel')
-        print(qHistory)
+        qHistory= questionHistory.objects.values('worldID__name','sectionID__name','questionID__questionLevel').annotate( world = F('worldID__name') ,
+        section = F('sectionID__name') , questionLevel = F('questionID__questionLevel'), value=Count('questionID__questionLevel')).values('world','section','questionLevel','value')        
+        for data in qHistory:
+            correctCount =  questionHistory.objects.filter(worldID__name = data['world'] , sectionID__name = data['section'] , questionID__questionLevel = data['questionLevel'], isAnsweredCorrect = True).count()
+            data['value'] = str(correctCount) + " / " +  str(data['value']) 
+            print(data)
         return qHistory
 
  
