@@ -73,14 +73,15 @@ class QuestionAPIView(APIView):
        
         try:
             if request.data["world"] != None and request.data["section"] != None and request.data["role"] !=None and request.data["questionLevel"] != None:
-                questions = Questions_teacher.objects.filter(world = request.data["world"], section  = request.data["section"], role = request.data["role"], questionLevel = request.data["questionLevel"] )   
+                world = World.objects.get(name = request.data['world'])
+                section = Section.objects.get(name = request.data['section'])
+                questions = Questions_teacher.objects.filter(worldID = world , sectionID  = section , role = request.data["role"], questionLevel = request.data["questionLevel"] )   
         except:
             questions = Questions_teacher.objects.all()
         serializer = QuestionTeacherSerializer(questions , many = True)
         return Response(serializer.data)
 
     def post(self, request):   
-        print(request.data)
         world = World.objects.get(name = request.data['world'])
         section = Section.objects.get(name = request.data['section'])
         data = {
@@ -111,7 +112,7 @@ class CreateQuestionAPIView(APIView):
 class gameSummaryAPIView(APIView):
     def get(self , request):
         try:
-            student = User.objects.get(account = request.data['account'])
+            student = User.objects.get(email = request.data['email'])
             print(student)
             serializer= gameSummarySerializer(student)
             return Response(serializer.data)   

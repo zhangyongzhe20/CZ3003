@@ -79,11 +79,11 @@ class gameSummarySerializer(serializers.ModelSerializer):
     questionHistory = serializers.SerializerMethodField()
     class Meta:
         model = User
-        fields = ('Ranking' , 'overallScore' , 'questionHistory')
+        fields = ('email', 'overallScore' , 'questionHistory')
 
     def get_questionHistory(self, obj):
         print(obj.id)
-        qHistory = questionHistory.objects.values('gameHistory','questionID__questionLevel','isAnsweredCorrect').annotate(count=Count('isAnsweredCorrect')).order_by('gameHistory','questionID__questionLevel')
+        qHistory = questionHistory.objects.values('worldID__name','sectionID__name','questionID__questionLevel','isAnsweredCorrect').annotate(count=Count('isAnsweredCorrect')).order_by('worldID__name','sectionID__name','questionID__questionLevel')
         print(qHistory)
         return qHistory
 
