@@ -296,6 +296,10 @@ class TestViews(APITestCase):
         student = User.objects.get(email = self.user.email)
         self.assertEqual( res_data , gameSummarySerializer(student).data)
         self.assertEqual(res.status_code , 200)
-        
-        
     
+    def test_game_summary_with_no_input(self): 
+        self.client.force_authenticate(user = self.user)
+        res = self.client.generic(method="GET", path= self.game_summary_url, content_type='application/json')
+        res_data = json.loads(res.content)
+        self.assertEqual( res_data , {'Error Message': 'record not found'})
+        self.assertEqual(res.status_code , 400)
