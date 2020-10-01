@@ -30,7 +30,7 @@ class LoginAPIView(APIView):
                 "token": token.key
                 })
         except:
-            return Response({"Error Message" : "Incorrect Email/Password"})
+            return Response({"Error Message" : "Incorrect Email/Password"},status = status.HTTP_401_UNAUTHORIZED)
     
 
 
@@ -49,18 +49,10 @@ class StudentAPIView(APIView):
                 serializer = StudentAccountSerializer(student)
         except:
                 students = User.objects.filter(is_staff = False)
-                serializer = StudentAccountSerializer(students , many = True)
+                serializer = StudentAccountSerializer(students , many = True)    
 
         return Response(serializer.data)
         
-    def post(self , request):
-        serializer = StudentAccountSerializer(data = request.data)
-
-        if(serializer.is_valid()):
-            serializer.save()
-            return Response(serializer.data , status = status.HTTP_201_CREATED)
-        return Response(serializer.errors,status = status.HTTP_400_BAD_REQUEST)
-
 class LeaderBoardAPIView(APIView):
     serializer_class = LeaderBoardSerializer
     def get(self , request):
@@ -70,40 +62,37 @@ class LeaderBoardAPIView(APIView):
 
 class QuestionAPIView(APIView):
     def get(self , request):
-       
         try:
-            if request.data["world"] != None and request.data["section"] != None and request.data["role"] !=None and request.data["questionLevel"] != None:
-                world = World.objects.get(name = request.data['world'])
-                section = Section.objects.get(name = request.data['section'])
-                questions = Questions_teacher.objects.filter(worldID = world , sectionID  = section , role = request.data["role"], questionLevel = request.data["questionLevel"] )   
+            world = World.objects.get(name = request.data['world'])
+            section = Section.objects.get(name = request.data['section'])
+            questions = Questions_teacher.objects.filter(worldID = world , sectionID  = section , role = request.data["role"], questionLevel = request.data["questionLevel"] )   
+            serializer = QuestionTeacherSerializer(questions , many = True)
+            return Response(serializer.data , status = status.HTTP_200_OK)
         except:
-            questions = Questions_teacher.objects.all()
-        serializer = QuestionTeacherSerializer(questions , many = True)
-        return Response(serializer.data)
+            return Response({'Error Message' :'Please enter the correct input'} ,status = status.HTTP_400_BAD_REQUEST)
 
-    def post(self, request):   
-        world = World.objects.get(name = request.data['world'])
-        section = Section.objects.get(name = request.data['section'])
-        data = {
+    def post(self, request):  
+        try: 
+            world = World.objects.get(name = request.data['world'])
+            section = Section.objects.get(name = request.data['section'])
+            data = {
             "worldID" : world.id,
             "sectionID" : section.id,
             "questionID": request.data['questionID'],
             "studentID" : request.data['studentID'],
             "studentAnswer" : request.data['studentAnswer'],
             "isAnsweredCorrect" : request.data['isAnsweredCorrect'],
-        }
-        print(data)
-        serializer = QuestionHistorySerializer(data = data)
-        if(serializer.is_valid()):
-            serializer.save()
-            return Response(({'pass': True}) , status = status.HTTP_201_CREATED)
-        return Response({'pass': False},status = status.HTTP_400_BAD_REQUEST)
+            }
+            serializer = QuestionHistorySerializer(data = data)
+            if(serializer.is_valid()):
+                serializer.save()
+                return Response(({'pass': True}) , status = status.HTTP_201_CREATED)
+        except:        
+            return Response({'pass': False},status = status.HTTP_400_BAD_REQUEST)
 
 class CreateQuestionAPIView(APIView):
     def post(self , request):
-        print(request.data)
         serializer = QuestionStudentSerializer(data = request.data)
-        print(serializer.is_valid())
         if(serializer.is_valid()):
             serializer.save()
             return Response({'submitted': True} , status = status.HTTP_201_CREATED)
@@ -113,10 +102,9 @@ class gameSummaryAPIView(APIView):
     def get(self , request):
         try:
             student = User.objects.get(email = request.data['email'])
-            print(student)
             serializer= gameSummarySerializer(student)
-            return Response(serializer.data)   
+            return Response(serializer.data , status = status.HTTP_200_OK)   
         except:
-            return Response({'Error Message': 'record not found'})
+            return Response({'Error Message': 'record not found'} , status = status.HTTP_400_BAD_REQUEST)
         
 

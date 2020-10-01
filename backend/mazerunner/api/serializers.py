@@ -42,10 +42,8 @@ class QuestionTeacherSerializer(serializers.ModelSerializer):
     questionAns = serializers.SerializerMethodField()
 
     def get_questionAns(self, obj):
-        print(obj.id)
         questionAnss = Questions_answer.objects.filter(questionID = obj.id)
         serializers = QuestionAnsSerializer(questionAnss , many = True)
-        print(serializers.data)
         return serializers.data
     
     class Meta:
@@ -70,7 +68,6 @@ class QuestionStudentSerializer(serializers.ModelSerializer):
         datas = validated_data.pop('questionAns')
         questionStudent = Questions_student.objects.create(**validated_data)
         for data in datas:
-            print(data)
             Questions_answer.objects.create(questionID = questionStudent , **data)
         return questionStudent
 
@@ -87,8 +84,7 @@ class gameSummarySerializer(serializers.ModelSerializer):
         for data in qHistory:
             correctCount =  questionHistory.objects.filter(worldID__name = data['world'] , sectionID__name = data['section'] , questionID__questionLevel = data['questionLevel'], isAnsweredCorrect = True).count()
             data['value'] = str(correctCount) + " / " +  str(data['value']) 
-            print(data)
-        return qHistory
+        return list(qHistory)
 
  
  
