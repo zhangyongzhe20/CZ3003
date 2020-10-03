@@ -3,9 +3,6 @@ from django.contrib import admin
 from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
-from django.shortcuts import render
-from django.urls import path
-from django.template.response import TemplateResponse
 
 from .models import User
 
@@ -75,9 +72,7 @@ class UserChangeForm(forms.ModelForm):
         # field does not have access to the initial value
      #   return self.initial["password"]
 
-class UserAdmin(BaseUserAdmin, admin.ModelAdmin):
-    change_form_template = 'custom_change_form.html'
-
+class UserAdmin(BaseUserAdmin):
     # The forms to add and change user instances
     form = UserChangeForm
     add_form = UserCreationForm
@@ -116,20 +111,7 @@ class UserAdmin(BaseUserAdmin, admin.ModelAdmin):
     ordering = ('email',)
     filter_horizontal = ()
 
-
-    def get_urls(self):
-        urls = super().get_urls()
-        my_urls = [
-            path('stats/', self.gostats)
-        ]
-        return my_urls + urls
-
-    def gostats(self, request):
-        return TemplateResponse(
-            request,
-            'users/post_assignment.html',
-            context,
-        )
+    
 
 
 # Now register the new UserAdmin...
