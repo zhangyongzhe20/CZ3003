@@ -56,4 +56,13 @@ class User(AbstractBaseUser):
     # def is_staff(self):
     #     "Is the user a member of staff?"
     #     # Simplest possible answer: All admins are staff
+<<<<<<< Updated upstream
     #     return self.is_admin
+=======
+    #     return self.is_admin
+
+
+@receiver(post_save, sender=settings.AUTH_USER_MODEL)
+def create_auth_token(sender, instance=None, created=False, **kwargs):
+    Token.objects.get_or_create(user=instance)
+>>>>>>> Stashed changes
