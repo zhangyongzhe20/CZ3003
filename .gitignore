@@ -6,3 +6,5 @@ env/
 **/localFile/
 **/migrations/
 **/__pycache__/
+**/node_modules/
+Pipfile
