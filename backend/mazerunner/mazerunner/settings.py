@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     ## dependencies
     'nested_admin',
-
+    ## Dashboard communication
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -58,6 +59,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    ## Dashboard communication
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'mazerunner.urls'

@@ -7,4 +7,6 @@ env/
 **/migrations/
 **/__pycache__/
 **/node_modules/
-Pipfile
+Pipfile*
+**.idea
+**/settings.json

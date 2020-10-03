@@ -76,7 +76,7 @@ class UserChangeForm(forms.ModelForm):
      #   return self.initial["password"]
 
 class UserAdmin(BaseUserAdmin, admin.ModelAdmin):
-    change_form_template = 'custom_change_form.html'
+    change_form_template = 'users/custom_change_form.html'
 
     # The forms to add and change user instances
     form = UserChangeForm

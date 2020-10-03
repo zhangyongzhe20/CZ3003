@@ -1,5 +1,6 @@
 import React, {Component} from "react";
-import {Navbar, Nav, Row, Col, Container, NavDropdown, ToggleButton, ButtonGroup, Table} from "react-bootstrap";
+import {Navbar, Row, Col, Container, ToggleButton, ButtonGroup, Table} from "react-bootstrap";
+import Chart from 'chart.js';
 import "./styles.css";
 
 class App extends Component {
@@ -27,34 +28,8 @@ class App extends Component {
       <Navbar bg="dark" variant="dark">
         <Navbar.Brand>Welcome {this.state.teacherName}</Navbar.Brand>
         </Navbar>
-        <Container fluid>
+        <Container fluid className="p-5">
           <Row>
-            <Col xs="auto">
-            <Nav class="col-md-12 d-none d-md-block bg-light sidebar">
-                <Nav.Link>
-                  Game Statistics
-                </Nav.Link>
-                <Nav.Link>
-                  Manage Player
-                </Nav.Link>
-                <Nav.Link>
-                  Post Question
-                </Nav.Link>
-                <NavDropdown title="Manage Questions">
-                  <NavDropdown.Item>
-                    Add
-                  </NavDropdown.Item>
-                  <NavDropdown.Item>
-                    Remove
-                  </NavDropdown.Item>
-                  <NavDropdown.Item>
-                    Approve
-                  </NavDropdown.Item>
-                </NavDropdown>
-          </Nav>
-          </Col>
-              <Col className="p-5">
-              <Row>
                 <Col>
                   <ButtonGroup toggle>
                     <ToggleButton type="radio" checked={"Average" === this.state.statistics} onChange={() => this.setState({statistics: "Average"})}>
@@ -93,8 +68,6 @@ class App extends Component {
                 <Col>
                 {this.generateTable}
                 </Col>
-              </Row>
-              </Col>
           </Row>
         </Container>
     </>
