@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import gameHistory, World, Section, questionHistory
+from .models import World, Section, questionHistory
 
 
 class questionHistoryInline(admin.TabularInline):
@@ -10,7 +10,6 @@ class questionHistoryInline(admin.TabularInline):
 class gameAdmin(admin.ModelAdmin):
 	inlines = [questionHistoryInline,]
 
-admin.site.register(gameHistory,gameAdmin)
 admin.site.register(questionHistory)
 admin.site.register(World)
 admin.site.register(Section)
