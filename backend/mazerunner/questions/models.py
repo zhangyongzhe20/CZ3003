@@ -1,6 +1,21 @@
 from django.db import models
-
 # Create your models here.
+
+class World(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.CharField(max_length=70,blank = True)
+
+    def __str__(self):
+        return self.name
+
+
+class Section(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.CharField(max_length=70, blank = True)
+    def __str__(self):
+        return self.name
+
+
 class Questions(models.Model):
     questionBody = models.CharField(max_length=200)
     isMCQ = models.BooleanField(default=False)
@@ -8,8 +23,8 @@ class Questions(models.Model):
     #     abstract = True
 
 class Questions_teacher(Questions):
-    world = models.CharField(max_length=30)
-    section = models.CharField(max_length=30)
+    worldID =  models.ForeignKey(World, on_delete=models.CASCADE)
+    sectionID = models.ForeignKey(Section, on_delete=models.CASCADE)
     role = models.CharField(max_length=30)
     questionLevel = models.IntegerField(default=0)
 
@@ -18,7 +33,7 @@ class Questions_teacher(Questions):
 
 
 class Questions_student(Questions):
-    Proposer = models.CharField(max_length=30)
+    Proposer = models.CharField(max_length=100)
     isApproved = models.BooleanField(default=False)
 
     def __str__(self):

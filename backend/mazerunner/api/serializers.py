@@ -2,8 +2,8 @@ from rest_framework import serializers
 from users.models import User
 from django.contrib.auth import authenticate
 from questions.models import Questions_teacher , Questions , Questions_answer , Questions_student
-from gameHistory.models import questionHistory
-from django.db.models import Count
+from gameHistory.models import questionHistory 
+from django.db.models import Count , F
 
 
 ## User
@@ -21,7 +21,11 @@ class StudentAccountSerializer(serializers.ModelSerializer):
     class Meta :
         model = User
         fields = ('id','email','name','distanceToNPC','overallScore','containBonus','role')
-
+        
+class LeaderBoardSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('name' , 'overallScore')
 ##Question
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta :
@@ -38,10 +42,8 @@ class QuestionTeacherSerializer(serializers.ModelSerializer):
     questionAns = serializers.SerializerMethodField()
 
     def get_questionAns(self, obj):
-        print(obj.id)
         questionAnss = Questions_answer.objects.filter(questionID = obj.id)
         serializers = QuestionAnsSerializer(questionAnss , many = True)
-        print(serializers.data)
         return serializers.data
     
     class Meta:
@@ -49,23 +51,11 @@ class QuestionTeacherSerializer(serializers.ModelSerializer):
         fields = ('id','questionBody', 'isMCQ' , 'questionAns')
 
 
+    
 class QuestionHistorySerializer(serializers.ModelSerializer):
     class Meta:
         model = questionHistory
-        fields = ('gameHistory','questionID','studentID','studentAnswer', 'isAnsweredCorrect')
-
-    def create(self , validated_data):
-        print(validated_data['questionID'].id)
-        questionAns = Questions_answer.objects.get(questionID = validated_data['questionID'].id , isCorrect = True)
-        qHistory = questionHistory(
-            gameHistory = validated_data['gameHistory'],
-            questionID = validated_data['questionID'],
-            studentID = validated_data['studentID'],
-            studentAnswer = validated_data['studentAnswer'],
-            isAnsweredCorrect = (questionAns.questionText == validated_data['studentAnswer'])
-        )
-        qHistory.save()
-        return qHistory
+        fields = ('worldID' , 'sectionID','questionID','studentID','studentAnswer', 'isAnsweredCorrect')
 
 
 class QuestionStudentSerializer(serializers.ModelSerializer):
@@ -86,13 +76,15 @@ class gameSummarySerializer(serializers.ModelSerializer):
     questionHistory = serializers.SerializerMethodField()
     class Meta:
         model = User
-        fields = ('Ranking' , 'overallScore' , 'questionHistory')
+        fields = ('email', 'overallScore' , 'questionHistory')
 
     def get_questionHistory(self, obj):
-        print(obj.id)
-        qHistory = questionHistory.objects.values('gameHistory','questionID__questionLevel','isAnsweredCorrect').annotate(count=Count('isAnsweredCorrect')).order_by('gameHistory','questionID__questionLevel')
-        print(qHistory)
-        return qHistory
+        qHistory= questionHistory.objects.values('worldID__name','sectionID__name','questionID__questionLevel').annotate( world = F('worldID__name') ,
+        section = F('sectionID__name') , questionLevel = F('questionID__questionLevel'), value=Count('questionID__questionLevel')).values('world','section','questionLevel','value')        
+        for data in qHistory:
+            correctCount =  questionHistory.objects.filter(worldID__name = data['world'] , sectionID__name = data['section'] , questionID__questionLevel = data['questionLevel'], isAnsweredCorrect = True).count()
+            data['value'] = str(correctCount) + " / " +  str(data['value']) 
+        return list(qHistory)
 
  
  
