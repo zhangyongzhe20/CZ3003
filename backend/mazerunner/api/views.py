@@ -65,7 +65,16 @@ class QuestionAPIView(APIView):
         try:
             world = World.objects.get(name = request.data['world'])
             section = Section.objects.get(name = request.data['section'])
-            questions = Questions_teacher.objects.filter(worldID = world , sectionID  = section , role = request.data["role"], questionLevel = request.data["questionLevel"] )   
+
+            role = 'no role'
+            if(request.data["role"] == "1"):
+                role = 'project manager'
+            if(request.data["role"] == "2"):
+                role = 'frontend'
+            if(request.data["role"] == "3"):
+                role = 'backend'
+    
+            questions = Questions_teacher.objects.filter(worldID = world , sectionID  = section , role = role, questionLevel = request.data["questionLevel"] )   
             serializer = QuestionTeacherSerializer(questions , many = True)
             return Response(serializer.data , status = status.HTTP_200_OK)
         except:
