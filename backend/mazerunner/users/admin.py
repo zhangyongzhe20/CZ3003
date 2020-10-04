@@ -76,7 +76,7 @@ class UserChangeForm(forms.ModelForm):
      #   return self.initial["password"]
 
 class UserAdmin(BaseUserAdmin, admin.ModelAdmin):
-    change_form_template = 'custom_change_form.html'
+    change_form_template = 'users/custom_change_form.html'
 
     # The forms to add and change user instances
     form = UserChangeForm
@@ -117,19 +117,19 @@ class UserAdmin(BaseUserAdmin, admin.ModelAdmin):
     filter_horizontal = ()
 
 
-    def get_urls(self):
-        urls = super().get_urls()
-        my_urls = [
-            path('stats/', self.gostats)
-        ]
-        return my_urls + urls
+#    def get_urls(self):
+#        urls = super().get_urls()
+#        my_urls = [
+#            path('stats/', self.gostats)
+#        ]
+#        return my_urls + urls
 
-    def gostats(self, request):
-        return TemplateResponse(
-            request,
-            'users/post_assignment.html',
-            context,
-        )
+#    def gostats(self, request):
+#        return TemplateResponse(
+#            request,
+#            'users/post_assignment.html',
+#           context,
+#       )
 
 
 # Now register the new UserAdmin...
