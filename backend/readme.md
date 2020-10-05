@@ -15,5 +15,5 @@
 * `Admin page`: Lightweight dashboard
 
 ### Phase 2"
-* `Testing`:  all test cases are stored in folder `tests` and run `python manage.py test` for testing.
+* `Testing`:  all test cases are stored in folder `tests` and execute `python manage.py test` for unit test.
 * `Deployment`: Django in Docker. [Link](https://docs.docker.com/compose/django/)
