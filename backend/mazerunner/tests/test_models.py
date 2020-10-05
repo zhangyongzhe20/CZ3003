@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-"""Whitebox testing implemented with Django unit test for our modules: User, Question, gameHistory"""
-=======
+
 """Whitebox testing implemented with Django unittest for our components : Model"""
->>>>>>> f8aa0d9e7f0cc422552dfa688d3bc8fb26d91dd4
 """ All code in setUp will be run once before each test case """
 
 """Django libs used in the test cases"""

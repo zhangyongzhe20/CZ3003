@@ -1,11 +1,19 @@
+"""Whitebox testing implemented with Django unittest for our components : RESTful API"""
+""" All code in setUp will be run once before each test case """
+
+"""Django libs used in the test cases"""
 from django.urls import reverse, resolve
 from rest_framework.test import APITestCase, URLPatternsTestCase, APIClient
 from rest_framework.authtoken.models import Token
+import json
+
+
+""" import our modules for unit test """
 from users.models import User
 from gameHistory.models import questionHistory
 from questions.models import Questions_teacher, Questions_answer, World, Section
 from api.serializers import StudentAccountSerializer, LeaderBoardSerializer, QuestionTeacherSerializer, gameSummarySerializer
-import json
+
 # Create your tests here.
 
 
@@ -27,7 +35,6 @@ class TestViews(APITestCase):
             'email': 'testuser@mail.com',
             'password': 'password',
             'name': 'testuser',
-            'role': 'frontend'
         }
         self.user = User.objects.create_user(**self.credentials)
 
@@ -45,7 +52,7 @@ class TestViews(APITestCase):
             isMCQ=True,
             worldID=world1,
             sectionID=section1,
-            role="testing role",
+            role="frontend",
             questionLevel=1)
         """ create question answers for the question"""
         Questions_answer.objects.create(
