@@ -39,11 +39,10 @@ class ModelTests(TestCase):
         """ Create a teacher question """
         self.question1 = Questions_teacher.objects.create(
             questionBody="What's HTML used for?",
-            isMCQ=False,
             worldID=self.world1,
             sectionID=self.section1,
             role="frontend",
-            questionLevel=1)   
+            questionLevel=3)   
 
         """ Create an answer for a question """
         self.answer1 = Questions_answer.objects.create(
@@ -85,9 +84,8 @@ class ModelTests(TestCase):
         question = Questions_teacher.objects.get(worldID = self.world1)
         """ check all atributes of teacher questions are correct """
         self.assertEqual(question.questionBody, "What's HTML used for?")
-        self.assertEqual(question.isMCQ, False)
         self.assertEqual(question.role, "frontend")
-        self.assertEqual(question.questionLevel, 1)
+        self.assertEqual(question.questionLevel, 3)
 
     def test_create_questionAnswer(self):
         """ test an answer of a teacher question is created """

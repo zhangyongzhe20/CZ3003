@@ -49,7 +49,6 @@ class TestViews(APITestCase):
         """create questions"""
         question1 = Questions_teacher.objects.create(
             questionBody="1+1 = ?",
-            isMCQ=True,
             worldID=world1,
             sectionID=section1,
             role="frontend",
@@ -69,7 +68,6 @@ class TestViews(APITestCase):
         """create questions"""
         question2 = Questions_teacher.objects.create(
             questionBody="2+2 = ?",
-            isMCQ=True,
             worldID=world1,
             sectionID=section1,
             role="frontend",
@@ -92,7 +90,6 @@ class TestViews(APITestCase):
         """ create a question """
         question3 = Questions_teacher.objects.create(
             questionBody="1*1 = ?",
-            isMCQ=True,
             worldID=world1,
             sectionID=section2,
             role="frontend",
@@ -114,7 +111,6 @@ class TestViews(APITestCase):
         """ create a question """
         question4 = Questions_teacher.objects.create(
             questionBody="2*2 = ?",
-            isMCQ=True,
             worldID=world1,
             sectionID=section2,
             role="frontend",
@@ -136,7 +132,6 @@ class TestViews(APITestCase):
         """ create question """
         question5 = Questions_teacher.objects.create(
             questionBody="10+10 = ?",
-            isMCQ=True,
             worldID=world1,
             sectionID=section1,
             role="frontend",
@@ -158,7 +153,6 @@ class TestViews(APITestCase):
         """ create question """
         question6 = Questions_teacher.objects.create(
             questionBody="10+20 = ?",
-            isMCQ=True,
             worldID=world1,
             sectionID=section1,
             role="frontend",
@@ -180,7 +174,6 @@ class TestViews(APITestCase):
         """ create question """
         question7 = Questions_teacher.objects.create(
             questionBody="10*10 = ?",
-            isMCQ=True,
             worldID=world1,
             sectionID=section2,
             role="frontend",
@@ -203,7 +196,6 @@ class TestViews(APITestCase):
         """ create question """
         question8 = Questions_teacher.objects.create(
             questionBody="20*10 = ?",
-            isMCQ=True,
             worldID=world1,
             sectionID=section1,
             role="frontend",
@@ -225,7 +217,6 @@ class TestViews(APITestCase):
         """ create question """
         question9 = Questions_teacher.objects.create(
             questionBody=" x + y = ?",
-            isMCQ=True,
             worldID=world2,
             sectionID=section1,
             role="frontend",
@@ -247,7 +238,6 @@ class TestViews(APITestCase):
         """ create question"""
         question10 = Questions_teacher.objects.create(
             questionBody="y+x = ?",
-            isMCQ=True,
             worldID=world2,
             sectionID=section1,
             role="frontend",
@@ -378,7 +368,7 @@ class TestViews(APITestCase):
     def test_post_create_StudentQuestion_With_Data(self):
         """ test post create new question by student with correct data is successful """
         self.client.force_authenticate(user=self.user)
-        data = {'Proposer': 'student@gmail.com', 'isMCQ': True,  'questionBody': '10*10 = ?',
+        data = {'Proposer': 'student@gmail.com',  'questionBody': '10*10 = ?',
                 'questionAns': [{'questionText': '1', 'isCorrect': False},  {'questionText': '10', 'isCorrect': False},
                                 {'questionText': '10', 'isCorrect': False},  {'questionText': '100', 'isCorrect': True}]}
         res = self.client.post(self.create_questions_url,

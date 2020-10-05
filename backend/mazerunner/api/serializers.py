@@ -30,7 +30,7 @@ class LeaderBoardSerializer(serializers.ModelSerializer):
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta :
         model = Questions
-        fields = ('id','questionBody', 'isMCQ')
+        fields = ('id','questionBody')
 
 class QuestionAnsSerializer(serializers.ModelSerializer):
     class Meta :
@@ -48,7 +48,7 @@ class QuestionTeacherSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Questions_teacher
-        fields = ('id','questionBody', 'isMCQ' , 'questionAns')
+        fields = ('id','questionBody' , 'questionAns')
 
 
     
