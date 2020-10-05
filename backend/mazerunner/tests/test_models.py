@@ -1,4 +1,4 @@
-"""Whitebox testing implemented with Django unittest for our components: User, Question, gameHistory and RESTful API"""
+"""Whitebox testing implemented with Django unittest for our components : Model"""
 """ All code in setUp will be run once before each test case """
 
 """Django libs used in the test cases"""
