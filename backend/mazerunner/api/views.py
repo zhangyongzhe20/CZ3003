@@ -7,12 +7,11 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
 from users.models import User
-from .serializers import LoginSerializer ,StudentAccountSerializer ,QuestionTeacherSerializer, QuestionHistorySerializer, QuestionStudentSerializer, gameSummarySerializer , LeaderBoardSerializer
+from .serializers import LoginSerializer ,StudentAccountSerializer ,QuestionTeacherSerializer, QuestionHistorySerializer, QuestionStudentSerializer, gameSummarySerializer , LeaderBoardSerializer, overallSummarySerializer
 from questions.models import Questions_teacher , Questions , Questions_answer
-from gameHistory.models import World , Section
+from gameHistory.models import World , Section, questionHistory
 from rest_framework.authtoken.models import Token
-# Create your views here.
-
+from rest_framework.permissions import AllowAny
 
 #Login
 class LoginAPIView(APIView):
@@ -106,5 +105,18 @@ class gameSummaryAPIView(APIView):
             return Response(serializer.data , status = status.HTTP_200_OK)   
         except:
             return Response({'Error Message': 'record not found'} , status = status.HTTP_400_BAD_REQUEST)
+
+
+class overallSummaryAPIView(generics.ListAPIView):
+    permission_classes = (AllowAny,)
+    serializer_class = overallSummarySerializer
+    queryset = questionHistory.objects.all()
+
+    # def get(self , request):
+    #     try:
+    #         serializer = overallSummarySerializer()
+    #         return Response(serializer.data , status = status.HTTP_200_OK)
+    #     except:
+    #         return Response({'Error Message': 'record not found'} , status = status.HTTP_400_BAD_REQUEST)
         
 

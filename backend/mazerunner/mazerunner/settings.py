@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     ## dependencies
     'nested_admin',
-    ## Dashboard communication
+    ## Dashboard Frontend
     'corsheaders',
 ]
 
@@ -61,6 +61,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     ## Dashboard communication
     'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'mazerunner.urls'
@@ -135,6 +136,10 @@ STATIC_URL = '/static/'
 
 
 REST_FRAMEWORK = {
-   'DEFAULT_PERMISSION_CLASSES' : ('rest_framework.permissions.IsAuthenticated',),
-  'DEFAULT_AUTHENTICATION_CLASSES' : ('rest_framework.authentication.TokenAuthentication',),
+   'DEFAULT_PERMISSION_CLASSES' : ('rest_framework.permissions.IsAuthenticated'),
+    'DEFAULT_AUTHENTICATION_CLASSES' : ('rest_framework.authentication.TokenAuthentication',),
 }
+
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000',
+]

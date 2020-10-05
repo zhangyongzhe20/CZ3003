@@ -1,6 +1,6 @@
 from django.urls import path
 from django.conf.urls import url
-from .views import StudentAPIView , QuestionAPIView ,CreateQuestionAPIView , gameSummaryAPIView  , LoginAPIView , LeaderBoardAPIView
+from .views import StudentAPIView , QuestionAPIView ,CreateQuestionAPIView , gameSummaryAPIView  , LoginAPIView , LeaderBoardAPIView, overallSummaryAPIView
 
 urlpatterns = [
     path('api/login/',LoginAPIView.as_view(), name = 'login'),
@@ -8,5 +8,6 @@ urlpatterns = [
     path('api/students', StudentAPIView.as_view() , name = 'students'),
     path('api/questions', QuestionAPIView.as_view() , name = 'questions'),
     path('api/questions/create', CreateQuestionAPIView.as_view() , name = 'create-questions'),
-    path('api/gameSummary', gameSummaryAPIView.as_view() , name = 'gameSummary')
+    path('api/gameSummary', gameSummaryAPIView.as_view() , name = 'gameSummary'),
+    path('api/overallSummary', overallSummaryAPIView.as_view() , name = 'overallSummary')
 ]
