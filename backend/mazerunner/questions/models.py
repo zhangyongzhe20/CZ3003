@@ -18,8 +18,7 @@ class Section(models.Model):
 
 class Questions(models.Model):
     questionBody = models.CharField(max_length=200)
-    isMCQ = models.BooleanField(default=False)
-    # class Meta:
+     # class Meta:
     #     abstract = True
 
 class Questions_teacher(Questions):
