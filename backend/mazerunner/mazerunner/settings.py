@@ -69,7 +69,7 @@ ROOT_URLCONF = 'mazerunner.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['C:/Users/GarySGX/Desktop'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -117,19 +117,19 @@ class UserAdmin(BaseUserAdmin, admin.ModelAdmin):
     filter_horizontal = ()
 
 
-    def get_urls(self):
-        urls = super().get_urls()
-        my_urls = [
-            path('stats/', self.gostats)
-        ]
-        return my_urls + urls
+#    def get_urls(self):
+#        urls = super().get_urls()
+#        my_urls = [
+#            path('stats/', self.gostats)
+#        ]
+#        return my_urls + urls
 
-    def gostats(self, request):
-        return TemplateResponse(
-            request,
-            'users/post_assignment.html',
-            context,
-        )
+#    def gostats(self, request):
+#        return TemplateResponse(
+#            request,
+#            'users/post_assignment.html',
+#           context,
+#       )
 
 
 # Now register the new UserAdmin...

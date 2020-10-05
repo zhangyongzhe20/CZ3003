@@ -16,9 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import path, include
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('', admin.site.urls),
     path('nested_admin', include('nested_admin.urls')),
     path('',include('api.urls')),
+    path('stats', TemplateView.as_view(template_name="post_assignment.html")),
 ]

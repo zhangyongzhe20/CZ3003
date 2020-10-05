@@ -1,0 +1,9 @@
+venv/
+env/
+.venv/
+.env/
+backend_env/
+.vscode/
+**/localFile/
+**/migrations/
+**/__pycache__/
