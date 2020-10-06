@@ -9,7 +9,7 @@
 
 ## 2. Overall Backend Structure:
 The Django application that uses Unity as a front end. It needs an API to allow Unity to consume data from the database.
-![alt text](https://miro.medium.com/max/3500/1*lAMsvtB6afHwTQYCNM1xvw.png)
+![alt text](https://github.com/FrankLeeeee/CZ3003-SSAD/blob/master/backend/docs/structure.jpeg)
 
 
 ## 3. RESTful APIs: 
