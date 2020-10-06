@@ -5,8 +5,87 @@
 ## Software requirements:
 * `python`: 3.7
 * `django`: 2.2
-* `RESTful API`: Djago_restframework
+* `RESTful API`: rest_framework
 * `Database`: sqlite
+
+
+## Overall Backend Structure:
+The Django application that uses Unity as a front end. It needs an API to allow Unity to consume data from the database.
+![alt text](https://miro.medium.com/max/3500/1*lAMsvtB6afHwTQYCNM1xvw.png)
+
+
+## RESTful APIs: 
+* 1. API Routes
+* 2. API Serializers: Map models to Json
+
+### API routes:
+``` python 
+urlpatterns = [
+    path('api/login/',LoginAPIView.as_view(), name = 'login'),
+    path('api/students', StudentAPIView.as_view() , name = 'students'),
+    path('api/students/leaderboard', LeaderBoardAPIView.as_view() , name = 'leaderboard'),
+    path('api/questions', QuestionAPIView.as_view() , name = 'questions'),
+    path('api/questions/create', CreateQuestionAPIView.as_view() , name = 'create-questions'),
+    path('api/gameSummary', gameSummaryAPIView.as_view() , name = 'gameSummary')
+]
+```
+
+### API Serializers: Each route has corresponding serializers
+*  Route: api/login/
+``` python 
+class LoginSerializer(serializers.Serializer):
+    email = serializers.CharField()
+    password = serializers.CharField()
+
+    def validate(self , data):
+        student = authenticate(**data)
+        if student:
+            return student
+        raise serializers.ValidateError("Incorrect Email/Password")
+```
+
+* Route: api/students
+``` python
+class StudentAccountSerializer(serializers.ModelSerializer):
+    class Meta :
+        model = User
+        fields = ('id','email','name','distanceToNPC','overallScore','containBonus','role')
+```
+
+* Route: api/students/leaderboard
+``` python 
+class LeaderBoardSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('name' , 'overallScore')
+```
+
+* Route: api/questions
+``` python 
+
+class QuestionTeacherSerializer(serializers.ModelSerializer):
+    questionAns = serializers.SerializerMethodField()
+
+    def get_questionAns(self, obj):
+        questionAnss = Questions_answer.objects.filter(questionID = obj.id)
+        serializers = QuestionAnsSerializer(questionAnss , many = True)
+        return serializers.data
+    
+    class Meta:
+        model = Questions_teacher
+        fields = ('id','questionBody' , 'questionAns')
+```
+
+* Route: api/gameSummary
+``` python
+## Game Summary
+class gameSummarySerializer(serializers.ModelSerializer):
+    questionHistory = serializers.SerializerMethodField()
+    class Meta:
+        model = User
+        fields = ('email', 'overallScore' , 'questionHistory')
+
+```
 
 
 ## Models:
@@ -116,7 +195,192 @@ class questionHistory(models.Model):
 ```
 
 
+## Controllers
 
+### API Manager
+
+### Account Controller
+``` python
+#Login
+class LoginAPIView(APIView):
+    serializer_class = LoginSerializer
+    authentication_classes = []
+    permission_classes = []
+    def post(self , request):
+        try:
+            serializer = LoginSerializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            student = serializer.validated_data
+            token, created = Token.objects.get_or_create(user=student)
+            return Response({
+                "user" : StudentAccountSerializer(student).data,
+                "token": token.key
+                })
+        except:
+            return Response({"Error Message" : "Incorrect Email/Password"},status = status.HTTP_401_UNAUTHORIZED)
+
+
+
+    
+
+
+class StudentAPIView(APIView):
+    serializer_class = StudentAccountSerializer
+
+    def get_queryset(self):
+        users = User.objects.all()
+        return users
+
+    def get(self , request):
+        try:
+            id = request.query_params["id"]
+            if id != None:
+                student = User.objects.get(id = id)
+                serializer = StudentAccountSerializer(student)
+        except:
+                students = User.objects.filter(is_staff = False)
+                serializer = StudentAccountSerializer(students , many = True)    
+
+        return Response(serializer.data)
+
+
+
+
+
+class LeaderBoardAPIView(APIView):
+    serializer_class = LeaderBoardSerializer
+    def get(self , request):
+        students = User.objects.filter(is_staff = False)
+        serializer = LeaderBoardSerializer(students , many = True)
+        return Response(serializer.data)
+
+
+
+
+```
+
+### Question Controller
+
+``` python 
+class QuestionAPIView(APIView):
+    def get(self , request):
+        try:
+            world = World.objects.get(name = request.data['world'])
+            section = Section.objects.get(name = request.data['section'])
+
+            role = 'no role'
+            if(request.data["role"] == "1"):
+                role = 'project manager'
+            if(request.data["role"] == "2"):
+                role = 'frontend'
+            if(request.data["role"] == "3"):
+                role = 'backend'
+    
+            questions = Questions_teacher.objects.filter(worldID = world , sectionID  = section , role = role, questionLevel = request.data["questionLevel"] )   
+            serializer = QuestionTeacherSerializer(questions , many = True)
+            return Response(serializer.data , status = status.HTTP_200_OK)
+        except:
+            return Response({'Error Message' :'Please enter the correct input'} ,status = status.HTTP_400_BAD_REQUEST)
+
+    def post(self, request):  
+        try: 
+            world = World.objects.get(name = request.data['world'])
+            section = Section.objects.get(name = request.data['section'])
+            data = {
+            "worldID" : world.id,
+            "sectionID" : section.id,
+            "questionID": request.data['questionID'],
+            "studentID" : request.data['studentID'],
+            "studentAnswer" : request.data['studentAnswer'],
+            "isAnsweredCorrect" : request.data['isAnsweredCorrect'],
+            }
+            serializer = QuestionHistorySerializer(data = data)
+            if(serializer.is_valid()):
+                serializer.save()
+                return Response(({'pass': True}) , status = status.HTTP_201_CREATED)
+        except:        
+            return Response({'pass': False},status = status.HTTP_400_BAD_REQUEST)
+
+class CreateQuestionAPIView(APIView):
+    def post(self , request):
+        serializer = QuestionStudentSerializer(data = request.data)
+        if(serializer.is_valid()):
+            serializer.save()
+            return Response({'submitted': True} , status = status.HTTP_201_CREATED)
+        return Response({'submitted':False},status = status.HTTP_400_BAD_REQUEST)
+
+
+class QuestionSerializer(serializers.ModelSerializer):
+    class Meta :
+        model = Questions
+        fields = ('id','questionBody')
+
+class QuestionAnsSerializer(serializers.ModelSerializer):
+    class Meta :
+        model = Questions_answer
+        fields = ('questionText', 'isCorrect')
+
+#Serializers
+class QuestionTeacherSerializer(serializers.ModelSerializer):
+    questionAns = serializers.SerializerMethodField()
+
+    def get_questionAns(self, obj):
+        questionAnss = Questions_answer.objects.filter(questionID = obj.id)
+        serializers = QuestionAnsSerializer(questionAnss , many = True)
+        return serializers.data
+    
+    class Meta:
+        model = Questions_teacher
+        fields = ('id','questionBody' , 'questionAns')
+```
+
+### Game Controller
+``` python 
+class gameSummaryAPIView(APIView):
+    def get(self , request):
+        try:
+            student = User.objects.get(email = request.data['email'])
+            serializer= gameSummarySerializer(student)
+            return Response(serializer.data , status = status.HTTP_200_OK)   
+        except:
+            return Response({'Error Message': 'record not found'} , status = status.HTTP_400_BAD_REQUEST)
+
+
+# Serializer
+class QuestionHistorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = questionHistory
+        fields = ('worldID' , 'sectionID','questionID','studentID','studentAnswer', 'isAnsweredCorrect')
+
+
+class QuestionStudentSerializer(serializers.ModelSerializer):
+    questionAns = QuestionAnsSerializer(many = True)
+    class Meta:
+        model = Questions_student
+        fields = QuestionSerializer.Meta.fields + ('Proposer', 'isApproved' , 'questionAns')
+    
+    def create(self , validated_data):
+        datas = validated_data.pop('questionAns')
+        questionStudent = Questions_student.objects.create(**validated_data)
+        for data in datas:
+            Questions_answer.objects.create(questionID = questionStudent , **data)
+        return questionStudent
+
+## Game Summary
+class gameSummarySerializer(serializers.ModelSerializer):
+    questionHistory = serializers.SerializerMethodField()
+    class Meta:
+        model = User
+        fields = ('email', 'overallScore' , 'questionHistory')
+
+    def get_questionHistory(self, obj):
+        qHistory= questionHistory.objects.values('worldID__name','sectionID__name','questionID__questionLevel').annotate( world = F('worldID__name') ,
+        section = F('sectionID__name') , questionLevel = F('questionID__questionLevel'), value=Count('questionID__questionLevel')).values('world','section','questionLevel','value')        
+        for data in qHistory:
+            correctCount =  questionHistory.objects.filter(worldID__name = data['world'] , sectionID__name = data['section'] , questionID__questionLevel = data['questionLevel'], isAnsweredCorrect = True).count()
+            data['value'] = str(correctCount) + " / " +  str(data['value']) 
+        return list(qHistory)
+```
 
 
 

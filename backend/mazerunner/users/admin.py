@@ -6,7 +6,6 @@ from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
 from .models import User
 
-
    # email = models.EmailField(max_length=255, unique=True)
    # name = models.CharField(max_length=100)
    ## distanceToNPC = models.IntegerField(default = 0)
@@ -110,9 +109,6 @@ class UserAdmin(BaseUserAdmin):
     search_fields = ('email',)
     ordering = ('email',)
     filter_horizontal = ()
-
-    
-
 
 # Now register the new UserAdmin...
 admin.site.register(User, UserAdmin)
