@@ -1,19 +1,39 @@
-# Django_Backend
+# Backend Documentation
  This repo serves the development of backend for CZ3003
 
 
 ## Software requirements:
 * `python`: 3.7
 * `django`: 2.2
+* `RESTful API`: Djago_restframework
+* `Database`: sqlite
 
 
-## Technical parts:
-### Phase 1:
-* `Database`: Django ORM; sqlite； Design model schemas;
-* `Logical code`: Try to apply some design patterns such as MVC, dependency injection.  [Link](https://subscription.packtpub.com/book/web_development/9781788831345/1/ch01lvl1sec13/what-is-a-pattern)
-* `RESTful API`: rest_framework in django; [Link](https://www.django-rest-framework.org/tutorial/quickstart/)
-* `Admin page`: Lightweight dashboard
+## Models:
+Each model is a Python class that subclasses django.db.models.Model, which is used to map all atributes of a model to a table stored in database.
 
-### Phase 2"
-* `Testing`:  all test cases are stored in folder `tests` and execute `python manage.py test` for unit test.
-* `Deployment`: Django in Docker. [Link](https://docs.docker.com/compose/django/)
+### USER:
+``` python
+class User(AbstractBaseUser):  
+    email = models.EmailField(max_length=255, unique=True)
+    name = models.CharField(max_length=100)
+    distanceToNPC = models.IntegerField(default = 0)
+    overallScore= models.IntegerField(default = 0)
+    containBonus = models.BooleanField(default = False)
+    role = models.CharField(max_length=30)
+
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+    objects = UserManager()
+
+    USERNAME_FIELD = 'email'
+
+```
+
+
+### QUESTION:
+
+
+### GAME_HISTORY:
+
+
