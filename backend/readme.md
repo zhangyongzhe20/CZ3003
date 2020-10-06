@@ -194,6 +194,7 @@ class questionHistory(models.Model):
 The controller responds to the user input and performs interactions on the data model objects. The controller receives the input, optionally validates it and then passes the input to the model.
 
 #### 5.1. Account Controller
+Validate login information.If user account exist, return user data and token.
 ``` python
 #Login
 class LoginAPIView(APIView):
@@ -212,7 +213,9 @@ class LoginAPIView(APIView):
                 })
         except:
             return Response({"Error Message" : "Incorrect Email/Password"},status = status.HTTP_401_UNAUTHORIZED)
-    
+```
+Return list of student unless id is specificed , it will return student based on id.
+``` python
 class StudentAPIView(APIView):
     serializer_class = StudentAccountSerializer
     def get_queryset(self):
@@ -231,6 +234,7 @@ class StudentAPIView(APIView):
 ```
 
 #### 5.2. Leaderboard Controller
+Return list of student data such as points and student name for leaderboard display.
 ``` python 
 class LeaderBoardAPIView(APIView):
     serializer_class = LeaderBoardSerializer
@@ -241,6 +245,8 @@ class LeaderBoardAPIView(APIView):
 ```
 
 #### 5.3. Question Controller
+
+Return list of question based on world , section and role.
 ``` python 
 class QuestionAPIView(APIView):
     def get(self , request):
@@ -259,6 +265,9 @@ class QuestionAPIView(APIView):
             return Response(serializer.data , status = status.HTTP_200_OK)
         except:
             return Response({'Error Message' :'Please enter the correct input'} ,status = status.HTTP_400_BAD_REQUEST)
+```
+Create question history to store record of student attempting the question.
+``` python 
     def post(self, request):  
         try: 
             world = World.objects.get(name = request.data['world'])
@@ -277,7 +286,10 @@ class QuestionAPIView(APIView):
                 return Response(({'pass': True}) , status = status.HTTP_201_CREATED)
         except:        
             return Response({'pass': False},status = status.HTTP_400_BAD_REQUEST)
+```
 
+Create Question proposed by the student.
+``` python 
 class CreateQuestionAPIView(APIView):
     def post(self , request):
         serializer = QuestionStudentSerializer(data = request.data)
@@ -288,6 +300,7 @@ class CreateQuestionAPIView(APIView):
 ```
 
 #### 5.4. Game Controller
+Return data of the student such as point , score based on question level, section and world for game summary display in unity.
 ``` python 
 class gameSummaryAPIView(APIView):
     def get(self , request):
