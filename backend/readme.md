@@ -91,7 +91,7 @@ class gameSummarySerializer(serializers.ModelSerializer):
 ## Models:
 Each model is a Python class that subclasses django.db.models.Model, which is used to map all atributes of a model to a table stored in database.
 
-### USER:
+### 1.USER:
 ``` python
 class User(AbstractBaseUser):  
     email = models.EmailField(max_length=255, unique=True)
@@ -138,7 +138,7 @@ class UserManager(BaseUserManager):
 ```
 
 
-### QUESTION:
+### 2. QUESTION:
 Three sub-models under QUESTION:
 
 1. Teachers' questions
@@ -174,7 +174,7 @@ class Questions_answer(models.Model):
         return str(self.questionID) + "-" + self.questionText
 ```
 
-### GAME_HISTORY:
+### 3. GAME_HISTORY:
 Foreign keys are used to link to model QUESTION, USER
 1. questionID (link to which question is played)
 2. studentID  (link to which student played)
@@ -194,8 +194,7 @@ class questionHistory(models.Model):
 
 ## API Controllers
 
-
-### Account Controller
+### 1. Account Controller
 ``` python
 #Login
 class LoginAPIView(APIView):
@@ -214,19 +213,12 @@ class LoginAPIView(APIView):
                 })
         except:
             return Response({"Error Message" : "Incorrect Email/Password"},status = status.HTTP_401_UNAUTHORIZED)
-
-
-
     
-
-
 class StudentAPIView(APIView):
     serializer_class = StudentAccountSerializer
-
     def get_queryset(self):
         users = User.objects.all()
         return users
-
     def get(self , request):
         try:
             id = request.query_params["id"]
@@ -236,34 +228,26 @@ class StudentAPIView(APIView):
         except:
                 students = User.objects.filter(is_staff = False)
                 serializer = StudentAccountSerializer(students , many = True)    
-
         return Response(serializer.data)
+```
 
-
-
-
-
+### 2. Leaderboard Controller
+``` python 
 class LeaderBoardAPIView(APIView):
     serializer_class = LeaderBoardSerializer
     def get(self , request):
         students = User.objects.filter(is_staff = False)
         serializer = LeaderBoardSerializer(students , many = True)
         return Response(serializer.data)
-
-
-
-
 ```
 
-### Question Controller
-
+### 3. Question Controller
 ``` python 
 class QuestionAPIView(APIView):
     def get(self , request):
         try:
             world = World.objects.get(name = request.data['world'])
             section = Section.objects.get(name = request.data['section'])
-
             role = 'no role'
             if(request.data["role"] == "1"):
                 role = 'project manager'
@@ -271,13 +255,11 @@ class QuestionAPIView(APIView):
                 role = 'frontend'
             if(request.data["role"] == "3"):
                 role = 'backend'
-    
             questions = Questions_teacher.objects.filter(worldID = world , sectionID  = section , role = role, questionLevel = request.data["questionLevel"] )   
             serializer = QuestionTeacherSerializer(questions , many = True)
             return Response(serializer.data , status = status.HTTP_200_OK)
         except:
             return Response({'Error Message' :'Please enter the correct input'} ,status = status.HTTP_400_BAD_REQUEST)
-
     def post(self, request):  
         try: 
             world = World.objects.get(name = request.data['world'])
@@ -304,33 +286,9 @@ class CreateQuestionAPIView(APIView):
             serializer.save()
             return Response({'submitted': True} , status = status.HTTP_201_CREATED)
         return Response({'submitted':False},status = status.HTTP_400_BAD_REQUEST)
-
-
-class QuestionSerializer(serializers.ModelSerializer):
-    class Meta :
-        model = Questions
-        fields = ('id','questionBody')
-
-class QuestionAnsSerializer(serializers.ModelSerializer):
-    class Meta :
-        model = Questions_answer
-        fields = ('questionText', 'isCorrect')
-
-#Serializers
-class QuestionTeacherSerializer(serializers.ModelSerializer):
-    questionAns = serializers.SerializerMethodField()
-
-    def get_questionAns(self, obj):
-        questionAnss = Questions_answer.objects.filter(questionID = obj.id)
-        serializers = QuestionAnsSerializer(questionAnss , many = True)
-        return serializers.data
-    
-    class Meta:
-        model = Questions_teacher
-        fields = ('id','questionBody' , 'questionAns')
 ```
 
-### Game Controller
+### 4. Game Controller
 ``` python 
 class gameSummaryAPIView(APIView):
     def get(self , request):
@@ -340,42 +298,6 @@ class gameSummaryAPIView(APIView):
             return Response(serializer.data , status = status.HTTP_200_OK)   
         except:
             return Response({'Error Message': 'record not found'} , status = status.HTTP_400_BAD_REQUEST)
-
-
-# Serializer
-class QuestionHistorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = questionHistory
-        fields = ('worldID' , 'sectionID','questionID','studentID','studentAnswer', 'isAnsweredCorrect')
-
-
-class QuestionStudentSerializer(serializers.ModelSerializer):
-    questionAns = QuestionAnsSerializer(many = True)
-    class Meta:
-        model = Questions_student
-        fields = QuestionSerializer.Meta.fields + ('Proposer', 'isApproved' , 'questionAns')
-    
-    def create(self , validated_data):
-        datas = validated_data.pop('questionAns')
-        questionStudent = Questions_student.objects.create(**validated_data)
-        for data in datas:
-            Questions_answer.objects.create(questionID = questionStudent , **data)
-        return questionStudent
-
-## Game Summary
-class gameSummarySerializer(serializers.ModelSerializer):
-    questionHistory = serializers.SerializerMethodField()
-    class Meta:
-        model = User
-        fields = ('email', 'overallScore' , 'questionHistory')
-
-    def get_questionHistory(self, obj):
-        qHistory= questionHistory.objects.values('worldID__name','sectionID__name','questionID__questionLevel').annotate( world = F('worldID__name') ,
-        section = F('sectionID__name') , questionLevel = F('questionID__questionLevel'), value=Count('questionID__questionLevel')).values('world','section','questionLevel','value')        
-        for data in qHistory:
-            correctCount =  questionHistory.objects.filter(worldID__name = data['world'] , sectionID__name = data['section'] , questionID__questionLevel = data['questionLevel'], isAnsweredCorrect = True).count()
-            data['value'] = str(correctCount) + " / " +  str(data['value']) 
-        return list(qHistory)
 ```
 
 
