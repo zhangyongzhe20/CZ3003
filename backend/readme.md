@@ -299,5 +299,58 @@ class gameSummaryAPIView(APIView):
             return Response({'Error Message': 'record not found'} , status = status.HTTP_400_BAD_REQUEST)
 ```
 
+#### 5.5. Dashboard Controller
 
+* User page:  admin.site.register(User, UserAdmin)
+``` python 
+class UserAdmin(BaseUserAdmin):
+    # The forms to add and change user instances
+    form = UserChangeForm
+    add_form = UserCreationForm
 
+    def save_model(self, request, obj, form, change):
+    # Override this to set the password to the value in the field if it's
+    # changed.
+        if obj.pk:
+            orig_obj = User.objects.get(pk=obj.pk)
+            if obj.password != orig_obj.password:
+                obj.set_password(obj.password)
+        else:
+            obj.set_password(obj.password)
+        obj.save()
+
+    # The fields to be used in displaying the User model.
+    # These override the definitions on the base UserAdmin
+    # that reference specific fields on auth.User.
+    list_display = ('email', 'password', 'name', 'distanceToNPC','overallScore','containBonus','role','is_active', 'is_staff')
+    list_filter = ('is_staff',)
+    fieldsets = (
+        (None, {'fields': ('email', 'password')}),
+        ('Personal info', {'fields': ('name', 'distanceToNPC','overallScore','containBonus','role',)}),
+        ('Permissions', {'fields': ('is_staff',)}),
+    )
+    # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
+    # overrides get_fieldsets to use this attribute when creating a user.
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': ('email', 'name', 'distanceToNPC','overallScore','containBonus','role','is_staff', 'password1', 'password2')}
+        ),
+    )
+    search_fields = ('email',)
+    ordering = ('email',)
+    filter_horizontal = ()
+```
+
+* Question page:  admin.site.register(Questions_teacher, QuestionAdmin)
+
+``` python 
+class QuestionAdmin(nested_admin.NestedModelAdmin):
+	inlines = [AnswerInline,]
+```
+
+* Game-record page: admin.site.register(questionHistory)
+``` python 
+class questionHistoryInline(admin.TabularInline):
+	model = questionHistory
+```
