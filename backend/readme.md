@@ -13,8 +13,8 @@ The Django application that uses Unity as a front end. It needs an API to allow 
 
 
 ## 3. RESTful APIs: 
-1. API Routes
-2. API Serializers: Map models to Json
+* API Routes: Route the incoming HTTP request from frontend to the API controllers
+* API Serializers: Map models to Json for get & post requests
 
 #### 3.1. API routes:
 ``` python 
