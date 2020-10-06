@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="eabc9247-baa5-456f-819f-24d84835d32d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/backend.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mazerunner/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/mazerunner/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mazerunner/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/mazerunner/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mazerunner/mazerunner/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/mazerunner/mazerunner/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mazerunner/mazerunner/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/mazerunner/mazerunner/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mazerunner/users/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/mazerunner/users/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mazerunner/users/templates/users/custom_change_form.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mazerunner/users/templates/users/post_assignment.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1iLZxK1dS8HSKCy4lzQYZxaTU6v" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/mazerunner/templates/admin" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\NTU\NTU SCSE\CZ3003 Software System Design &amp; Analysis\Lab\Codes\Github Repo\CZ3003-SSAD\backend\mazerunner\templates\admin" />
+      <recent name="E:\NTU\NTU SCSE\CZ3003 Software System Design &amp; Analysis\Lab\Codes\Github Repo\CZ3003-SSAD\backend\mazerunner\main\templates\main" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="eabc9247-baa5-456f-819f-24d84835d32d" name="Default Changelist" comment="" />
+      <created>1601689079850</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1601689079850</updated>
+    </task>
+    <servers />
+  </component>
+</project>

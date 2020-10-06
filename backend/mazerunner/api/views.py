@@ -7,12 +7,11 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
 from users.models import User
-from .serializers import LoginSerializer ,StudentAccountSerializer ,QuestionTeacherSerializer, QuestionHistorySerializer, QuestionStudentSerializer, gameSummarySerializer , LeaderBoardSerializer
+from .serializers import LoginSerializer ,StudentAccountSerializer ,QuestionTeacherSerializer, QuestionHistorySerializer, QuestionStudentSerializer, gameSummarySerializer , LeaderBoardSerializer, overallSummarySerializer
 from questions.models import Questions_teacher , Questions , Questions_answer
-from gameHistory.models import World , Section
+from gameHistory.models import World , Section, questionHistory
 from rest_framework.authtoken.models import Token
-# Create your views here.
-
+from rest_framework.permissions import AllowAny
 
 #Login
 class LoginAPIView(APIView):
@@ -115,5 +114,36 @@ class gameSummaryAPIView(APIView):
             return Response(serializer.data , status = status.HTTP_200_OK)   
         except:
             return Response({'Error Message': 'record not found'} , status = status.HTTP_400_BAD_REQUEST)
-        
 
+def overallSummaryView(request):
+    data = []
+    labels = []
+    backgroundColor = []
+    queryset = questionHistory.objects.all()
+    worldSet = set()
+
+    labels = ['Correct', 'Incorrect']
+    data = [0, 0]
+    backgroundColor = ['#2A9D8F', '#F4A261']
+    for question in queryset:
+        worldSet.add(question.worldID.name)
+        if question.isAnsweredCorrect:
+            data[0] += 1
+        else:
+            data[1] += 1
+
+    worldList = sorted(list(worldSet))
+
+    if currWorld == None:
+        currWorld = worldList[0]
+    
+    return render(request, 'dashboard.html', {
+        'labels': labels,
+        'data': data,
+        'backgroundColor': backgroundColor,
+        'worldList': worldList,
+        'currWorld': currWorld
+    })
+
+def selectWorld(request, worldID):
+    currWorld = worldID

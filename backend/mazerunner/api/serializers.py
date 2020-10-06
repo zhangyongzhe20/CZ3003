@@ -86,8 +86,21 @@ class gameSummarySerializer(serializers.ModelSerializer):
             data['value'] = str(correctCount) + " / " +  str(data['value']) 
         return list(qHistory)
 
- 
- 
+## Dashboard Summary
+class overallSummarySerializer(serializers.ModelSerializer):
+    questionHistory = serializers.SerializerMethodField()
+    class Meta:
+        model = questionHistory
+        fields = ('questionHistory', )
 
-
-  
+    def get_questionHistory(self, obj):
+        # qHistory= questionHistory.objects.values('worldID__name','sectionID__name','questionID__questionLevel').annotate( world = F('worldID__name') ,
+        # section = F('sectionID__name') , questionLevel = F('questionID__questionLevel'), value=Count('questionID__questionLevel')).values('world','section','questionLevel','value')
+        # for data in qHistory:
+        #     correctCount =  questionHistory.objects.filter(worldID__name = data['world'] , sectionID__name = data['section'] , questionID__questionLevel = data['questionLevel'], isAnsweredCorrect = True).count()
+        #     data['value'] = str(correctCount) + " / " +  str(data['value'])
+        qHistory = questionHistory.objects.values()
+        for data in qHistory:
+            student_email = getattr(User.objects.get(id=data['studentID_id']), 'email')
+            data['student_email'] = student_email
+        return list(qHistory)

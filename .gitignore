@@ -1,0 +1,12 @@
+venv/
+env/
+.venv/
+.env/
+.vscode/
+**/localFile/
+**/migrations/
+**/__pycache__/
+**/node_modules/
+Pipfile*
+**.idea
+**/settings.json
