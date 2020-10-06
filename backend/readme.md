@@ -1,24 +1,22 @@
 # Backend Documentation
- This repo serves the development of backend for CZ3003
 
-
-## Software requirements:
+## 1. Software requirements:
 * `python`: 3.7
 * `django`: 2.2
 * `RESTful API`: rest_framework
 * `Database`: sqlite
 
 
-## Overall Backend Structure:
+## 2. Overall Backend Structure:
 The Django application that uses Unity as a front end. It needs an API to allow Unity to consume data from the database.
 ![alt text](https://miro.medium.com/max/3500/1*lAMsvtB6afHwTQYCNM1xvw.png)
 
 
-## RESTful APIs: 
+## 3. RESTful APIs: 
 1. API Routes
 2. API Serializers: Map models to Json
 
-### API routes:
+#### 3.1. API routes:
 ``` python 
 urlpatterns = [
     path('api/login/',LoginAPIView.as_view(), name = 'login'),
@@ -30,7 +28,7 @@ urlpatterns = [
 ]
 ```
 
-### API Serializers: Each route has corresponding serializers
+#### 3.2. API Serializers: Each route has corresponding serializers
 *  Route: api/login/
 ``` python 
 class LoginSerializer(serializers.Serializer):
@@ -88,10 +86,10 @@ class gameSummarySerializer(serializers.ModelSerializer):
 ```
 
 
-## Models:
+## 4. Models:
 Each model is a Python class that subclasses django.db.models.Model, which is used to map all atributes of a model to a table stored in database.
 
-### 1.USER:
+#### 4.1.USER:
 ``` python
 class User(AbstractBaseUser):  
     email = models.EmailField(max_length=255, unique=True)
@@ -138,7 +136,7 @@ class UserManager(BaseUserManager):
 ```
 
 
-### 2. QUESTION:
+#### 4.2. QUESTION:
 Three sub-models under QUESTION:
 
 1. Teachers' questions
@@ -174,7 +172,7 @@ class Questions_answer(models.Model):
         return str(self.questionID) + "-" + self.questionText
 ```
 
-### 3. GAME_HISTORY:
+#### 4.3. GAME_HISTORY:
 Foreign keys are used to link to model QUESTION, USER
 1. questionID (link to which question is played)
 2. studentID  (link to which student played)
@@ -192,9 +190,10 @@ class questionHistory(models.Model):
 ```
 
 
-## API Controllers
+## 5. API Controllers
+The controller responds to the user input and performs interactions on the data model objects. The controller receives the input, optionally validates it and then passes the input to the model.
 
-### 1. Account Controller
+#### 5.1. Account Controller
 ``` python
 #Login
 class LoginAPIView(APIView):
@@ -231,7 +230,7 @@ class StudentAPIView(APIView):
         return Response(serializer.data)
 ```
 
-### 2. Leaderboard Controller
+#### 5.2. Leaderboard Controller
 ``` python 
 class LeaderBoardAPIView(APIView):
     serializer_class = LeaderBoardSerializer
@@ -241,7 +240,7 @@ class LeaderBoardAPIView(APIView):
         return Response(serializer.data)
 ```
 
-### 3. Question Controller
+#### 5.3. Question Controller
 ``` python 
 class QuestionAPIView(APIView):
     def get(self , request):
@@ -288,7 +287,7 @@ class CreateQuestionAPIView(APIView):
         return Response({'submitted':False},status = status.HTTP_400_BAD_REQUEST)
 ```
 
-### 4. Game Controller
+#### 5.4. Game Controller
 ``` python 
 class gameSummaryAPIView(APIView):
     def get(self , request):
