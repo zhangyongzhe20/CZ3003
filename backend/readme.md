@@ -15,8 +15,8 @@ The Django application that uses Unity as a front end. It needs an API to allow 
 
 
 ## RESTful APIs: 
-* 1. API Routes
-* 2. API Serializers: Map models to Json
+1. API Routes
+2. API Serializers: Map models to Json
 
 ### API routes:
 ``` python 
@@ -140,10 +140,8 @@ class UserManager(BaseUserManager):
 
 ### QUESTION:
 Three sub-models under QUESTION:
-1. Teachers' questions
-2. Student-proposed questions
-3. Answers of questions
 
+1. Teachers' questions
 ``` python
 class Questions_teacher(Questions):
     worldID =  models.ForeignKey(World, on_delete=models.CASCADE)
@@ -155,6 +153,7 @@ class Questions_teacher(Questions):
         return self.questionBody
 ```
 
+2. Student-proposed questions
 ```python
 class Questions_student(Questions):
     Proposer = models.CharField(max_length=100)
@@ -164,6 +163,7 @@ class Questions_student(Questions):
         return self.questionBody
 ```
 
+3. Answers of questions
 ```python
 class Questions_answer(models.Model):
     #multiple possible foreign keys reference (question_teacher or question_student)?
@@ -174,11 +174,8 @@ class Questions_answer(models.Model):
         return str(self.questionID) + "-" + self.questionText
 ```
 
-
-
 ### GAME_HISTORY:
-The play record:
-Foreign keys:
+Foreign keys are used to link to model QUESTION, USER
 1. questionID (link to which question is played)
 2. studentID  (link to which student played)
 3. world & section (link to which senario is played)
@@ -195,9 +192,8 @@ class questionHistory(models.Model):
 ```
 
 
-## Controllers
+## API Controllers
 
-### API Manager
 
 ### Account Controller
 ``` python
