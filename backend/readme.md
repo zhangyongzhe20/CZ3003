@@ -300,6 +300,7 @@ class gameSummaryAPIView(APIView):
 ```
 
 #### 5.5. Dashboard Controller
+Django reads metadata from models and display the customized fields of tables in admin site for trusted users to manage content.  
 
 * User page:  admin.site.register(User, UserAdmin)
 ``` python 
