@@ -115,17 +115,35 @@ class gameSummaryAPIView(APIView):
         except:
             return Response({'Error Message': 'record not found'} , status = status.HTTP_400_BAD_REQUEST)
 
-
-class overallSummaryAPIView(generics.ListAPIView):
-    permission_classes = (AllowAny,)
-    serializer_class = overallSummarySerializer
+def overallSummaryView(request):
+    data = []
+    labels = []
+    backgroundColor = []
     queryset = questionHistory.objects.all()
+    worldSet = set()
 
-    # def get(self , request):
-    #     try:
-    #         serializer = overallSummarySerializer()
-    #         return Response(serializer.data , status = status.HTTP_200_OK)
-    #     except:
-    #         return Response({'Error Message': 'record not found'} , status = status.HTTP_400_BAD_REQUEST)
-        
+    labels = ['Correct', 'Incorrect']
+    data = [0, 0]
+    backgroundColor = ['#2A9D8F', '#F4A261']
+    for question in queryset:
+        worldSet.add(question.worldID.name)
+        if question.isAnsweredCorrect:
+            data[0] += 1
+        else:
+            data[1] += 1
 
+    worldList = sorted(list(worldSet))
+
+    if currWorld == None:
+        currWorld = worldList[0]
+    
+    return render(request, 'dashboard.html', {
+        'labels': labels,
+        'data': data,
+        'backgroundColor': backgroundColor,
+        'worldList': worldList,
+        'currWorld': currWorld
+    })
+
+def selectWorld(request, worldID):
+    currWorld = worldID
