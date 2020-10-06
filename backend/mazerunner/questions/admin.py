@@ -8,7 +8,6 @@ class AnswerInline(nested_admin.NestedTabularInline):
 	extra = 4
 	max_num = 4
 
-
 class QuestionTeacherInline(nested_admin.NestedTabularInline):
 	model = Questions_teacher
 	inlines = [AnswerInline,]
