@@ -122,6 +122,8 @@ def overallSummaryView(request):
     queryset = questionHistory.objects.all()
     worldSet = set()
 
+    currWorld = None
+
     labels = ['Correct', 'Incorrect']
     data = [0, 0]
     backgroundColor = ['#2A9D8F', '#F4A261']
