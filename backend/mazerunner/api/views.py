@@ -114,38 +114,46 @@ class gameSummaryAPIView(APIView):
             return Response(serializer.data , status = status.HTTP_200_OK)   
         except:
             return Response({'Error Message': 'record not found'} , status = status.HTTP_400_BAD_REQUEST)
+class overallSummaryView(APIView):
+    authentication_classes = []
+    permission_classes = []
+    def get(self,request):
+        try:
+            currWorld = request.query_params["worldID"]
+            queryset = questionHistory.objects.filter(worldID__name = currWorld)
+        except:
+            currWorld = None
+            queryset = questionHistory.objects.all()
+        data = []
+        labels = []
+        backgroundColor = []
+        worldSet = set()
 
-def overallSummaryView(request):
-    data = []
-    labels = []
-    backgroundColor = []
-    queryset = questionHistory.objects.all()
-    worldSet = set()
+        print(currWorld)
+        labels = ['Correct', 'Incorrect']
+        data = [0, 0]
+        backgroundColor = ['#2A9D8F', '#F4A261']
+        for question in queryset:
+            worldSet.add(question.worldID.name)
+            if question.isAnsweredCorrect:
+                data[0] += 1
+            else:
+                data[1] += 1
 
-    currWorld = None
-
-    labels = ['Correct', 'Incorrect']
-    data = [0, 0]
-    backgroundColor = ['#2A9D8F', '#F4A261']
-    for question in queryset:
-        worldSet.add(question.worldID.name)
-        if question.isAnsweredCorrect:
-            data[0] += 1
-        else:
-            data[1] += 1
-
-    worldList = sorted(list(worldSet))
-
-    if currWorld == None:
-        currWorld = worldList[0]
+        worldList = World.objects.all()
+        
+        if currWorld == None:
+            currWorld = worldList[0]
     
-    return render(request, 'dashboard.html', {
-        'labels': labels,
-        'data': data,
-        'backgroundColor': backgroundColor,
-        'worldList': worldList,
-        'currWorld': currWorld
-    })
+        return render(request, 'dashboard.html', {
+            'labels': labels,
+            'data': data,
+            'backgroundColor': backgroundColor,
+            'worldList': worldList,
+            'currWorld': currWorld
+        })
+
+   
 
 def selectWorld(request, worldID):
     currWorld = worldID

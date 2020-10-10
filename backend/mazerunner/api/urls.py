@@ -10,6 +10,6 @@ urlpatterns = [
     path('api/questions/create', CreateQuestionAPIView.as_view() , name = 'create-questions'),
     path('api/gameSummary', gameSummaryAPIView.as_view() , name = 'gameSummary'),
 
-    path('dashboard/', overallSummaryView, name='dashboard'),
+    path('dashboard/', overallSummaryView.as_view(), name='dashboard'),
     path('<str:worldID>/world/', selectWorld, name='select_world')
 ]
