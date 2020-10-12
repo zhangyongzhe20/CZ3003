@@ -62,6 +62,7 @@ class LeaderBoardAPIView(APIView):
 class QuestionAPIView(APIView):
     def get(self , request):
         try:
+            print(request.data)
             world = World.objects.get(name = request.data['world'])
             section = Section.objects.get(name = request.data['section'])
 
@@ -72,7 +73,7 @@ class QuestionAPIView(APIView):
                 role = 'frontend'
             if(request.data["role"] == "3"):
                 role = 'backend'
-    
+            print(role)
             questions = Questions_teacher.objects.filter(worldID = world , sectionID  = section , role = role, questionLevel = request.data["questionLevel"] )   
             serializer = QuestionTeacherSerializer(questions , many = True)
             return Response(serializer.data , status = status.HTTP_200_OK)
