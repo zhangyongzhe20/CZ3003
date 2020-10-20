@@ -44,7 +44,7 @@ class UserBehaviour(TaskSet):
         print(res.content)
     
 
-    '''function to call api to submit question answer based on question and student for stress and peformance test '''
+    '''function to call api to create question history based on question and student for stress and peformance test '''
     @task
     def post_question_ans(self):
         data = {'world': 'World1','section':'1',
@@ -63,7 +63,7 @@ class UserBehaviour(TaskSet):
             {'questionText': '10', 'isCorrect' : False  },  {'questionText': '100', 'isCorrect' : True }]} 
         res = self.client.post("/api/questions/create", headers = self.header , json = data)
         print(res.content)
-''' '''
+''' driver program '''
 class User(HttpUser):
     tasks = [UserBehaviour]
     min_wait = 5000
