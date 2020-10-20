@@ -1,8 +1,7 @@
 # Database script
 ## Load user, world, section, questions from our datasets with csv format
 ### Testing script
-```
-python
+``` python
 import sys
 import os
 import django
