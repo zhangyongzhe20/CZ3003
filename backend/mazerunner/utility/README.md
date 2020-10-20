@@ -84,14 +84,28 @@ class User(HttpUser):
     host = "http://127.0.0.1:8000"
 ```
 ## Testing results
-* 1. Simulate 10 users with spawned rate 1 user per second.
-![alt text](https://github.com/FrankLeeeee/CZ3003-SSAD/blob/master/backend/docs/structure.jpeg)
+* `Columns represents in the results:`
+1. Type of requests - related to each task to be simulated.
+2. Name - Name of the task/request.
+3. Number of requests - Total number of requests for a task.
+4. Number of failures - Total number of failed requests.
+5. The median, average, max and min of requests in milliseconds.
+6. Content size - Size of requests data.
+7. Request per second.
 
+The detailed rsults are saved as *.html in our `test` folder. The below two pictures are used to support our observations.
+* 1. Simulate 700 users with spawned rate 70 users per second.
+![alt text](https://github.com/FrankLeeeee/CZ3003-SSAD/blob/master/backend/mazerunner/tests/700users_70.png)
 
-* 2. Simulate 100 users with spawned rate 10 users per second.
-![alt text](https://github.com/FrankLeeeee/CZ3003-SSAD/blob/master/backend/docs/structure.jpeg)
+* 2. Simulate 800 users with spawned rate 80 users per second.
+![alt text](https://github.com/FrankLeeeee/CZ3003-SSAD/blob/master/backend/mazerunner/tests/800users_80.png)
 
 ## Observations
-As seen in result 1, since the number of users is less, there is no failover. While when the number of requests increased to 100 users with spawned rate 10, we get failure rate 
+### Load testings
+* To test the load caopability of our server, we gradually increased the spawned rate from 10 to 100. Compare the result 1 and result 2, we can find that our server can response the requests from 70 users per second at most. Once the spawned rate increases to 80, our server will crash. 
+### `Performance testings`
+* When the spawned rate is below 80 users per second, 99 percentage of requests are reponsed with 1 second.
+* Among the 6 testing cases, `login` requests need more time receive the reponse from server because of the authenticating process. 
+
 
 
