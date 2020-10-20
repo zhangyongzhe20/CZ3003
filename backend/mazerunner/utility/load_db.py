@@ -60,11 +60,15 @@ def load_questions_data():
                     Questions_answer.objects.create(questionID = question ,questionText= row[7] ,isCorrect = False)
                     Questions_answer.objects.create(questionID = question , questionText=row[8] ,isCorrect = False)
 
+'''loading of data function being called'''
 def load_db(): 
+    '''load all data '''
     load_users_data()
     load_worlds_data()
     load_sections_data()
     load_questions_data()
 
+
+''' driver program '''
 if __name__ == "__main__":
     load_db()
