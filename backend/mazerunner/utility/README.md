@@ -187,7 +187,7 @@ The detailed rsults are saved as *.html in our `test` folder. The below two pict
 * To test the load caopability of our server, we gradually increased the spawned rate from 10 to 100. Compare the result 1 and result 2, we can find that our server can response the requests from 70 users per second at most. Once the spawned rate increases to 80, our server will crash. 
 * Most of the failures are at creating questions.
 ### Performance testings
-* When the spawned rate is below 80 users per second, 99 percentage of requests are reponsed with 1 second.
+* When the spawned rate is below 80 users per second, 99 percentage of requests are reponsed within 1 second.
 * Among the 6 testing cases, `login` requests need more time to receive the reponse from server because of the authenticating process. 
 
 
