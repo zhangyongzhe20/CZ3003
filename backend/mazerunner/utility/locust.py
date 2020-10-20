@@ -5,7 +5,7 @@ import json
 '''List of task to be included for stress and peformance test '''
 class UserBehaviour(TaskSet):
     """ user authentication """
-    header = {"authorization" : "Token bdfeedd723094892a05ab8bafb422c70ec00ae43"}
+    header = {"authorization" : "Token a67aef66e4364d945d821d6129e3e8bbf88722c1"}
     student = {"email":"jy@gmail.com", "password":"password"}
     
     '''function to call api login for stress and peformance test '''
@@ -31,7 +31,7 @@ class UserBehaviour(TaskSet):
     '''function to call api get list of questions based on world , section , role and question level for stress and peformance test '''
     @task
     def get_question(self):
-        data = {'world': 'World1', 'section': '1', 'role': '2', 'questionLevel': 1}
+        data = {'world': '1', 'section': '1', 'role': '2', 'questionLevel': 1}
         res = self.client.get("/api/questions",headers=self.header, json=data)
         print(res.content)
 
@@ -47,7 +47,7 @@ class UserBehaviour(TaskSet):
     '''function to call api to create question history based on question and student for stress and peformance test '''
     @task
     def post_question_ans(self):
-        data = {'world': 'World1','section':'1',
+        data = {'world': '1','section':'1',
         'questionID': 1, 'studentID': 1,  'studentAnswer': '2',  'isAnsweredCorrect': True }  
         res = self.client.post("/api/questions",headers = self.header , json = data)
         print(res.content)

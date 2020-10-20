@@ -55,7 +55,7 @@ def load_questions_data():
                 questionLevel = row[3] , questionBody = row[4])
                 Questions_answer.objects.create(questionID = question , questionText =row[5] , isCorrect = True)
 
-                if(question.questionLevel != 3):
+                if(question.questionLevel !='3'):
                     Questions_answer.objects.create(questionID = question ,questionText= row[6] ,isCorrect = False)
                     Questions_answer.objects.create(questionID = question ,questionText= row[7] ,isCorrect = False)
                     Questions_answer.objects.create(questionID = question , questionText=row[8] ,isCorrect = False)
