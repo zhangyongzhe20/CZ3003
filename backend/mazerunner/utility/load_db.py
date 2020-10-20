@@ -8,14 +8,11 @@ sys.path.append(os.getcwd())
 os.environ['DJANGO_SETTINGS_MODULE'] = 'mazerunner.settings'
 django.setup()
 
-
 from users.models import User
 from questions.models import World
 from questions.models import Section
 from questions.models import Questions_teacher
 from questions.models import Questions_answer
-
-
 
 ''' function to create users and load into the database'''
 def load_users_data(): 
@@ -46,10 +43,8 @@ def load_sections_data():
     Section.objects.create(name = '4' , description = 'Section 4')
     Section.objects.create(name = '5' , description = 'Section 5')
 
-
 ''' function to create questions and load into the database'''
 def load_questions_data():
-
     with open(os.path.join(os.getcwd(),"" "utility","questions.csv")) as f:
         reader = csv.reader(f)
         for row in reader:

@@ -1,8 +1,8 @@
+""" Using Locust lib for the load & performance test """
 from locust import TaskSet, task, between , HttpUser
 import json
 
-
-#header = {"authorization" : "Token bdfeedd723094892a05ab8bafb422c70ec00ae43"}
+""" user authentication """
 class UserBehaviour(TaskSet):
     header = {"authorization" : "Token bdfeedd723094892a05ab8bafb422c70ec00ae43"}
     student = {"email":"jy@gmail.com", "password":"password"}
