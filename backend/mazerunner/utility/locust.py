@@ -30,9 +30,9 @@ class UserBehaviour(TaskSet):
 
     '''function to call api get list of questions based on world , section , role and question level for stress and peformance test '''
     @task
-    def get_question(self):
+    def post_query_for_question_list(self):
         data = {'world': '1', 'section': '1', 'role': '1', 'questionLevel': 1}
-        res = self.client.get("/api/questions",headers=self.header, json=data)
+        res = self.client.post("/api/questions",headers=self.header, json=data)
         print(res.content)
 
 
@@ -49,7 +49,7 @@ class UserBehaviour(TaskSet):
     def post_question_ans(self):
         data = {'world': '1','section':'1',
         'questionID': 1, 'studentID': 1,  'studentAnswer': '2',  'isAnsweredCorrect': True }  
-        res = self.client.post("/api/questions",headers = self.header , json = data)
+        res = self.client.post("/api/questions/submit",headers = self.header , json = data)
         print(res.content)
 
 
