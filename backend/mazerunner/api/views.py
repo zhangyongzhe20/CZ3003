@@ -81,7 +81,6 @@ class QuestionAPIView(APIView):
             return Response({'Error Message' :'Please enter the correct input'} ,status = status.HTTP_400_BAD_REQUEST)
 
 
-
 class QuestionSubmitAPIView(APIView):
     def post(self, request):  
         try: 
