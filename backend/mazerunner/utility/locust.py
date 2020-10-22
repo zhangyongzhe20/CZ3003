@@ -5,13 +5,13 @@ import json
 '''List of task to be included for stress and peformance test '''
 class UserBehaviour(TaskSet):
     """ user authentication """
-    header = {"authorization" : "Token a67aef66e4364d945d821d6129e3e8bbf88722c1"}
+    header = {"authorization" : "Token 45b484f113cf89bf94dbf11062f28c0478d846a2"}
     student = {"email":"jy@gmail.com", "password":"password"}
     
     '''function to call api login for stress and peformance test '''
     @task
     def login(self):
-        res = self.client.post("/api/login/", json=self.student)
+        res = self.client.post("/api/login/", json={"email":"jy@gmail.com", "password":"password"})
         print(res.content)
         res_data = json.loads(res.content)
         self.header = {"authorization" : "Token " +res_data['token']}
@@ -31,7 +31,7 @@ class UserBehaviour(TaskSet):
     '''function to call api get list of questions based on world , section , role and question level for stress and peformance test '''
     @task
     def get_question(self):
-        data = {'world': '1', 'section': '1', 'role': '2', 'questionLevel': 1}
+        data = {'world': '1', 'section': '1', 'role': '1', 'questionLevel': 1}
         res = self.client.get("/api/questions",headers=self.header, json=data)
         print(res.content)
 

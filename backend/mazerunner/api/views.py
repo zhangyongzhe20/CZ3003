@@ -60,7 +60,7 @@ class LeaderBoardAPIView(APIView):
         return Response(serializer.data)
 
 class QuestionAPIView(APIView):
-    def get(self , request):
+    def post(self , request):
         try:
             print(request.data)
             world = World.objects.get(name = request.data['world'])
@@ -80,6 +80,9 @@ class QuestionAPIView(APIView):
         except:
             return Response({'Error Message' :'Please enter the correct input'} ,status = status.HTTP_400_BAD_REQUEST)
 
+
+
+class QuestionSubmitAPIView(APIView):
     def post(self, request):  
         try: 
             world = World.objects.get(name = request.data['world'])
