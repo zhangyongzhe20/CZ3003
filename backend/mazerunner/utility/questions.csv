@@ -1,0 +1,4 @@
+world,section,"role (project manager, frontend , backend)",question_level,question_body,question_ans,question_choice1,question_choice2,question_choice3
+1,1,project manager,1,Requirements engineering is concerned with identifying the _____ of a software system and the _____ in which it will be used.,"purpose,contexts","wrong,ans1","wrong,ans2","wrong,ans3"
+1,1,project manager,1,4 steps of requirements development : ,"elicitation, analysis, specification, and validation","wrong,ans1","wrong,ans2","wrong,ans3"
+1,1,project manager,3,"CRUDL matrix includes actions, ____, Read, Update, Delete, or List, performed on entities by use cases/events/processes. ",Create,,,

@@ -38,7 +38,7 @@
 				</a>
 				<div class="dropdown-menu">
 					{% for world in worldList %}
-					<a class="dropdown-item" href="{% url 'select_world' world %}" method="post">{{world}}</a>
+					<a class="dropdown-item" href="/dashboard?worldID={{world}}" method="post">{{world}}</a>
 					{% endfor %}
 				</div>
 			</li>

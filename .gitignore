@@ -4,8 +4,6 @@ env/
 .env/
 .vscode/
 **/localFile/
-**/migrations/
-**/__pycache__/
 **/node_modules/
 Pipfile*
 **.idea

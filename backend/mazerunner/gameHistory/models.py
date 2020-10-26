@@ -11,4 +11,4 @@ class questionHistory(models.Model):
     studentID = models.ForeignKey(User, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
     isAnsweredCorrect = models.BooleanField(default=False)
-    studentAnswer = models.CharField(max_length=30, default ="1")
+    studentAnswer = models.CharField(max_length=200, default ="1")

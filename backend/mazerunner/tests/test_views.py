@@ -27,6 +27,7 @@ class TestViews(APITestCase):
         self.leaderboard_url = reverse('leaderboard')
         self.students_url = reverse('students')
         self.questions_url = reverse('questions')
+        self.questions_submit_url = reverse('questions_submit')
         self.create_questions_url = reverse('create-questions')
         self.game_summary_url = reverse('gameSummary')
 
@@ -310,19 +311,21 @@ class TestViews(APITestCase):
         self.assertEqual(res_data, LeaderBoardSerializer(user, many=True).data)
         self.assertEqual(res.status_code, 200)
 
-    def test_get_question_withoutQuery(self):
+    def test_post_question_list_withoutQuery(self):
         """ test get question without data is unsccessful """
         self.client.force_authenticate(user=self.user)
-        res = self.client.get(self.questions_url)
+        #res = self.client.get(self.questions_url)
+        res = self.client.post(self.questions_url)
         res_data = json.loads(res.content)
         self.assertEqual(res.status_code, 400)
 
-    def test_get_question_withQuery(self):
+    def test_post_question_list_withQuery(self):
         """ test get question with corect data input is successful """
         self.client.force_authenticate(user=self.user)
         data = {"world": "1", "section": "1", "role": "2", "questionLevel": 1}
-        res = self.client.generic(method="GET", path=self.questions_url, data=json.dumps(
-            data), content_type='application/json')
+        #res = self.client.generic(method="GET", path=self.questions_url, data=json.dumps(
+        #    data), content_type='application/json')
+        res = self.client.post(self.questions_url , data = data , format = 'json')
         res_data = json.loads(res.content)
 
         world = World.objects.get(name='1')
@@ -340,7 +343,7 @@ class TestViews(APITestCase):
         self.client.force_authenticate(user=self.user)
         data = {'world': self.question.worldID.name, 'section': self.question.sectionID.name,
                 'questionID': self.question.id, 'studentID': self.user.id,  'studentAnswer': '2',  'isAnsweredCorrect': True}
-        res = self.client.post(self.questions_url, data=data, format='json')
+        res = self.client.post(self.questions_submit_url, data=data, format='json')
         res_data = json.loads(res.content)
 
         self.assertEqual(res_data, {'pass': True})
@@ -349,7 +352,7 @@ class TestViews(APITestCase):
     def test_post_questionAns_Without_Data(self):
         """ test post question answer without data is unsuccessful"""
         self.client.force_authenticate(user=self.user)
-        res = self.client.post(self.questions_url)
+        res = self.client.post(self.questions_submit_url)
         res_data = json.loads(res.content)
 
         self.assertEqual(res_data, {'pass': False})
