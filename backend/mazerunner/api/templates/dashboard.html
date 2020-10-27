@@ -43,7 +43,7 @@
 				<a class="btn btn-outline-primary" href="/dashboard?worldID={{world}}&studentID={{currObjects.Student}}" method="post">World {{world}}</a>
 			{% endif %}
 		{% endfor %}
-		{% if objList.World == None %}
+		{% if currObjects.World == None %}
 			<a class="btn btn-outline-warning active">Reset World</a>
 		{% else %}
 			<a class="btn btn-outline-warning" href="/dashboard" method="post">Reset World</a>
