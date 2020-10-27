@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
+from django.db.models import Count, Max, Min, Avg
 from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view
 from rest_framework import generics
@@ -117,46 +118,80 @@ class gameSummaryAPIView(APIView):
             return Response(serializer.data , status = status.HTTP_200_OK)   
         except:
             return Response({'Error Message': 'record not found'} , status = status.HTTP_400_BAD_REQUEST)
+
 class overallSummaryView(APIView):
+    """
+    View for Dashboard
+
+    Returns:
+        HttpResponse: Response that contains all the variables used by dashboard.html template
+    """
     authentication_classes = []
     permission_classes = []
     def get(self,request):
-        try:
-            currWorld = request.query_params["worldID"]
-            queryset = questionHistory.objects.filter(worldID__name = currWorld)
-        except:
-            currWorld = None
-            queryset = questionHistory.objects.all()
-        data = []
-        labels = []
-        backgroundColor = []
-        worldSet = set()
+        currObjects = dict()
+        noParams = True
 
-        print(currWorld)
+        if "studentID" in request.query_params.keys():
+            currObjects["Student"] = request.query_params["studentID"]
+        else:
+            currObjects["Student"] = None
+
+        if "worldID" in request.query_params.keys():
+            currObjects["World"] = request.query_params["worldID"]
+            noParams = False
+        else:
+            currObjects["World"] = None
+
+        if "sectionID" in request.query_params.keys():
+            currObjects["Section"] = request.query_params["sectionID"]
+            noParams = False
+        else:
+            currObjects["Section"] = None
+        
+        if "questionID" in request.query_params.keys():
+            currObjects["Question"] = request.query_params["questionID"]
+            noParams = False
+        else:
+            currObjects["Question"] = None
+        
+        if currObjects["Student"] != None:
+            queryset = questionHistory.objects.filter(studentID__name = currObjects["Student"])
+            noParams = False
+        else:
+            queryset = questionHistory.objects.all()
+
+        objList = dict()
+
         labels = ['Correct', 'Incorrect']
         data = [0, 0]
         backgroundColor = ['#2A9D8F', '#F4A261']
-        for question in queryset:
-            worldSet.add(question.worldID.name)
-            if question.isAnsweredCorrect:
-                data[0] += 1
-            else:
-                data[1] += 1
 
-        worldList = World.objects.all()
+        objList["World"] = [str(x["worldID__name"]) for x in queryset.order_by().values("worldID__name").distinct()]
         
-        if currWorld == None:
-            currWorld = worldList[0]
+        if currObjects["World"] != None:
+            queryset = queryset.filter(worldID__name = currObjects["World"])
+            objList["Section"] = [str(x["sectionID__name"]) for x in queryset.order_by().values("sectionID__name").distinct()]
+            if currObjects["Section"] != None:
+                queryset = queryset.filter(sectionID__name = currObjects["Section"])
+                objList["Question"] = [str(x["questionID__questionLevel"]) for x in queryset.order_by().values("questionID__questionLevel").distinct()]
+                if currObjects["Question"] != None:
+                    queryset = queryset.filter(questionID__questionLevel = currObjects["Question"])
+
+        objList["Student"] = [str(x["studentID__name"]) for x in queryset.order_by().values("studentID__name").distinct()]
+
+        data[0] = queryset.filter(isAnsweredCorrect=True).count()
+        data[1] = queryset.count() - data[0]
+        
+        print(currObjects)
+        print(objList)
+        print(data)
     
         return render(request, 'dashboard.html', {
             'labels': labels,
             'data': data,
             'backgroundColor': backgroundColor,
-            'worldList': worldList,
-            'currWorld': currWorld
+            'currObjects': currObjects,
+            'objList': objList,
+            'noParams': noParams
         })
-
-   
-
-def selectWorld(request, worldID):
-    currWorld = worldID
