@@ -13,6 +13,7 @@ from questions.models import Questions_teacher , Questions , Questions_answer
 from gameHistory.models import World , Section, questionHistory
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import AllowAny
+import statistics
 
 #Login
 class LoginAPIView(APIView):
@@ -178,14 +179,29 @@ class overallSummaryView(APIView):
                 if currObjects["Question"] != None:
                     queryset = queryset.filter(questionID__questionLevel = currObjects["Question"])
 
-        objList["Student"] = [str(x["studentID__name"]) for x in queryset.order_by().values("studentID__name").distinct()]
+        studentList = [str(x["studentID__name"]) for x in queryset.order_by().values("studentID__name").distinct()]
 
+        studentScore = list(queryset.filter(isAnsweredCorrect=True).values('studentID__name').annotate(Count('studentID__name')))
+        studentScore = {x['studentID__name']: x['studentID__name__count'] for x in studentScore}
+
+        tempScore = studentScore
+        for student in studentList:
+            if student not in studentScore.keys():
+                tempScore[student] = 0
+        studentScore = tempScore
+
+        orderedStudentList = [k for k, v in sorted(studentScore.items(), key=lambda item: [1])]
+        orderedScoreList = [v for k, v in sorted(studentScore.items(), key=lambda item: [1])]
+
+        scoreLevel = dict()
+        scoreLevel["Max"] = max(orderedScoreList)
+        scoreLevel["Min"] = min(orderedScoreList)
+        scoreLevel["Mean"] = round(statistics.mean(orderedScoreList), 2)
+        scoreLevel["Median"] = statistics.median(orderedScoreList)
+
+        
         data[0] = queryset.filter(isAnsweredCorrect=True).count()
         data[1] = queryset.count() - data[0]
-        
-        print(currObjects)
-        print(objList)
-        print(data)
     
         return render(request, 'dashboard.html', {
             'labels': labels,
@@ -193,5 +209,9 @@ class overallSummaryView(APIView):
             'backgroundColor': backgroundColor,
             'currObjects': currObjects,
             'objList': objList,
-            'noParams': noParams
+            'noParams': noParams,
+            'studentScore': studentScore,
+            'orderedStudentList': orderedStudentList,
+            'orderedScoreList': orderedScoreList,
+            'scoreLevel': scoreLevel
         })
