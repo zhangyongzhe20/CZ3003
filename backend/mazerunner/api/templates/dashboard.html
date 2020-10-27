@@ -29,23 +29,62 @@
 			aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-
-		<ul class="navbar-nav ml-auto">
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false">
-					{{currWorld| safe}}
-				</a>
-				<div class="dropdown-menu">
-					{% for world in worldList %}
-					<a class="dropdown-item" href="/dashboard?worldID={{world}}" method="post">{{world}}</a>
-					{% endfor %}
-				</div>
-			</li>
-		</ul>
 	</nav>
 	<div id="container" style="width: 75%;">
 		<canvas id="chart"></canvas>
+	</div>
+	<div class="ml-5 mr-5 mb-3">
+		{% for world in objList.World %}
+			{% if world == currObjects.World %}
+				<a class="btn btn-outline-primary active">World {{world}}</a>
+			{% elif currObjects.Student == None %}
+				<a class="btn btn-outline-primary" href="/dashboard?worldID={{world}}" method="post">World {{world}}</a>
+			{% else %}
+				<a class="btn btn-outline-primary" href="/dashboard?worldID={{world}}&studentID={{currObjects.Student}}" method="post">World {{world}}</a>
+			{% endif %}
+		{% endfor %}
+		{% if objList.World == None %}
+			<a class="btn btn-outline-warning active">Reset World</a>
+		{% else %}
+			<a class="btn btn-outline-warning" href="/dashboard" method="post">Reset World</a>
+		{% endif %}
+	</div>
+	<div class="ml-5 mr-5 mb-3">
+		{% if currObjects.World != None %}
+			{% for section in objList.Section %}
+				{% if section == currObjects.Section %}
+					<a class="btn btn-outline-primary active">Section {{section}}</a>
+				{% elif currObjects.Student == None %}
+					<a class="btn btn-outline-primary" href="/dashboard?worldID={{currObjects.World}}&sectionID={{section}}" method="post">Section {{section}}</a>
+				{% else %}
+					<a class="btn btn-outline-primary" href="/dashboard?worldID={{currObjects.World}}&sectionID={{section}}&studentID={{currObjects.Student}}" method="post">Section {{section}}</a>
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+	</div>
+	<div class="ml-5 mr-5 mb-3">
+		{% if currObjects.Section != None %}
+			{% for question in objList.Question %}
+				{% if question == currObjects.Question %}
+					<a class="btn btn-outline-primary active">Question {{question}}</a>	
+				{% elif currObjects.Student == None %}
+					<a class="btn btn-outline-primary" href="/dashboard?worldID={{currObjects.World}}&sectionID={{currObjects.Section}}&questionID={{question}}" method="post">Question {{question}}</a>
+				{% else %}
+					<a class="btn btn-outline-primary" href="/dashboard?worldID={{currObjects.World}}&sectionID={{currObjects.Section}}&questionID={{question}}&studentID={{currObjects.Student}}" method="post">Question {{question}}</a>
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+	</div>
+	<div class="ml-5 mr-5 mb-3">
+		{% for student in objList.Student %}
+			{% if student == currObjects.Student %}
+				<a class="btn btn-light active">{{student}}</a>
+			{% elif noParams %}
+				<a class="btn btn-light" href="{{ request.path }}?studentID={{student}}" method="post">{{student}}</a>
+			{% else %}
+				<a class="btn btn-light" href="{{ request.get_full_path }}&studentID={{student}}" method="post">{{student}}</a>
+			{% endif %}
+		{% endfor %}
 	</div>
 
 	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
@@ -70,7 +109,7 @@
 		};
 		window.onload = function () {
 			var ctx = document.getElementById('chart').getContext('2d');
-			window.myChart = new Chart(ctx, config);
+			window.pieChart = new Chart(ctx, config);
 		};
 
 	</script>
