@@ -32,6 +32,12 @@
 	</nav>
 	<div id="container" style="width: 75%;">
 		<canvas id="chart"></canvas>
+		<canvas id="scoreChart"></canvas>
+	</div>
+	<div class="ml-5 mr-5 mb-3">
+		{% for key, item in scoreLevel.items %}
+			<span class="mr-3"><strong>{{key}}:</strong> {{item}}</span>
+		{% endfor %}
 	</div>
 	<div class="ml-5 mr-5 mb-3">
 		{% for world in objList.World %}
@@ -76,19 +82,31 @@
 		{% endif %}
 	</div>
 	<div class="ml-5 mr-5 mb-3">
-		{% for student in objList.Student %}
+		{% for student, score in studentScore.items %}
 			{% if student == currObjects.Student %}
-				<a class="btn btn-light active">{{student}}</a>
+				<a class="btn btn-light active">{{student}} {{score}}</a>
 			{% elif noParams %}
-				<a class="btn btn-light" href="{{ request.path }}?studentID={{student}}" method="post">{{student}}</a>
+				<a class="btn btn-light" href="{{ request.path }}?studentID={{student}}" method="post">{{student}} {{score}}</a>
 			{% else %}
-				<a class="btn btn-light" href="{{ request.get_full_path }}&studentID={{student}}" method="post">{{student}}</a>
+				<a class="btn btn-light" href="{{ request.get_full_path }}&studentID={{student}}" method="post">{{student}} {{score}}</a>
 			{% endif %}
 		{% endfor %}
 	</div>
 
 	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 	<script>
+
+		function getRandomColor() {
+            var letters = '0123456789ABCDEF'.split('');
+            var color = '#';
+            for (var i = 0; i < 6; i++ ) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+		}
+
+		var scoreArray = {{ orderedScoreList | safe }};
+		var colourArray = scoreArray.map(getRandomColor);
 
 		var config = {
 			type: 'pie',
@@ -107,9 +125,32 @@
 			responsive: true
 		}
 		};
+		var scoreConfig = {
+			type: 'bar',
+			data: {
+				labels: {{ orderedStudentList | safe }},
+		datasets: [{
+			data: scoreArray,
+			backgroundColor: colourArray,
+	          //   backgroundColor: [
+	          //     '#696969', '#808080', '#A9A9A9', '#C0C0C0', '#D3D3D3'
+	          //   ],
+	          //   label: 'Population'
+			  }],
+			},
+		options: {
+			responsive: true,
+			legend: {
+				display: false
+			}
+		}
+		};
 		window.onload = function () {
 			var ctx = document.getElementById('chart').getContext('2d');
 			window.pieChart = new Chart(ctx, config);
+
+			var ctx = document.getElementById('scoreChart').getContext('2d');
+			window.scoreChart = new Chart(ctx, scoreConfig);
 		};
 
 	</script>
