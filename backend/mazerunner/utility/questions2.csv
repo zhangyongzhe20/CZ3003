@@ -1,9 +1,9 @@
-ï»¿1,1,all,1,RequirementsÂ engineeringÂ is concerned with identifying theÂ _____Â of a software systemÂ and theÂ _____ in which it will be used.,"purpose,contexts","users,contexts","development teams,contexts","development teams,contexts"
+1,1,all,1,Requirements engineering is concerned with identifying the _____ of a software system and the _____ in which it will be used.,"purpose,contexts","users,contexts","development teams,contexts","development teams,contexts"
 1,1,all,1,The steps of requirements development :,"elicitation, analysis, specification, and validation","elicitation, analysis and validation","elicitation, specification, and validation","elicitation, analysis, and specification"
 1,1,all,1,"CRUDL matrix includes actions, ____, performed on entities by use cases/events/processes.","Create, Read, Update, Delete, or List"," Create, Retrieve, Update, Delete, or List","Create, Read, Update, Delete","Read, Write, Access"
 1,1,all,1,The objective of requirement analysis are to: ,all the other three,decompose high-level requirements into details;,create alternative views of requirements,identify the priorities; 
 1,1,all,1,The  frequently used diagram for requirement analysis are:,all the other three,context diagram,use case diagram,structured analysis models
-1,1,all,2,RequirementsÂ engineeringÂ is concerned with identifying theÂ purposeÂ of a software systemÂ and theÂ _____ in which it will be used.,contexts,,,
+1,1,all,2,Requirements engineering is concerned with identifying the purpose of a software system and the _____ in which it will be used.,contexts,,,
 1,1,all,2,The steps of requirements development :,"elicitation, analysis, specification, and validation",,,
 1,1,all,2,"CRUDL matrix includes actions, ____, performed on entities by use cases/events/processes.","Create, Read, Update, Delete, or List",,,
 1,2,all,1,CRUDL is a ______,structured analysis model,context diagram,use case diagram,data flow diagram
@@ -58,97 +58,97 @@
 4,1,all,1, What are the issues that an architect need to bear in mind?,All of the above,Environment and users,Completeness and scalability,Risk/Difficulties
 4,1,all,1, What are the issues that an architect need to bear in mind?,All of the above,Technical difficulties,Standards and regulations,Known environmental challenges
 4,1,all,1,Who are the immediate stakeholders?,Both,Vendor,Customer,Neither
-4,1,all,2,____________ pattern is used to create business-oriented components that areÂ easier to unit-testÂ and haveÂ a higher separation of concerns.Â ,Entity-Control-BoundaryÂ (ECB),,,
-4,1,all,2,The common atomic unit of software is a _____.Â ,class,,,
+4,1,all,2,____________ pattern is used to create business-oriented components that are easier to unit-test and have a higher separation of concerns. ,Entity-Control-Boundary (ECB),,,
+4,1,all,2,The common atomic unit of software is a _____. ,class,,,
 4,1,all,2,An architecture is a ____  design specification.,high-level,,,
 4,1,all,2,Software architecture is a specialization of computer architecture consisting only of ______.,software components,,,
 4,1,all,2,The two fundamental categories of software are product and _____.,system,,,
 4,1,frontend,2,The two fundamental categories of software are system and _____.,product,,,
-4,1,frontend,2,"________ interacts with external class, and internal control classes.Â ",Boundary,,,
-4,1,all,2,________ isÂ the form of control effected when the current time and date reach some preset values.Â ,SchedulerÂ ,,,
-4,1,all,3,________ is the â€œfront-endâ€ that manages a database and handles queries to the database.Â ,Database Manager ,,,
-4,1,all,3,A _____ componentÂ provides a serviceÂ that is seen inÂ many other software of its kind.Â ,standard,,,
-4,1,backend,3,_____ class isÂ a class through which external client classes can access a set of functions in supplier classes. It delegates the client classâ€™ calls to the appropriate supplier class.Â ,FaÃ§ade,,,
-4,1,frontend,3,"_____ takes current state of the application and environmental conditions as inputs, applies rules and formulations to analyses and selects the most appropriate responses.Â ",Model,,,
+4,1,frontend,2,"________ interacts with external class, and internal control classes. ",Boundary,,,
+4,1,all,2,________ is the form of control effected when the current time and date reach some preset values. ,Scheduler ,,,
+4,1,all,3,________ is the “front-end” that manages a database and handles queries to the database. ,Database Manager ,,,
+4,1,all,3,A _____ component provides a service that is seen in many other software of its kind. ,standard,,,
+4,1,backend,3,_____ class is a class through which external client classes can access a set of functions in supplier classes. It delegates the client class’ calls to the appropriate supplier class. ,Façade,,,
+4,1,frontend,3,"_____ takes current state of the application and environmental conditions as inputs, applies rules and formulations to analyses and selects the most appropriate responses. ",Model,,,
 4,2,backend,1,"What is the design strategy that: Entire software is sub-divided into coherent components, that are in-turn sub-divided, until base components are reached",Top down,Bottom Up,Reusing,Evolutionary
-4,2,backend,1,What is the design strategy that: Software functions and features are constructed in a continuous â€œsurvival of the fittestâ€ progression.,Evolutionary,Top down,Bottom Up,Reusing
+4,2,backend,1,What is the design strategy that: Software functions and features are constructed in a continuous “survival of the fittest” progression.,Evolutionary,Top down,Bottom Up,Reusing
 4,2,backend,1,"What is the design strategy that: The separate base components are joined into small compound components, that are in-turn joined into larger compound components, until the entire software is assembled",Bottom Up,Top down,Evolutionary,Reusing
 4,2,backend,1,What is the design strategy that: The software is augmented with coherent components proven to be high quality by virtue of their service elsewhere (i.e. from frameworks or repositories).,Reusing,Top down,Bottom Up,Evolutionary
 4,2,project manager,1,What's the first step of jumpstart method?,Listing,Initial,Final pending,final
 4,2,project manager,1,"To set the technical direction of the software, is the focus of which phrase of SCAP method?",Evolving phase,Kick start phase,Not a focus of any phase,Formalizing phase
-4,2,all,1,The common atomic unit of software is a _____.Â ,Class,File,Script,Module
-4,2,all,1,"Software components are high-level design, each isÂ a set of ______.",All of the above,Class,File,Script
-4,2,frontend,1,Entity-Control-BoundaryÂ (ECB) pattern is used to create business-oriented components that areÂ _________.,easier to unit-testÂ ,easier to white box testÂ ,lower separation of concerns.Â ,easier to A/B test
-4,2,frontend,1,"Entity is a _______, passive class holding system data.Â ",Entity,Control,Boundry,Persistent
-4,2,frontend,1,________ manages the boundary and entity classes and their interactions.Â ,Control,Entity,Boundry,Persistent
-4,2,frontend,1,"________ interacts with external class, and internal control classes.Â ",Boundary,Control,Entity,Persistent
-4,2,frontend,1,________ is the one-to-oneÂ â€œsoftware interfaceâ€Â to a hardware device that typically is installed directly into the device.Â ,Controller,Driver,Scheduler,Handler
-4,2,frontend,2,"Entity is a _______, passive class holding system data.Â ",persistent,,,
-4,2,frontend,2,________ is the one-to-oneÂ â€œsoftware interfaceâ€Â to a hardware device that typically is installed directly into the device.Â ,Controller,,,
-4,2,all,2,________ isÂ the form of control effected when certain steps/actions are triggered.Â ,HandlerÂ ,,,
-4,2,all,3,"4 recommended categories of software components are:Â thematic, standard, ______ and reused.Â ",integrative,,,
-4,2,all,3,"An _____ componentÂ connects other components together, at the same time â€œhidingâ€ them from design changes.Â ",integrative,,,
-4,2,backend,3,_____ design patternÂ decouples the supply classes from direct access by the client.Â ,FaÃ§ade ,,,
-4,2,frontend,3,_____ outputs information in a unique perspective.Â ,View,,,
-4,3,all,1,________ is the componentÂ in the operating system/system software that allows the OS to connect and communicate with a device.Â ,Driver,Controller,Scheduler,Handler
-4,3,all,1,________ isÂ the form of control effected when the current time and date reach some preset values.Â ,SchedulerÂ ,Driver,Controller,Handler
-4,3,all,1,________ isÂ the form of control effected when certain steps/actions are triggered.Â ,HandlerÂ ,Driver,Scheduler,Controller
-4,3,all,1,"________ is the â€œbrainâ€ of all or a large part of some software, which often manages a group of schedulers or handlers.Â ",Manager,Driver,Scheduler,Controller
-4,3,all,1,________ is the â€œfront-endâ€ that manages a database and handles queries to the database.Â ,Database Manager ,Driver,Scheduler,Controller
-4,3,all,1,"4 recommended categories of software components are:Â thematic, standard, ______ and reused.Â ",integrative,thematic,standard,clustered
-4,3,all,1,A  _____  componentÂ providesÂ aÂ serviceÂ embodying the intended theme of a software.Â ,thematic,integrative,standard,clustered
-4,3,all,1,A _____ componentÂ provides a serviceÂ that is seen inÂ many other software of its kind.Â ,standard,thematic,integrative,clustered
-4,3,all,1,"An _____ componentÂ connects other components together, at the same time â€œhidingâ€ them from design changes.Â ",integrative,thematic,standard,clustered
-4,3,all,1,A _____ component isÂ a clone/copy of design and implementation of some other component.Â ,reused,thematic,standard,clustered
-4,3,backend,1,_____ class isÂ a class through which external client classes can access a set of functions in supplier classes. It delegates the client classâ€™ calls to the appropriate supplier class.Â ,FaÃ§ade,access,factory,messenger
-4,3,backend,1,_____ design patternÂ decouples the supply classes from direct access by the client.Â ,FaÃ§ade ,access,factory,messenger
-4,3,frontend,1,_______Â architecture styleÂ is commonly used for an applicationâ€™s first-level decomposition.Â ,Model-View-Controller,3-layer,client-server,networked
-4,3,frontend,1,"_____ takes current state of the application and environmental conditions as inputs, applies rules and formulations to analyses and selects the most appropriate responses.Â ",Model,View,Controller,Presentation
-4,3,frontend,1,_____ outputs information in a unique perspective.Â ,View,Model,Controller,Presentation
-4,3,frontend,1,"_____  controls operations of the MVC such as sending input parameters to model, launching views, and synchronizing views and model.Â ",Controller,View,Model,Presentation
-4,3,frontend,2,________ manages the boundary and entity classes and their interactions.Â ,Control,,,
-4,3,all,2,________ is the componentÂ in the operating system/system software that allows the OS to connect and communicate with a device.Â ,Driver,,,
-4,3,all,3,"________ is the â€œbrainâ€ of all or a large part of some software, which often manages a group of schedulers or handlers.Â ",Manager,,,
-4,3,all,3,A  _____  componentÂ providesÂ aÂ serviceÂ embodying the intended theme of a software.Â ,thematic,,,
-4,3,all,3,A _____ component isÂ a clone/copy of design and implementation of some other component.Â ,reused,,,
-4,3,frontend,3,_______Â architecture styleÂ is commonly used for an applicationâ€™s first-level decomposition.Â ,Model-View-Controller,,,
-4,3,frontend,3,"_____  controls operations of the MVC such as sending input parameters to model, launching views, and synchronizing views and model.Â ",Controller,,,
-5,1,backend,1,"WithÂ _____, theÂ reusable code and problem-specific are developed independently, even though they operate together in the program.Â ",CommonÂ frameworkÂ ,Documentation,Class diagram,Context Diagram
-5,1,backend,1,______Â are software element main reusables.Â ,Components and classes,Component,Classes,Modules
-5,1,backend,1,"______ describes a design where theÂ reusableÂ software dictates the overall flow of control, and not the custom-written portions.Â ",Inversion of control,architecture diagram,data flow diagram,class diagram
+4,2,all,1,The common atomic unit of software is a _____. ,Class,File,Script,Module
+4,2,all,1,"Software components are high-level design, each is a set of ______.",All of the above,Class,File,Script
+4,2,frontend,1,Entity-Control-Boundary (ECB) pattern is used to create business-oriented components that are _________.,easier to unit-test ,easier to white box test ,lower separation of concerns. ,easier to A/B test
+4,2,frontend,1,"Entity is a _______, passive class holding system data. ",Entity,Control,Boundry,Persistent
+4,2,frontend,1,________ manages the boundary and entity classes and their interactions. ,Control,Entity,Boundry,Persistent
+4,2,frontend,1,"________ interacts with external class, and internal control classes. ",Boundary,Control,Entity,Persistent
+4,2,frontend,1,________ is the one-to-one “software interface” to a hardware device that typically is installed directly into the device. ,Controller,Driver,Scheduler,Handler
+4,2,frontend,2,"Entity is a _______, passive class holding system data. ",persistent,,,
+4,2,frontend,2,________ is the one-to-one “software interface” to a hardware device that typically is installed directly into the device. ,Controller,,,
+4,2,all,2,________ is the form of control effected when certain steps/actions are triggered. ,Handler ,,,
+4,2,all,3,"4 recommended categories of software components are: thematic, standard, ______ and reused. ",integrative,,,
+4,2,all,3,"An _____ component connects other components together, at the same time “hiding” them from design changes. ",integrative,,,
+4,2,backend,3,_____ design pattern decouples the supply classes from direct access by the client. ,Façade ,,,
+4,2,frontend,3,_____ outputs information in a unique perspective. ,View,,,
+4,3,all,1,________ is the component in the operating system/system software that allows the OS to connect and communicate with a device. ,Driver,Controller,Scheduler,Handler
+4,3,all,1,________ is the form of control effected when the current time and date reach some preset values. ,Scheduler ,Driver,Controller,Handler
+4,3,all,1,________ is the form of control effected when certain steps/actions are triggered. ,Handler ,Driver,Scheduler,Controller
+4,3,all,1,"________ is the “brain” of all or a large part of some software, which often manages a group of schedulers or handlers. ",Manager,Driver,Scheduler,Controller
+4,3,all,1,________ is the “front-end” that manages a database and handles queries to the database. ,Database Manager ,Driver,Scheduler,Controller
+4,3,all,1,"4 recommended categories of software components are: thematic, standard, ______ and reused. ",integrative,thematic,standard,clustered
+4,3,all,1,A  _____  component provides a service embodying the intended theme of a software. ,thematic,integrative,standard,clustered
+4,3,all,1,A _____ component provides a service that is seen in many other software of its kind. ,standard,thematic,integrative,clustered
+4,3,all,1,"An _____ component connects other components together, at the same time “hiding” them from design changes. ",integrative,thematic,standard,clustered
+4,3,all,1,A _____ component is a clone/copy of design and implementation of some other component. ,reused,thematic,standard,clustered
+4,3,backend,1,_____ class is a class through which external client classes can access a set of functions in supplier classes. It delegates the client class’ calls to the appropriate supplier class. ,Façade,access,factory,messenger
+4,3,backend,1,_____ design pattern decouples the supply classes from direct access by the client. ,Façade ,access,factory,messenger
+4,3,frontend,1,_______ architecture style is commonly used for an application’s first-level decomposition. ,Model-View-Controller,3-layer,client-server,networked
+4,3,frontend,1,"_____ takes current state of the application and environmental conditions as inputs, applies rules and formulations to analyses and selects the most appropriate responses. ",Model,View,Controller,Presentation
+4,3,frontend,1,_____ outputs information in a unique perspective. ,View,Model,Controller,Presentation
+4,3,frontend,1,"_____  controls operations of the MVC such as sending input parameters to model, launching views, and synchronizing views and model. ",Controller,View,Model,Presentation
+4,3,frontend,2,________ manages the boundary and entity classes and their interactions. ,Control,,,
+4,3,all,2,________ is the component in the operating system/system software that allows the OS to connect and communicate with a device. ,Driver,,,
+4,3,all,3,"________ is the “brain” of all or a large part of some software, which often manages a group of schedulers or handlers. ",Manager,,,
+4,3,all,3,A  _____  component provides a service embodying the intended theme of a software. ,thematic,,,
+4,3,all,3,A _____ component is a clone/copy of design and implementation of some other component. ,reused,,,
+4,3,frontend,3,_______ architecture style is commonly used for an application’s first-level decomposition. ,Model-View-Controller,,,
+4,3,frontend,3,"_____  controls operations of the MVC such as sending input parameters to model, launching views, and synchronizing views and model. ",Controller,,,
+5,1,backend,1,"With _____, the reusable code and problem-specific are developed independently, even though they operate together in the program. ",Common framework ,Documentation,Class diagram,Context Diagram
+5,1,backend,1,______ are software element main reusables. ,Components and classes,Component,Classes,Modules
+5,1,backend,1,"______ describes a design where the reusable software dictates the overall flow of control, and not the custom-written portions. ",Inversion of control,architecture diagram,data flow diagram,class diagram
 5,1,all,1,"Which step of reusing software components is this: analyse the reusable for appropriateness in the design, including services offered, conditions of service, naming, and library usage. ",Qualify fitness of candidate components,Identify opportunities to reuse,Isolate unwanted service,Make architectural style
 5,1,all,1,______ is more difficult/risky for the software architect to design.,Backward compatibility,forward compatibility,reverse compatibility,straight compatibility
 5,1,all,1,What is not a definitive characteristic of software reliability?,Failure could be quickly recovered,Failure is time independent,failure can occure without warning,software can continue to operate
 5,1,project manager,1,Which trend in reliability is: upgrades or new technology involving the software introduce new faults.,Claw back, weibull curve, Increase with time, drop with time
-5,1,all,2,_______is a collection of individual class compatible with a particular programming language that each provide reliable implantations for a variety of standard computer functions.Â ,Library,,,
-5,1,all,2,Effective and trustworthy sources of reusable software components:Â CSBE repo and ________.,software frameworks ,,,
+5,1,all,2,_______is a collection of individual class compatible with a particular programming language that each provide reliable implantations for a variety of standard computer functions. ,Library,,,
+5,1,all,2,Effective and trustworthy sources of reusable software components: CSBE repo and ________.,software frameworks ,,,
 5,1,all,2,The step of reusing software components _____ is: uncover the parts of the architecture for which reuse is a possibility. Standard and integrative components are suitable for reuse; thematic are not,Identify opportunities to reuse,,,
-5,1,all,3,"The step of reusing software components _____ is: reinforce the reusableâ€™s reliability, and reduce integration effort, by putting into an architectural style. ",Make architectural style,,,
+5,1,all,3,"The step of reusing software components _____ is: reinforce the reusable’s reliability, and reduce integration effort, by putting into an architectural style. ",Make architectural style,,,
 5,1,project manager,3,"The trend in reliability over time _______ is: as faults are fixed, fewer new faults are found over time",Increase with time,,,
 5,1,project manager,3,"Most of the software produced today is a _____, with only a few exceptions ",product,,,
 5,1,all,3,"The core of most product certifications include reliability, safety, and _____. ",correctness,,,
-5,2,backend,1,_______is a collection of individual class compatible with a particular programming language that each provide reliable implantations for a variety of standard computer functions.Â ,Library,APIs,Scripts,Modules
-5,2,all,1,Steps to reusing software components:Â identify opportunities to reuse; qualify fitness of candidate components; isolate any unwanted service; and make architectural style.Â ,All,Â identify opportunities to reuse,qualify fitness of candidate components,isolate any unwanted service
-5,2,backend,1,"WithÂ _____, theÂ reusable code and problem-specific are developed independently, even though they operate together in the program.Â ",Inversion of control,architecture diagram,data flow diagram,class diagram
+5,2,backend,1,_______is a collection of individual class compatible with a particular programming language that each provide reliable implantations for a variety of standard computer functions. ,Library,APIs,Scripts,Modules
+5,2,all,1,Steps to reusing software components: identify opportunities to reuse; qualify fitness of candidate components; isolate any unwanted service; and make architectural style. ,All, identify opportunities to reuse,qualify fitness of candidate components,isolate any unwanted service
+5,2,backend,1,"With _____, the reusable code and problem-specific are developed independently, even though they operate together in the program. ",Inversion of control,architecture diagram,data flow diagram,class diagram
 5,2,all,1,"Which step of reusing software components is this: shutoff with a wrapper or a terminator component, any offered services in the reusable that are not desired or detrimental to the rest of the design.",Isolate unwanted service,Identify opportunities to reuse,Qualify fitness of candidate components,Make architectural style
 5,2,all,1,______ is more the simplest for the software architect to design.,Forward compatibility,Backward compatibility,reverse compatibility,straight compatibility
 5,2,project manager,1,"Most of the software produced today is a _____, with only a few exceptions ",product,system,application,project
 5,2,project manager,1,"Which trend in reliability is: Fault accumulates. Over time, this dirt degrades portions of the software, until eventually the faults cascade and compound to crash the entire software.",Weilbull curve, claw back, Increase with time, drop with time
-5,2,all,2,_____is an application that provides a standard computer service.Â ,ToolkitÂ ,,,
-5,2,backend,2,"______ describes a design where theÂ reusableÂ software dictates the overall flow of control, and not the custom-written portions.Â ",Inversion of control,,,
+5,2,all,2,_____is an application that provides a standard computer service. ,Toolkit ,,,
+5,2,backend,2,"______ describes a design where the reusable software dictates the overall flow of control, and not the custom-written portions. ",Inversion of control,,,
 5,2,all,2,"The step of reusing software components _____ is: analyse the reusable for appropriateness in the design, including services offered, conditions of service, naming, and library usage. ",Qualify fitness of candidate components,,,
 5,2,all,3,______ is more difficult/risky for the software architect to design.,Backward compatibility,,,
 5,2,project manager,3,The trend in reliability over time _______ is: upgrades or new technology involving the software introduce new faults.,Claw back,,,
 5,2,all,3,"The core of most product certifications include ______, safety, and correctness. ",reliability,,,
-5,3,backend,1,_____is an application that provides a standard computer service.Â ,ToolkitÂ ,Toolbox,Toolbar,Toolpool
-5,3,all,1,Effective and trustworthy sources of reusable software components:Â ________.,Both,Â software frameworks , CBSE repositories,Neither
+5,3,backend,1,_____is an application that provides a standard computer service. ,Toolkit ,Toolbox,Toolbar,Toolpool
+5,3,all,1,Effective and trustworthy sources of reusable software components: ________.,Both, software frameworks , CBSE repositories,Neither
 5,3,all,1,Which step of reusing software components is this: uncover the parts of the architecture for which reuse is a possibility. Standard and integrative components are suitable for reuse; thematic are not,Identify opportunities to reuse,Qualify fitness of candidate components,Isolate unwanted service,Make architectural style
-5,3,all,1,"Which step of reusing software components is this: reinforce the reusableâ€™s reliability, and reduce integration effort, by putting into an architectural style. ",Make architectural style,Identify opportunities to reuse,Isolate unwanted service,Qualify fitness of candidate components
+5,3,all,1,"Which step of reusing software components is this: reinforce the reusable’s reliability, and reduce integration effort, by putting into an architectural style. ",Make architectural style,Identify opportunities to reuse,Isolate unwanted service,Qualify fitness of candidate components
 5,3,all,1,What is not a trend in reliability over time?,Drop with time,weilbull curve,Increase with time,Claw back
 5,3,project manager,1,"Which trend in reliability is:  as faults are fixed, fewer new faults are found over time",Increase with time, claw back, weibull curve, drop with time
-5,3,all,2,"WithÂ _____, theÂ reusable code and problem-specific are developed independently, even though they operate together in the program.Â ",CommonÂ frameworkÂ ,,,
-5,3,backend,2,______Â are software element main reusables.Â ,Components and classes,,,
-5,3,backend,2,"WithÂ _____, theÂ reusable code and problem-specific are developed independently, even though they operate together in the program.Â ",Inversion of control,,,
+5,3,all,2,"With _____, the reusable code and problem-specific are developed independently, even though they operate together in the program. ",Common framework ,,,
+5,3,backend,2,______ are software element main reusables. ,Components and classes,,,
+5,3,backend,2,"With _____, the reusable code and problem-specific are developed independently, even though they operate together in the program. ",Inversion of control,,,
 5,3,all,3,"The step of reusing software components _____ is: shutoff with a wrapper or a terminator component, any offered services in the reusable that are not desired or detrimental to the rest of the design.",Isolate unwanted service,,,
 5,3,all,3,______ is more the simplest for the software architect to design.,Forward compatibility,,,
 5,3,project manager,3,"The trend in reliability over time _______ is: Fault accumulates. Over time, this dirt degrades portions of the software, until eventually the faults cascade and compound to crash the entire software.",Weilbull curve,,,

@@ -76,7 +76,10 @@ class QuestionAPIView(APIView):
             if(request.data["role"] == "3"):
                 role = 'backend'
             print(role)
-            questions = Questions_teacher.objects.filter(worldID = world , sectionID  = section , role = role, questionLevel = request.data["questionLevel"] )   
+            if(request.data["questionLevel"]  == 1):
+                questions = Questions_teacher.objects.filter(worldID = world , sectionID  = section , role = role, questionLevel = request.data["questionLevel"] ).order_by('?')[:5]   
+            else:
+                questions = Questions_teacher.objects.filter(worldID = world , sectionID  = section , role = role, questionLevel = request.data["questionLevel"] ).order_by('?')[:3]  
             serializer = QuestionTeacherSerializer(questions , many = True)
             return Response(serializer.data , status = status.HTTP_200_OK)
         except:
@@ -88,6 +91,8 @@ class QuestionSubmitAPIView(APIView):
         try: 
             world = World.objects.get(name = request.data['world'])
             section = Section.objects.get(name = request.data['section'])
+            point = request.data['pointGain']
+            print(point)
             data = {
             "worldID" : world.id,
             "sectionID" : section.id,
@@ -96,9 +101,12 @@ class QuestionSubmitAPIView(APIView):
             "studentAnswer" : request.data['studentAnswer'],
             "isAnsweredCorrect" : request.data['isAnsweredCorrect'],
             }
+            student = User.objects.get(id = request.data['studentID'])
             serializer = QuestionHistorySerializer(data = data)
-            if(serializer.is_valid()):
+            if serializer.is_valid() and student!= None:
                 serializer.save()
+                student.overallScore = student.overallScore + point
+                student.save()
                 return Response(({'pass': True}) , status = status.HTTP_201_CREATED)
         except:        
             return Response({'pass': False},status = status.HTTP_400_BAD_REQUEST)
