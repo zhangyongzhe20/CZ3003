@@ -28,7 +28,7 @@ class Questions_teacher(Questions):
     questionLevel = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.questionBody
+        return "World " + str(self.worldID) + " - Section" + str(self.sectionID) + "- Level " + str(self.questionLevel)
 
 
 class Questions_student(Questions):
@@ -44,4 +44,4 @@ class Questions_answer(models.Model):
     questionText = models.CharField(max_length=200)
     isCorrect = models.BooleanField(default=False)
     def __str__(self):
-        return str(self.questionID) + "-" + self.questionText
+        return str(self.questionID.id) + "-" + str(self.questionText)
