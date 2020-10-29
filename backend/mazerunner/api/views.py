@@ -57,7 +57,7 @@ class StudentAPIView(APIView):
 class LeaderBoardAPIView(APIView):
     serializer_class = LeaderBoardSerializer
     def get(self , request):
-        students = User.objects.filter(is_staff = False)
+        students = User.objects.filter(is_staff = False).order_by("overallScore")
         serializer = LeaderBoardSerializer(students , many = True)
         return Response(serializer.data)
 
