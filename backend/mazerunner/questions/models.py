@@ -28,7 +28,7 @@ class Questions_teacher(Questions):
     questionLevel = models.IntegerField(default=0)
 
     def __str__(self):
-        return "World " + str(self.worldID) + " - Section" + str(self.sectionID) + "- Level " + str(self.questionLevel)
+        return "World " + str(self.worldID) + " - Section" + str(self.sectionID) + "- Level " + str(self.questionLevel) + "- QuestionNo - " + str(self.id)
 
 
 class Questions_student(Questions):
