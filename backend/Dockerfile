@@ -3,8 +3,7 @@ FROM python:3.7-alpine
 ENV PYTHONUNBUFFERED 1
 
 ADD ./requirements.txt /requirements.txt
-RUN apk add zlib-dev jpeg-dev gcc musl-dev
-RUN apk add build-base libffi-dev  openssl-dev
+RUN apk add zlib-dev jpeg-dev gcc musl-dev && apk add build-base libffi-dev  openssl-dev
 RUN apk add --update --no-cache --virtual .tmp-build-deps
 RUN pip install -U pip && pip install -U setuptools
 RUN pip install -r /requirements.txt
