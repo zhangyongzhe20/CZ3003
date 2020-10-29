@@ -6,7 +6,8 @@ services:
       context: .
     ports:
       - "8000:8000"
-    volumes:
-      - ./mazerunner:/mazerunner
-      - ./db.sqlite3
-    command: python manage.py runserver 0.0.0.0:8000
+    command: >
+       sh -c "cd /user/home &&
+              source venv/bin/activate &&
+              cd mazerunner/ && 
+              python manage.py runserver 0.0.0.0:8000"
