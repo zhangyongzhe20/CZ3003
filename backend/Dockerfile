@@ -12,6 +12,7 @@ RUN apk del .tmp-build-deps
 RUN mkdir /mazerunner
 WORKDIR /mazerunner
 COPY ./mazerunner /mazerunner
+COPY ./venv /venv
 
 RUN mkdir -p /vol/web/media
 RUN mkdir -p /vol/web/static
