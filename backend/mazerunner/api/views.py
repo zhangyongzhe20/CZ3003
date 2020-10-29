@@ -76,7 +76,7 @@ class QuestionAPIView(APIView):
             if(request.data["role"] == "3"):
                 role = 'backend'
             print(role)
-            if(request.data["questionLevel"]  == 1):
+            if(int(request.data["questionLevel"])  == 1):
                 questions = Questions_teacher.objects.filter(worldID = world , sectionID  = section , role = role, questionLevel = request.data["questionLevel"] ).order_by('?')[:5]   
             else:
                 questions = Questions_teacher.objects.filter(worldID = world , sectionID  = section , role = role, questionLevel = request.data["questionLevel"] ).order_by('?')[:3]  
@@ -91,7 +91,7 @@ class QuestionSubmitAPIView(APIView):
         try: 
             world = World.objects.get(name = request.data['world'])
             section = Section.objects.get(name = request.data['section'])
-            point = request.data['pointGain']
+            point = int(request.data['pointGain'])
             print(point)
             data = {
             "worldID" : world.id,
