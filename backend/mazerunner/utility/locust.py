@@ -63,6 +63,12 @@ class UserBehaviour(TaskSet):
             {'questionText': '10', 'isCorrect' : False  },  {'questionText': '100', 'isCorrect' : True }]} 
         res = self.client.post("/api/questions/create", headers = self.header , json = data)
         print(res.content)
+
+    @task(100)
+    def get_Dashboard(self):
+        res = self.client.get("/dashboard", headers=self.header)
+        print(res.content)
+
 ''' driver program '''
 class User(HttpUser):
     tasks = [UserBehaviour]
