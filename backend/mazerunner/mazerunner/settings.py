@@ -49,6 +49,9 @@ INSTALLED_APPS = [
     'nested_admin',
     ## Dashboard Frontend
     'corsheaders',
+    ## generate api doc
+    'rest_framework_swagger',
+
 ]
 
 MIDDLEWARE = [
@@ -138,7 +141,8 @@ STATIC_URL = '/static/'
 
 REST_FRAMEWORK = {
    'DEFAULT_PERMISSION_CLASSES' : ('rest_framework.permissions.IsAuthenticated',),
-    'DEFAULT_AUTHENTICATION_CLASSES' : ('rest_framework.authentication.TokenAuthentication',),
+    'DEFAULT_AUTHENTICATION_CLASSES' : ('rest_framework.authentication.TokenAuthentication',
+    'rest_framework.authentication.SessionAuthentication'),
 }
 
 CORS_ORIGIN_WHITELIST = [

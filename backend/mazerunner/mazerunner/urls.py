@@ -17,10 +17,19 @@ from django.contrib import admin
 from django.urls import path
 from django.urls import path, include
 from django.views.generic import TemplateView
+from rest_framework.schemas import get_schema_view
 
 urlpatterns = [
     path('', admin.site.urls),
     path('nested_admin', include('nested_admin.urls')),
-    path('',include('api.urls')),
+    path('', include('api.urls')),
     path('stats', TemplateView.as_view(template_name="post_assignment.html")),
+    path('openapi/', get_schema_view(
+        title="MazeRunner",
+        description="Generated API documentation by Swagger"
+    ), name='openapi-schema'),
+    path('docs/', TemplateView.as_view(
+        template_name='documentation.html',
+        extra_context={'schema_url':'openapi-schema'}
+    ), name='swagger-ui'),
 ]

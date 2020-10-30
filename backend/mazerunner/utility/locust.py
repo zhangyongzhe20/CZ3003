@@ -11,8 +11,8 @@ class UserBehaviour(TaskSet):
 
     ''' the weight ratio of task '''
     ''' post_question_ans(every question)  : post_query_for_question_list(every section) : get_leaderboard (depends): get_student_list (same as get_leaderboard)  
-        : post_question_create (depends): login (one time per user) '''
-    ''' 10 : 4 : 3 : 3 : 2 : 1'''
+        : get_Dashboard : post_question_create (depends): login (one time per user) '''
+    ''' 10 : 4 : 3 : 3 : 2 : 2 : 1'''
     '''function to call api login for stress and peformance test '''
     @task(1)
     def login(self):
@@ -69,7 +69,7 @@ class UserBehaviour(TaskSet):
         res = self.client.post("/api/questions/create", headers = self.header , json = data)
         print(res.content)
 
-    @task(100)
+    @task(2)
     def get_Dashboard(self):
         res = self.client.get("/dashboard", headers=self.header)
         print(res.content)
