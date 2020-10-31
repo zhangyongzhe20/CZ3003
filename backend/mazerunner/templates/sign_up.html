@@ -1,103 +1,69 @@
-{% extends 'base.html' %}
 {% load static %}
 {% block head %}
 
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<style>
-		body {
-			font-family: Arial, sans-serif;
-		}
-	</style>
-	<!-- Bootstrap 4 -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+  </style>
+  <!-- Bootstrap 4 -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
 
-
-	{% block head %}
-	<title>
-		Register
-	</title>
-	{% endblock %}
+  <title>
+    Register
+  </title>
 </head>
-
 {% endblock %}
 
 {% block body %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="/">Return</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07"
+    aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+</nav>
 
-
-<div class="container">
-  <div class="header" style="text-align:center;color:white;">
-    <h1>Register</h1>
-  </div>
-  <div class="profile">
-    <form method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-      <small>*All fields are required</small>
-
-      <div class="reg-part">
-        <!-- Full name -->
-        <div class="fieldWrapper">
-          <label for="{{ form.fullname.id_for_label }}">Full Name</label>
-          <span class="error">{{ form.full_name.errors }}</span>
-          {{ form.full_name }}
-          <small>{{form.full_name.help_text}}</small>
-        </div>
-
-        <!-- Email -->
-        <div class="fieldWrapper">
-          <label for="{{ form.email.id_for_label }}">Email</label>
-          {{ form.email }}
-          <small>{{form.email.help_text}}</small>
-          <small class="error" style="color:red;">{{ form.email.errors }}</small>
-        </div>
-
-
-        <!-- Username -->
-        <div class="fieldWrapper">
-          <label for="{{ form.username.id_for_label }}">Username</label>
-          <small class="error" style="color:red;">{{ form.username.errors }}</small>
-          {{ form.username }}
-        </div>
-
-        <!-- Password 1 -->
-        <div class="fieldWrapper">
-          <label for="{{ form.password1.id_for_label }}">Password</label>
-          <span class="help_text">{{ form.password1.help_text }}</span>
-          {{ form.password1 }}
-          <small class="error" style="color:red;">{{ form.password1.errors }}</small>
-        </div>
-
-        <!-- Password 2 -->
-        <div class="fieldWrapper">
-          <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
-          {{ form.password2 }}
-          <small class="error" style="color:red;">{{ form.password2.errors }}</small>
+<div class="row p-5">
+  <div class="col-md d-flex justify-content-center">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <h1>Register</h1>
         </div>
       </div>
-
-      <div class="reg-part">
-
-       
-
-
-      <button class="btn btn-dark submit" id="submit" type="submit">Submit</button>
-
-    </form>
-
+      <div class="card-body">
+        <div class="card-text">
+          <form action="/signup/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="form-group">
+              {{ field.label_tag }} {{ field }}
+              {% if field.help_text %}
+              <small class="help form-text text-muted">{{ field.help_text|safe }}</small>
+              {% endif %}
+            </div>
+            {% endfor %}
+            <small class="form-text text-danger">{{ form.non_field_errors }}</small>
+            <button class="btn btn-dark submit" id="submit" type="submit">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
-
 </div>
-
-<br>
-
-{% endblock %}
-
-{% block footer %}
-
-{{ form.media }}
 
 {% endblock %}
