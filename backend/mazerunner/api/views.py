@@ -1,21 +1,27 @@
-from django.shortcuts import render
+import statistics
+
+from django.db import IntegrityError
+from django.db.models import Avg, Count, Max, Min
 from django.http import HttpResponse, JsonResponse
-from django.db.models import Count, Max, Min, Avg
-from rest_framework.parsers import JSONParser
+from django.http.response import HttpResponseRedirect
+from django.shortcuts import render
+from gameHistory.models import Section, World, questionHistory
+from questions.models import Questions, Questions_answer, Questions_teacher
+from rest_framework import generics, status
+from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view
-from rest_framework import generics
+from rest_framework.parsers import JSONParser
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-from rest_framework import status
 from rest_framework.views import APIView
 from users.models import User
-from .serializers import LoginSerializer ,StudentAccountSerializer ,QuestionTeacherSerializer, QuestionHistorySerializer, QuestionStudentSerializer, gameSummarySerializer , LeaderBoardSerializer, overallSummarySerializer
-from questions.models import Questions_teacher , Questions , Questions_answer
-from gameHistory.models import World , Section, questionHistory
-from rest_framework.authtoken.models import Token
-from rest_framework.permissions import AllowAny
-import statistics
-from django.http.response import HttpResponseRedirect
+
 from .forms import signupForm
+from .serializers import (LeaderBoardSerializer, LoginSerializer,
+                          QuestionHistorySerializer, QuestionStudentSerializer,
+                          QuestionTeacherSerializer, StudentAccountSerializer,
+                          gameSummarySerializer, overallSummarySerializer)
+
 
 #Login
 class LoginAPIView(APIView):
@@ -252,12 +258,7 @@ class signup(APIView):
         if form.is_valid():
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
-            if form.cleaned_data['is_admin']:
-                User.objects.create_superuser(email, password)
-            elif password == '':
-                User.objects.create_user(email)
-            else:
-                User.objects.create_user(email, password)
+            User.objects.create_superuser(email, password)
             return HttpResponseRedirect('/')
         
         return render(request, 'sign_up.html', {
