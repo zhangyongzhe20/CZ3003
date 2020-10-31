@@ -5,7 +5,7 @@ import json
 '''List of task to be included for stress and peformance test '''
 class UserBehaviour(TaskSet):
     """ user authentication """
-    header = {"authorization" : "Token 45b484f113cf89bf94dbf11062f28c0478d846a2"}
+    header = {"authorization" : "Token 60708f93f200848e33f3b433f91f7df77a2991a0"}
     student = {"email":"jy@gmail.com", "password":"password"}
     
 
@@ -53,7 +53,7 @@ class UserBehaviour(TaskSet):
     @task(10)
     def post_question_ans(self):
         data = {'world': '1','section':'1',
-        'questionID': 1, 'studentID': 1,  'studentAnswer': '2',  'isAnsweredCorrect': True }  
+        'questionID': 1, 'studentID': 1,  'studentAnswer': '2',  'isAnsweredCorrect': True , 'pointGain' : 3 }  
         res = self.client.post("/api/questions/submit",headers = self.header , json = data)
         print(res.content)
 

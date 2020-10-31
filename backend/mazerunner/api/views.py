@@ -65,14 +65,13 @@ class StudentAPIView(APIView):
 class LeaderBoardAPIView(APIView):
     serializer_class = LeaderBoardSerializer
     def get(self , request):
-        students = User.objects.filter(is_staff = False).order_by("overallScore")
+        students = User.objects.filter(is_staff = False).order_by("-overallScore")
         serializer = LeaderBoardSerializer(students , many = True)
         return Response(serializer.data)
 
 class QuestionAPIView(APIView):
     def post(self , request):
         try:
-            print(request.data)
             world = World.objects.get(name = request.data['world'])
             section = Section.objects.get(name = request.data['section'])
 
@@ -83,7 +82,6 @@ class QuestionAPIView(APIView):
                 role = 'frontend'
             if(request.data["role"] == "3"):
                 role = 'backend'
-            print(role)
             if(int(request.data["questionLevel"])  == 1):
                 questions = Questions_teacher.objects.filter(worldID = world , sectionID  = section , role = role, questionLevel = request.data["questionLevel"] ).order_by('?')[:5]   
             else:
@@ -100,7 +98,6 @@ class QuestionSubmitAPIView(APIView):
             world = World.objects.get(name = request.data['world'])
             section = Section.objects.get(name = request.data['section'])
             point = int(request.data['pointGain'])
-            print(point)
             data = {
             "worldID" : world.id,
             "sectionID" : section.id,

@@ -20,7 +20,7 @@ class LoginSerializer(serializers.Serializer):
 class StudentAccountSerializer(serializers.ModelSerializer):
     class Meta :
         model = User
-        fields = ('id','email','name','distanceToNPC','overallScore','containBonus','role')
+        fields = ('id','email','name','overallScore')
         
 class LeaderBoardSerializer(serializers.ModelSerializer):
     class Meta:
