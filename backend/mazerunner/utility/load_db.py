@@ -45,20 +45,52 @@ def load_sections_data():
 
 ''' function to create questions and load into the database'''
 def load_questions_data():
-    with open(os.path.join(os.getcwd(),"" "utility","questions.csv")) as f:
+    with open(os.path.join(os.getcwd(),"" "utility","questions2.csv")) as f:
         reader = csv.reader(f)
         for row in reader:
-            if row[0] != "world":
+            if row[0] != 'world':
                 world, created = World.objects.get_or_create(name = row[0])
                 section, created = Section.objects.get_or_create(name = row[1])
-                question = Questions_teacher.objects.create(worldID= world , sectionID = section , role = row[2] ,
-                questionLevel = row[3] , questionBody = row[4])
-                Questions_answer.objects.create(questionID = question , questionText =row[5] , isCorrect = True)
 
-                if(question.questionLevel !='3'):
-                    Questions_answer.objects.create(questionID = question ,questionText= row[6] ,isCorrect = False)
-                    Questions_answer.objects.create(questionID = question ,questionText= row[7] ,isCorrect = False)
-                    Questions_answer.objects.create(questionID = question , questionText=row[8] ,isCorrect = False)
+                if row[2] != "all":
+                    question = Questions_teacher.objects.create(worldID= world , sectionID = section , role = row[2] ,
+                    questionLevel = row[3] , questionBody = row[4])
+
+                    Questions_answer.objects.create(questionID = question , questionText =row[5] , isCorrect = True)
+
+                    if(question.questionLevel =='1'):
+                        if(row[6] != None and row[6] != ""):
+                            Questions_answer.objects.create(questionID = question ,questionText= row[6] ,isCorrect = False)
+                        if(row[7] != None and row[7] != ""):
+                            Questions_answer.objects.create(questionID = question ,questionText= row[7] ,isCorrect = False)
+                        if(row[8] != None and row[8] != ""):
+                            Questions_answer.objects.create(questionID = question , questionText=row[8] ,isCorrect = False)
+
+                else :
+                    roles = ["project manager","backend","frontend"]
+
+                    for role in roles:
+                        question = Questions_teacher.objects.create(worldID= world , sectionID = section , role = role ,
+                    questionLevel = row[3] , questionBody = row[4])
+
+                    
+                        Questions_answer.objects.create(questionID = question , questionText =row[5] , isCorrect = True)
+
+        
+                        if(question.questionLevel == '1'):
+                        
+                            if(row[6] != None and row[6] != ""):
+                                Questions_answer.objects.create(questionID = question ,questionText= row[6] ,isCorrect = False)
+                        
+                            if(row[7] != None and row[7] != ""):              
+                                Questions_answer.objects.create(questionID = question ,questionText= row[7] ,isCorrect = False)
+                            if(row[8] != None and row[8] != ""):
+                                Questions_answer.objects.create(questionID = question , questionText=row[8] ,isCorrect = False)
+
+                    
+
+
+               
 
 '''loading of data function being called'''
 def load_db(): 
@@ -72,3 +104,4 @@ def load_db():
 ''' driver program '''
 if __name__ == "__main__":
     load_db()
+    print("done")

@@ -12,3 +12,6 @@ class questionHistory(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     isAnsweredCorrect = models.BooleanField(default=False)
     studentAnswer = models.CharField(max_length=200, default ="1")
+
+    def __str__(self):
+        return 'question record: ' + str(self.questionID)

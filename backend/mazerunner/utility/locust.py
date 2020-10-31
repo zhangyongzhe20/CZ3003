@@ -8,8 +8,13 @@ class UserBehaviour(TaskSet):
     header = {"authorization" : "Token 45b484f113cf89bf94dbf11062f28c0478d846a2"}
     student = {"email":"jy@gmail.com", "password":"password"}
     
+
+    ''' the weight ratio of task '''
+    ''' post_question_ans(every question)  : post_query_for_question_list(every section) : get_leaderboard (depends): get_student_list (same as get_leaderboard)  
+        : get_Dashboard : post_question_create (depends): login (one time per user) '''
+    ''' 10 : 4 : 3 : 3 : 2 : 2 : 1'''
     '''function to call api login for stress and peformance test '''
-    @task
+    @task(1)
     def login(self):
         res = self.client.post("/api/login/", json={"email":"jy@gmail.com", "password":"password"})
         print(res.content)
@@ -17,35 +22,35 @@ class UserBehaviour(TaskSet):
         self.header = {"authorization" : "Token " +res_data['token']}
     
     '''function to call api get list of students for stress and peformance test '''
-    @task
+    @task(3)
     def get_student_list(self):
         res = self.client.get("/api/students", headers=self.header)
         print(res.content)
     
     '''function to call api get leaderboard datas for stress and peformance test '''
-    @task
+    @task(3)
     def get_leaderboard(self):
         res = self.client.get("/api/students/leaderboard", headers=self.header)
         print(res.content)
 
     '''function to call api get list of questions based on world , section , role and question level for stress and peformance test '''
-    @task
+    @task(4)
     def post_query_for_question_list(self):
         data = {'world': '1', 'section': '1', 'role': '1', 'questionLevel': 1}
         res = self.client.post("/api/questions",headers=self.header, json=data)
         print(res.content)
 
 
-    '''function to call api to get game summary based on student email for stress and peformance test '''
-    @task
-    def get_gameSummary(self):
-        data = {'email' : 'jy@gmail.com'}
-        res = self.client.get("/api/gameSummary" , headers = self.header , json=data)
-        print(res.content)
+    # '''function to call api to get game summary based on student email for stress and peformance test '''
+    # @task
+    # def get_gameSummary(self):
+    #     data = {'email' : 'jy@gmail.com'}
+    #     res = self.client.get("/api/gameSummary" , headers = self.header , json=data)
+    #     print(res.content)
     
 
     '''function to call api to create question history based on question and student for stress and peformance test '''
-    @task
+    @task(10)
     def post_question_ans(self):
         data = {'world': '1','section':'1',
         'questionID': 1, 'studentID': 1,  'studentAnswer': '2',  'isAnsweredCorrect': True }  
@@ -54,7 +59,7 @@ class UserBehaviour(TaskSet):
 
 
     '''function to call api to create question based on student for stress and peformance test '''
-    @task
+    @task(2)
     def post_question_create(self):
         data ={ 'Proposer': self.student['email'] , 'isMCQ': True,  'questionBody': '10*10 = ?', 
         'questionAns'  : [
@@ -63,6 +68,12 @@ class UserBehaviour(TaskSet):
             {'questionText': '10', 'isCorrect' : False  },  {'questionText': '100', 'isCorrect' : True }]} 
         res = self.client.post("/api/questions/create", headers = self.header , json = data)
         print(res.content)
+
+    @task(2)
+    def get_Dashboard(self):
+        res = self.client.get("/dashboard", headers=self.header)
+        print(res.content)
+
 ''' driver program '''
 class User(HttpUser):
     tasks = [UserBehaviour]

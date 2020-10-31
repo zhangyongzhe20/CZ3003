@@ -25,7 +25,7 @@ SECRET_KEY = 'd9!r^@1)2a5+dl8en-z*_$s=q^!h060h1b*9jyj3bds2wywtf@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -49,6 +49,9 @@ INSTALLED_APPS = [
     'nested_admin',
     ## Dashboard Frontend
     'corsheaders',
+    ## generate api doc
+    'rest_framework_swagger',
+
 ]
 
 MIDDLEWARE = [
@@ -69,7 +72,7 @@ ROOT_URLCONF = 'mazerunner.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['C:/Users/GarySGX/Desktop'],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -78,6 +81,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'debug':DEBUG,
         },
     },
 ]
@@ -137,7 +141,8 @@ STATIC_URL = '/static/'
 
 REST_FRAMEWORK = {
    'DEFAULT_PERMISSION_CLASSES' : ('rest_framework.permissions.IsAuthenticated',),
-    'DEFAULT_AUTHENTICATION_CLASSES' : ('rest_framework.authentication.TokenAuthentication',),
+    'DEFAULT_AUTHENTICATION_CLASSES' : ('rest_framework.authentication.TokenAuthentication',
+    'rest_framework.authentication.SessionAuthentication'),
 }
 
 CORS_ORIGIN_WHITELIST = [
