@@ -1,3 +1,6 @@
+{% load static %}
+{% block head %}
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,12 +16,11 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 
-	{% block head %}
 	<title>
 		Dashboard
 	</title>
-	{% endblock %}
 </head>
+{% endblock %}
 
 {% block content %}
 
@@ -30,9 +32,20 @@
 			<span class="navbar-toggler-icon"></span>
 		</button>
 	</nav>
-	<div id="container" style="width: 75%;">
-		<canvas id="chart"></canvas>
-		<canvas id="scoreChart"></canvas>
+	{% if data == None %}
+	<div class="ml-5 mr-5 mb-3">
+		<h1>No Questions Answered</h1>
+	</div>
+	{% else %}
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md">
+				<canvas id="chart"></canvas>
+			</div>
+			<div class="col-md">
+				<canvas id="scoreChart"></canvas>
+			</div>
+		</div>
 	</div>
 	<div class="ml-5 mr-5 mb-3">
 		{% for key, item in scoreLevel.items %}
@@ -44,15 +57,15 @@
 			{% if world == currObjects.World %}
 				<a class="btn btn-outline-primary active">World {{world}}</a>
 			{% elif currObjects.Student == None %}
-				<a class="btn btn-outline-primary" href="/dashboard?worldID={{world}}" method="post">World {{world}}</a>
+				<a class="btn btn-outline-primary" href="{% url 'dashboard' %}?worldID={{world}}" method="post">World {{world}}</a>
 			{% else %}
-				<a class="btn btn-outline-primary" href="/dashboard?worldID={{world}}&studentID={{currObjects.Student}}" method="post">World {{world}}</a>
+				<a class="btn btn-outline-primary" href="{% url 'dashboard' %}?worldID={{world}}&studentID={{currObjects.Student}}" method="post">World {{world}}</a>
 			{% endif %}
 		{% endfor %}
 		{% if currObjects.World == None %}
 			<a class="btn btn-outline-warning active">Reset World</a>
 		{% else %}
-			<a class="btn btn-outline-warning" href="/dashboard" method="post">Reset World</a>
+			<a class="btn btn-outline-warning" href="{% url 'dashboard' %}" method="post">Reset World</a>
 		{% endif %}
 	</div>
 	<div class="ml-5 mr-5 mb-3">
@@ -61,9 +74,9 @@
 				{% if section == currObjects.Section %}
 					<a class="btn btn-outline-primary active">Section {{section}}</a>
 				{% elif currObjects.Student == None %}
-					<a class="btn btn-outline-primary" href="/dashboard?worldID={{currObjects.World}}&sectionID={{section}}" method="post">Section {{section}}</a>
+					<a class="btn btn-outline-primary" href="{% url 'dashboard' %}?worldID={{currObjects.World}}&sectionID={{section}}" method="post">Section {{section}}</a>
 				{% else %}
-					<a class="btn btn-outline-primary" href="/dashboard?worldID={{currObjects.World}}&sectionID={{section}}&studentID={{currObjects.Student}}" method="post">Section {{section}}</a>
+					<a class="btn btn-outline-primary" href="{% url 'dashboard' %}?worldID={{currObjects.World}}&sectionID={{section}}&studentID={{currObjects.Student}}" method="post">Section {{section}}</a>
 				{% endif %}
 			{% endfor %}
 		{% endif %}
@@ -74,9 +87,9 @@
 				{% if question == currObjects.Question %}
 					<a class="btn btn-outline-primary active">Question {{question}}</a>	
 				{% elif currObjects.Student == None %}
-					<a class="btn btn-outline-primary" href="/dashboard?worldID={{currObjects.World}}&sectionID={{currObjects.Section}}&questionID={{question}}" method="post">Question {{question}}</a>
+					<a class="btn btn-outline-primary" href="{% url 'dashboard' %}?worldID={{currObjects.World}}&sectionID={{currObjects.Section}}&questionID={{question}}" method="post">Question {{question}}</a>
 				{% else %}
-					<a class="btn btn-outline-primary" href="/dashboard?worldID={{currObjects.World}}&sectionID={{currObjects.Section}}&questionID={{question}}&studentID={{currObjects.Student}}" method="post">Question {{question}}</a>
+					<a class="btn btn-outline-primary" href="{% url 'dashboard' %}?worldID={{currObjects.World}}&sectionID={{currObjects.Section}}&questionID={{question}}&studentID={{currObjects.Student}}" method="post">Question {{question}}</a>
 				{% endif %}
 			{% endfor %}
 		{% endif %}
@@ -154,6 +167,7 @@
 		};
 
 	</script>
+	{% endif %}
 
 </body>
 

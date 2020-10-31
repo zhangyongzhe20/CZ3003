@@ -14,6 +14,8 @@ from gameHistory.models import World , Section, questionHistory
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import AllowAny
 import statistics
+from django.http.response import HttpResponseRedirect
+from .forms import signupForm
 
 #Login
 class LoginAPIView(APIView):
@@ -170,6 +172,11 @@ class overallSummaryView(APIView):
         else:
             queryset = questionHistory.objects.all()
 
+        if queryset.count() == 0:
+            return render(request, 'dashboard.html', {
+                'data': None
+            })
+
         objList = dict()
 
         labels = ['Correct', 'Incorrect']
@@ -222,4 +229,37 @@ class overallSummaryView(APIView):
             'orderedStudentList': orderedStudentList,
             'orderedScoreList': orderedScoreList,
             'scoreLevel': scoreLevel
+        })
+
+class signup(APIView):
+    """
+    View for Signup form
+
+    Returns:
+        HttpResponse: Response that contains all the variables used by sign_up.html template
+    """
+    authentication_classes = []
+    permission_classes = []
+    def get(self, request):
+        form = signupForm()
+
+        return render(request, 'sign_up.html', {
+            'form': form
+        })
+    
+    def post(self, request):
+        form = signupForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            if form.cleaned_data['is_admin']:
+                User.objects.create_superuser(email, password)
+            elif password == '':
+                User.objects.create_user(email)
+            else:
+                User.objects.create_user(email, password)
+            return HttpResponseRedirect('/')
+        
+        return render(request, 'sign_up.html', {
+            'form': form
         })
