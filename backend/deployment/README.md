@@ -1,6 +1,6 @@
 # Set up Backend Server
-
-## 1. Running Server on local computer
+## Two ways are provided to set up the backend server
+## 1. Running server on local computer
 ### Requirements
 1. Python 3.7
 
@@ -24,7 +24,7 @@ python manage.py runserver
 
 4. In your browser, go to http://localhost:8000
 
-5. Press Control+C to stop the local web server.
+5. Press `control+C` to stop the local web server.
 
 
 ## 2. Running Server using Docker
@@ -34,7 +34,8 @@ python manage.py runserver
 3. Dockerfile
 
 ### Steps
+1. Change to the directory contains Dockerfile: `cd backend/deployment`
 1. Build a docker image: `docker-compose run app`
-2. Run the docker container: `docker-compose up`
-3. In your browser, go to `http://localhost:8000`
-3. Stop the docker: `docker stop $(docker ps -aq)`
+2. Run the server: `docker-compose up`
+3. In your browser, go to http://localhost:8000
+3. Stop the server: `docker stop $(docker ps -aq)`
