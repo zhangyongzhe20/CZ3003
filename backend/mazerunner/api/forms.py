@@ -31,14 +31,3 @@ class signupForm(forms.Form):
             raise forms.ValidationError(
                 "Passwords do not match"
             )
-        
-
-		if is_exists:
-			raise forms.ValidationError(
-				"Account already exists"
-			)
-		if not is_same:
-			raise forms.ValidationError(
-				"Passwords do not match"
-			)
-		
