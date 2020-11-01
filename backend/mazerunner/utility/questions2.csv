@@ -1,155 +1,207 @@
-1,1,all,1,Requirements†engineering†is concerned with identifying the†_____†of a software system†and the†_____ in which it will be used.,"purpose,contexts","users,contexts","development teams,contexts","development teams,contexts"
+Ôªø1,1,all,1,Requirements¬†engineering¬†is concerned with identifying the¬†_____¬†of a software system¬†and the¬†_____ in which it will be used.,"purpose,contexts","users,contexts","development teams,contexts","development teams,contexts"
 1,1,all,1,The steps of requirements development :,"elicitation, analysis, specification, and validation","elicitation, analysis and validation","elicitation, specification, and validation","elicitation, analysis, and specification"
-1,1,all,1,"CRUDL matrix includes actions, ____, performed on entities by use cases/events/processes.","Create, Read, Update, Delete, or List"," Create, Retrieve, Update, Delete, or List","Create, Read, Update, Delete","Read, Write, Access"
+1,1,all,1,Requirement elicitation is to classify the voice of the customer,TRUE,FALSE,,
 1,1,all,1,The objective of requirement analysis are to: ,all the other three,decompose high-level requirements into details;,create alternative views of requirements,identify the priorities; 
-1,1,all,1,The  frequently used diagram for requirement analysis are:,all the other three,context diagram,use case diagram,structured analysis models
-1,1,all,2,Requirements†engineering†is concerned with identifying the†purpose†of a software system†and the†_____ in which it will be used.,contexts,,,
-1,1,all,2,The steps of requirements development :,"elicitation, analysis, specification, and validation",,,
-1,1,all,2,"CRUDL matrix includes actions, ____, performed on entities by use cases/events/processes.","Create, Read, Update, Delete, or List",,,
+1,1,all,1,Software requirements specification (SRS) is a set of precisely stated ______ that a software system must satisfy. ,properties and constraints, purposes and contexts, requirements and attributes, features
+1,1,all,2,Requirements¬†engineering¬†is concerned with identifying the¬†purpose¬†of a software system¬†and the¬†_____ in which it will be used.,contexts,,,
+1,1,all,2,"The steps of requirements development : ______, _______, specification, and validation","elicitation, analysis ",,,
+1,1,all,2,Requirement elicitation is to ______,classify the voice of the customer,,,
+1,1,all,3,Requirements¬†engineering¬†is concerned with identifying __________.,the¬†purpose¬†of a software system¬†and the¬†contexts in which it will be used,,,
+1,1,all,3,The steps of requirements development :,"elicitation, analysis, specification, and validation",,,
+1,1,all,3,Software requirements specification (SRS) is a set of precisely stated ______ that a software system must satisfy. ,properties and constraints,,,
+1,2,all,1,The type of frequently used diagram for requirement analysis is: ,all the other three,context diagram,use case diagram, structured analysis model
 1,2,all,1,CRUDL is a ______,structured analysis model,context diagram,use case diagram,data flow diagram
 1,2,all,1,"Entity-relationship diagram is a representation of the ______, which is useful for requirement engineering and database design.",logical relationships of data,a finite-state machine,use case,database tables
-1,2,all,1,The audiences of software requirements specification are:,all the other three,end users,"software, hardware, and systems engineers",product management
 1,2,all,1,"Dialog map is a concise, complete and unambiguous representation of ______ for systems or objects",a finite-state machine,context,use case,logical relationships of data
-1,2,all,1,The objectives of software requirement specification are to: achieve agreement regarding the requirements among,all the other three,developers,customers,other stakeholders
-1,2,all,2,CRUDL is a ______,structured analysis model,,,
+1,2,all,1, 4 objectives of requirement analysis are to: decompose high-level requirements into details;  identify the priorities; create alternative views of requirements; and look for incomplete/ambiguous/conflicted requirements. ,TRUE,FALSE,,
+1,2,all,2,The type of frequently used diagram for requirement analysis is: ,"context diagram, use case diagram, and structured analysis models.",,,
 1,2,all,2,"Entity-relationship diagram is a representation of the ______, which is useful for requirement engineering and database design.",logical relationships of data,,,
 1,2,all,2,"Dialog map is a concise, complete and unambiguous representation of ______ for systems or objects",a finite-state machine,,,
+1,2,all,3,CRUDL is a ______,structured analysis model,,,
+1,2,all,3,"Entity-relationship diagram is a representation of the logical relationships of data, which is useful for _______.",requirement engineering and database design,,,
+1,2,all,3,Dialog map is _______ of a finite-state machine for systems or objects,"a concise, complete and unambiguous representation",,,
+1,3,all,1,Software requirements specification (SRS) is a set of precisely stated ______ that a software system must satisfy. ,properties and constraints, purposes and contexts, requirements and attributes, features
+1,3,all,1,The objectives of software requirement specification are to: achieve agreement regarding the requirements among ______,all the other three,developers,customers,other stakeholders
+1,3,all,1,"End users, marketing, product management teams are the audiences of software requirements specification. ",TRUE,FALSE,,
+1,3,all,1,"Software, hardware, and systems engineers  are the audiences of software requirements specification. ",TRUE,FALSE,,
+1,3,all,1,Maintenance and support teams are the audiences of software requirements specification. ,TRUE,FALSE,,
+1,3,all,2,3 types of frequently used diagram for requirement analysis are:,"context diagram, use case diagram, and structured analysis models.",,,
+1,3,all,2,2 objectives of software requirement specification are to: achieve agreement regarding the requirements among _______ ; and... ,"developers, customers, and other stakeholders",,,
+1,3,all,2,"2 objectives of software requirement specification are to: achieve agreement regarding the requirements among developers, customers, and other stakeholders; and provide ______. ",the basis for design and system testing,,,
+1,3,all,3,"5 teams that are audiences of software requirements specification are: _________; project management; software, hardware, and systems engineers; testing group; maintenance and support team.","end users, marketing, product management",,,
+1,3,all,3,"5 teams that are audiences of software requirements specification are: end users, marketing, product management; project management; _________ ; testing group; maintenance and support team.","software, hardware, and systems engineers",,,
+1,3,all,3,"5 teams that are audiences of software requirements specification are: end users, marketing, product management; project management; software, hardware, and systems engineers; testing group; ________.",maintenance and support team,,,
 2,1,all,1,"4 software design principles are: modularity, single responsibility principle, principle of least knowledge and open close principle.",TRUE,FALSE,,
 2,1,all,1,Single responsibility principle requires that,each component or module should be responsible for only a specific feature or functionality,a component should not know about internal details of other components,"software entities like classes, modules and functions should be open for extension but closed for modifications","the design should be composed of replaceable, self-contained assemblies of elementary parts, thereby aiding both the initial development and the later maintenance"
 2,1,all,1,Principle of least knowledge requires that,a component should not know about internal details of other components,each component or module should be responsible for only a specific feature or functionality,"software entities like classes, modules and functions should be open for extension but closed for modifications","the design should be composed of replaceable, self-contained assemblies of elementary parts, thereby aiding both the initial development and the later maintenance"
 2,1,all,1,Open close principle requires that ,"software entities like classes, modules and functions should be open for extension but closed for modifications",each component or module should be responsible for only a specific feature or functionality,a component should not know about internal details of other components,"the design should be composed of replaceable, self-contained assemblies of elementary parts, thereby aiding both the initial development and the later maintenance"
 2,1,all,1,Modularity requires that,"the design should be composed of replaceable, self-contained assemblies of elementary parts, thereby aiding both the initial development and the later maintenance",each component or module should be responsible for only a specific feature or functionality,a component should not know about internal details of other components,"software entities like classes, modules and functions should be open for extension but closed for modifications"
+2,1,all,2,4 software design principles are:,"modularity, single responsibility principle, principle of least knowledge and open close principle",,,
+2,1,all,2,Single responsibility principle requires that each component or module should be responsible for only _________,a specific feature or functionality,,,
+2,1,all,2,Principle of least knowledge requires that a component should not know about _______,internal details of other components,,,
+2,1,all,3,"Open close principle requires that software entities like classes, modules and functions should be ______",open for extension but closed for modifications,,,
+2,1,all,3,"Modularity requires that the design should be composed of _______ , thereby aiding both the initial development and the later maintenance","replaceable, self-contained assemblies of elementary parts",,,
+2,1,all,3,The benefit of following software design principles is:,"separation of achieve concerns, low coupling and high cohesion",,,
 2,2,all,1,Software performance is,the responsiveness of a system.,the easiness of a software system to be transported to multiple hardware/software platforms.,the components of one software system can be easily reused in the development of other software systems.,in nature iterative and model-based and has multiple solutions.
 2,2,all,1,Portability is ,the easiness of a software system to be transported to multiple hardware/software platforms.,the responsiveness of a system.,the components of one software system can be easily reused in the development of other software systems.,in nature iterative and model-based and has multiple solutions.
 2,2,all,1,Reusability requires that ,the components of one software system can be easily reused in the development of other software systems.,the responsiveness of a system.,the easiness of a software system to be transported to multiple hardware/software platforms.,in nature iterative and model-based and has multiple solutions.
 2,2,all,1,Software design process is ,in nature iterative and model-based and has multiple solutions.,the responsiveness of a system.,the easiness of a software system to be transported to multiple hardware/software platforms.,the components of one software system can be easily reused in the development of other software systems.
-2,1,all,2,Single responsibility principle requires that each component or module should be responsible for only _________,a specific feature or functionality,,,
-2,1,all,2,Principle of least knowledge requires that a component should not know about _______,internal details of other components,,,
-2,1,all,2,"Open close principle requires that software entities like classes, modules and functions should be ______",open for extension but closed for modifications,,,
-2,1,all,2,"Modularity requires that the design should be composed of _______ , thereby aiding both the initial development and the later maintenance","replaceable, self-contained assemblies of elementary parts",,,
+2,2,all,1,"Types of the software quality models are:hierarchical models, relational models of SQ",TRUE,FALSE,,
 2,2,all,2,Software performance is _______,the responsiveness of a system.,,,
 2,2,all,2,Portability is the easiness of a software system to be _______,transported to multiple hardware/software platforms.,,,
 2,2,all,2,Reusability requires that the components of one software system can be easily reused in _____,the development of other software systems.,,,
-2,2,all,2,Software design process is  in nature ______,iterative and model-based and has multiple solutions.,,,
+2,2,all,3,Software design process is  in nature ______,iterative and model-based and has multiple solutions.,,,
+2,2,all,3,Types of the software quality models are:,"hierarchical models, relational models of SQ",,,
+2,2,all,3,Three major software qualities are:,"software performance, portability and reusability",,,
+2,3,all,1,Design is the first state in software system creation in which _____ can begin to be addressed.,quality requirements,funtional requirements,use case, hardware requirements
+2,3,all,1,Efficiency: ,How few system resources does it consume?,How easy it is to correct defects or make changes?,Can I verify that it was implemented correctly?,How easy is it to add new capabilities?
+2,3,all,1,Maintainability: ,How easy it is to correct defects or make changes?,How few system resources does it consume?,Can I verify that it was implemented correctly?,How easy is it to add new capabilities?
+2,3,all,1,Testability: ,Can I verify that it was implemented correctly?,How few system resources does it consume?,How easy it is to correct defects or make changes?,How easy is it to add new capabilities?
+2,3,all,1,Flexibility:,How easy is it to add new capabilities?,How few system resources does it consume?,How easy it is to correct defects or make changes?,Can I verify that it was implemented correctly?
+2,3,all,2,Design is the first state in software system creation in which _____ can begin to be addressed.,quality requirements,,,
+2,3,all,2,Efficiency: ,How few system resources does it consume?,,,
+2,3,all,2,Maintainability: ,How easy it is to correct defects or make changes?,,,
+2,3,all,3,Design is ______ in which quality requirements can begin to be addressed.,the first state in software system creation,,,
+2,3,all,3,Testability: ,Can I verify that it was implemented correctly?,,,
+2,3,all,3,Flexibility:,How easy is it to add new capabilities?,,,
 3,1,all,1,Software architecture is considered as a description of the high-level structure of a software system in terms of architectural elements and the interactions between them.,TRUE,FALSE,,
 3,1,all,1,"An architectural element, also known as _____, is a unit of software that performs some function at runtime.",component,object,class,entity
 3,1,all,1,"As with building blocks, ______ must be decomposable to a point when they are no longer components.",software components,software classes,software interfaces ,software designs 
 3,1,all,1,"The interactions between components, also known as connectors, are the ______ among components.",all the other three, communication, coordination, cooperation
-3,1,all,1,"Some commonly used architectural styles include client & server, implicit invocation, batch sequential, pipe-and-filter, main program and sub routine, and layered system.",TRUE,fasle,,
-3,2,all,1,There are two fundamental categories of software: ,product and system,product and service,infrastucture and service,infrastucture and system
-3,2,all,1,Product is ,a set of dependent components joined immutably,"a bag of self-sufficient, substitutable components joined dynamically",,
-3,2,all,1,System is ,"a bag of self-sufficient, substitutable components joined dynamically",a set of dependent components joined immutably,,
-3,2,all,1,"5 key concepts to keep in view for building satisfactory software architecture are: essential elements, system perspective, structure, behavior, stakeholders",TRUE,fasle,,
-3,2,all,1,2 widely used software architectural process are the jumpstart and the software architecting canonical process (SACP).,TRUE,fasle,,
+3,1,all,1,"Some commonly used architectural styles include client & server, implicit invocation, batch sequential, pipe-and-filter, main program and sub routine, and layered system.",TRUE,FALSE,,
 3,1,all,2,Software architecture is considered as a description of the high-level structure of a software system in terms of _______.,architectural elements and the interactions between them,,,
 3,1,all,2,"An architectural element, also known as _____, is a unit of software that performs some function at runtime.",component,,,
 3,1,all,2,"As with building blocks, ______ must be decomposable to a point when they are no longer components.",software components,,,
-3,1,all,2,"The interactions between components, also known as connectors, are the ______ among components.",all the other three,,,
-3,1,all,2,"Some commonly used ______ include client & server, implicit invocation, batch sequential, pipe-and-filter, main program and sub routine, and layered system.",architectural styles,,,
+3,1,all,3,Software architecture is considered as ______ in terms of architectural elements and the interactions between them.,a description of the high-level structure of a software system,,,
+3,1,all,3,"The interactions between components, also known as connectors, are the ______ among components.","communication, coordination, and cooperation",,,
+3,1,all,3,"Some commonly used ______ include client & server, implicit invocation, batch sequential, pipe-and-filter, main program and sub routine, and layered system.",architectural styles,,,
+3,2,all,1,There are two fundamental categories of software: ,product and system,product and service,infrastucture and service,infrastucture and system
+3,2,all,1,Product is ,a set of dependent components joined immutably,"a bag of self-sufficient, substitutable components joined dynamically",,
+3,2,all,1,System is ,"a bag of self-sufficient, substitutable components joined dynamically",a set of dependent components joined immutably,,
+3,2,all,1,"5 key concepts to keep in view for building satisfactory software architecture are: essential elements, system perspective, structure, behavior, stakeholders",TRUE,FALSE,,
+3,2,all,1,2 widely used software architectural process are the jumpstart and the software architecting canonical process (SACP).,TRUE,FALSE,,
 3,2,all,2,There are two fundamental categories of software: ,product and system,,,
 3,2,all,2,Product is ,a set of dependent components joined immutably,,,
 3,2,all,2,System is ,"a bag of self-sufficient, substitutable components joined dynamically",,,
-3,2,all,2,"5 key concepts to keep in view for building satisfactory software architecture are: essential elements, system perspective, structure, behavior,______",stakeholders,,,
-3,2,all,2,2 widely used software architectural process are the jumpstart and _________ (SACP).,the software architecting canonical process,,,
-4,1,all,1,Which architectural thinking perspective is Component Diagram concerned with?,Structure,Behaviours,System Perspective,Stakeholder
-4,1,all,1,Which architectural thinking perspective is Communication Diagram concerned with?,Behaviors,Structure,System Perspective,Stakeholder
+3,2,all,3,"5 key concepts to keep in view for building satisfactory software architecture are: essential elements, system perspective, structure, behavior,______",stakeholders,,,
+3,2,all,3,2 widely used software architectural process are _______ and SACP.,the jumpstart,,,
+3,2,all,3,2 widely used software architectural process are the jumpstart and _________ (SACP).,the software architecting canonical process,,,
+3,3,all,1,An architectural style defines a family of components in terms of a pattern of structural organization.,FALSE,TRUE,,
+3,3,all,1,An architectural style includes a vocabulary of component and connector types,TRUE,FALSE,,
+3,3,all,1,An architectural style includes a set of constraints on how they can be combined,TRUE,FALSE,,
+3,3,all,1,Components communicate through messages,FALSE,TRUE,,
+3,3,all,1,Connectors are a number of independent processes or objects,FALSE,TRUE,,
+3,3,all,2,An architectural style defines a family of systems in terms of _____.,a pattern of structural organization,,,
+3,3,all,2,An architectural style includes a vocabulary of _____ types,component and connector,,,
+3,3,all,2,An architectural style includes a set of ____ on how they can be combined,constraints ,,,
+3,3,all,3,Components are _______,a number of independent processes or objects,,,
+3,3,all,3,Connectors _______,communicate through messages,,,
+3,3,all,3,An architectural style must specify _______,the number of components involved and the mechanism of interaction,,,
 4,1,all,1,Product is a set of dependent components joined ____?,immutably,At most+G2 times mutably,Sometimes mutably,mutably
 4,1,all,1,System is a bag of _____ components joined dynamically.,Both,Self-sufficient,substitutable,Neither
 4,1,all,1, What are the issues that an architect need to bear in mind?,All of the above,Environment and users,Completeness and scalability,Risk/Difficulties
 4,1,all,1, What are the issues that an architect need to bear in mind?,All of the above,Technical difficulties,Standards and regulations,Known environmental challenges
 4,1,all,1,Who are the immediate stakeholders?,Both,Vendor,Customer,Neither
-4,1,all,2,____________ pattern is used to create business-oriented components that are†easier to unit-test†and have†a higher separation of concerns.†,Entity-Control-Boundary†(ECB),,,
-4,1,all,2,The common atomic unit of software is a _____.†,class,,,
+4,1,all,2,The common atomic unit of software is a _____.¬†,class,,,
 4,1,all,2,An architecture is a ____  design specification.,high-level,,,
 4,1,all,2,Software architecture is a specialization of computer architecture consisting only of ______.,software components,,,
 4,1,all,2,The two fundamental categories of software are product and _____.,system,,,
 4,1,frontend,2,The two fundamental categories of software are system and _____.,product,,,
-4,1,frontend,2,"________ interacts with external class, and internal control classes.†",Boundary,,,
-4,1,all,2,________ is†the form of control effected when the current time and date reach some preset values.†,Scheduler†,,,
-4,1,all,3,________ is the ìfront-endî that manages a database and handles queries to the database.†,Database Manager ,,,
-4,1,all,3,A _____ component†provides a service†that is seen in†many other software of its kind.†,standard,,,
-4,1,backend,3,_____ class is†a class through which external client classes can access a set of functions in supplier classes. It delegates the client classí calls to the appropriate supplier class.†,FaÁade,,,
-4,1,frontend,3,"_____ takes current state of the application and environmental conditions as inputs, applies rules and formulations to analyses and selects the most appropriate responses.†",Model,,,
+4,1,all,3,A _____ component¬†provides a service¬†that is seen in¬†many other software of its kind.¬†,standard,,,
+4,1,all,3,_____ class is¬†a class through which external client classes can access a set of functions in supplier classes. It delegates the client class‚Äô calls to the appropriate supplier class.¬†,Fa√ßade,,,
+4,1,all,3,"_____ takes current state of the application and environmental conditions as inputs, applies rules and formulations to analyses and selects the most appropriate responses.¬†",Model,,,
+4,2,all,1,Which architectural thinking perspective is Component Diagram concerned with?,Structure,Behaviours,System Perspective,Stakeholder
+4,2,all,1,Which architectural thinking perspective is Communication Diagram concerned with?,Behaviors,Structure,System Perspective,Stakeholder
 4,2,backend,1,"What is the design strategy that: Entire software is sub-divided into coherent components, that are in-turn sub-divided, until base components are reached",Top down,Bottom Up,Reusing,Evolutionary
-4,2,backend,1,What is the design strategy that: Software functions and features are constructed in a continuous ìsurvival of the fittestî progression.,Evolutionary,Top down,Bottom Up,Reusing
+4,2,backend,1,What is the design strategy that: Software functions and features are constructed in a continuous ‚Äúsurvival of the fittest‚Äù progression.,Evolutionary,Top down,Bottom Up,Reusing
 4,2,backend,1,"What is the design strategy that: The separate base components are joined into small compound components, that are in-turn joined into larger compound components, until the entire software is assembled",Bottom Up,Top down,Evolutionary,Reusing
 4,2,backend,1,What is the design strategy that: The software is augmented with coherent components proven to be high quality by virtue of their service elsewhere (i.e. from frameworks or repositories).,Reusing,Top down,Bottom Up,Evolutionary
-4,2,project manager,1,What's the first step of jumpstart method?,Listing,Initial,Final pending,final
+4,2,all,1,What's the first step of jumpstart method?,Listing,Initial,Final pending,final
 4,2,project manager,1,"To set the technical direction of the software, is the focus of which phrase of SCAP method?",Evolving phase,Kick start phase,Not a focus of any phase,Formalizing phase
-4,2,all,1,The common atomic unit of software is a _____.†,Class,File,Script,Module
-4,2,all,1,"Software components are high-level design, each is†a set of ______.",All of the above,Class,File,Script
-4,2,frontend,1,Entity-Control-Boundary†(ECB) pattern is used to create business-oriented components that are†_________.,easier to unit-test†,easier to white box test†,lower separation of concerns.†,easier to A/B test
-4,2,frontend,1,"Entity is a _______, passive class holding system data.†",Entity,Control,Boundry,Persistent
-4,2,frontend,1,________ manages the boundary and entity classes and their interactions.†,Control,Entity,Boundry,Persistent
-4,2,frontend,1,"________ interacts with external class, and internal control classes.†",Boundary,Control,Entity,Persistent
-4,2,frontend,1,________ is the one-to-one†ìsoftware interfaceî†to a hardware device that typically is installed directly into the device.†,Controller,Driver,Scheduler,Handler
-4,2,frontend,2,"Entity is a _______, passive class holding system data.†",persistent,,,
-4,2,frontend,2,________ is the one-to-one†ìsoftware interfaceî†to a hardware device that typically is installed directly into the device.†,Controller,,,
-4,2,all,2,________ is†the form of control effected when certain steps/actions are triggered.†,Handler†,,,
-4,2,all,3,"4 recommended categories of software components are:†thematic, standard, ______ and reused.†",integrative,,,
-4,2,all,3,"An _____ component†connects other components together, at the same time ìhidingî them from design changes.†",integrative,,,
-4,2,backend,3,_____ design pattern†decouples the supply classes from direct access by the client.†,FaÁade ,,,
-4,2,frontend,3,_____ outputs information in a unique perspective.†,View,,,
-4,3,all,1,________ is the component†in the operating system/system software that allows the OS to connect and communicate with a device.†,Driver,Controller,Scheduler,Handler
-4,3,all,1,________ is†the form of control effected when the current time and date reach some preset values.†,Scheduler†,Driver,Controller,Handler
-4,3,all,1,________ is†the form of control effected when certain steps/actions are triggered.†,Handler†,Driver,Scheduler,Controller
-4,3,all,1,"________ is the ìbrainî of all or a large part of some software, which often manages a group of schedulers or handlers.†",Manager,Driver,Scheduler,Controller
-4,3,all,1,________ is the ìfront-endî that manages a database and handles queries to the database.†,Database Manager ,Driver,Scheduler,Controller
-4,3,all,1,"4 recommended categories of software components are:†thematic, standard, ______ and reused.†",integrative,thematic,standard,clustered
-4,3,all,1,A  _____  component†provides†a†service†embodying the intended theme of a software.†,thematic,integrative,standard,clustered
-4,3,all,1,A _____ component†provides a service†that is seen in†many other software of its kind.†,standard,thematic,integrative,clustered
-4,3,all,1,"An _____ component†connects other components together, at the same time ìhidingî them from design changes.†",integrative,thematic,standard,clustered
-4,3,all,1,A _____ component is†a clone/copy of design and implementation of some other component.†,reused,thematic,standard,clustered
-4,3,backend,1,_____ class is†a class through which external client classes can access a set of functions in supplier classes. It delegates the client classí calls to the appropriate supplier class.†,FaÁade,access,factory,messenger
-4,3,backend,1,_____ design pattern†decouples the supply classes from direct access by the client.†,FaÁade ,access,factory,messenger
-4,3,frontend,1,_______†architecture style†is commonly used for an applicationís first-level decomposition.†,Model-View-Controller,3-layer,client-server,networked
-4,3,frontend,1,"_____ takes current state of the application and environmental conditions as inputs, applies rules and formulations to analyses and selects the most appropriate responses.†",Model,View,Controller,Presentation
-4,3,frontend,1,_____ outputs information in a unique perspective.†,View,Model,Controller,Presentation
-4,3,frontend,1,"_____  controls operations of the MVC such as sending input parameters to model, launching views, and synchronizing views and model.†",Controller,View,Model,Presentation
-4,3,frontend,2,________ manages the boundary and entity classes and their interactions.†,Control,,,
-4,3,all,2,________ is the component†in the operating system/system software that allows the OS to connect and communicate with a device.†,Driver,,,
-4,3,all,3,"________ is the ìbrainî of all or a large part of some software, which often manages a group of schedulers or handlers.†",Manager,,,
-4,3,all,3,A  _____  component†provides†a†service†embodying the intended theme of a software.†,thematic,,,
-4,3,all,3,A _____ component is†a clone/copy of design and implementation of some other component.†,reused,,,
-4,3,frontend,3,_______†architecture style†is commonly used for an applicationís first-level decomposition.†,Model-View-Controller,,,
-4,3,frontend,3,"_____  controls operations of the MVC such as sending input parameters to model, launching views, and synchronizing views and model.†",Controller,,,
-5,1,backend,1,"With†_____, the†reusable code and problem-specific are developed independently, even though they operate together in the program.†",Common†framework†,Documentation,Class diagram,Context Diagram
-5,1,backend,1,______†are software element main reusables.†,Components and classes,Component,Classes,Modules
-5,1,backend,1,"______ describes a design where the†reusable†software dictates the overall flow of control, and not the custom-written portions.†",Inversion of control,architecture diagram,data flow diagram,class diagram
+4,2,all,1,The common atomic unit of software is a _____.¬†,Class,File,Script,Module
+4,2,all,1,"Software components are high-level design, each is¬†a set of ______.",All of the above,Class,File,Script
+4,2,all,1,"4 recommended categories of software components are:¬†thematic, standard, ______ and reused.¬†",integrative,thematic,standard,clustered
+4,2,all,1,A  _____  component¬†provides¬†a¬†service¬†embodying the intended theme of a software.¬†,thematic,integrative,standard,clustered
+4,2,all,1,A _____ component¬†provides a service¬†that is seen in¬†many other software of its kind.¬†,standard,thematic,integrative,clustered
+4,2,all,1,"An _____ component¬†connects other components together, at the same time ‚Äúhiding‚Äù them from design changes.¬†",integrative,thematic,standard,clustered
+4,2,all,1,A _____ component is¬†a clone/copy of design and implementation of some other component.¬†,reused,thematic,standard,clustered
+4,2,backend,1,_____ class is¬†a class through which external client classes can access a set of functions in supplier classes. It delegates the client class‚Äô calls to the appropriate supplier class.¬†,Fa√ßade,access,factory,messenger
+4,2,backend,1,_____ design pattern¬†decouples the supply classes from direct access by the client.¬†,Fa√ßade ,access,factory,messenger
+4,2,all,2,"4 recommended categories of software components are:¬†thematic, standard, ______ and reused.¬†",integrative,,,
+4,2,all,2,The common atomic unit of software is a _____.¬†,Class,,,
+4,2,backend,2,_____ design pattern¬†decouples the supply classes from direct access by the client.¬†,Fa√ßade ,,,
+4,2,all,2,A _____ component is¬†a clone/copy of design and implementation of some other component.¬†,reused,,,
+4,2,all,3,"An _____ component¬†connects other components together, at the same time ‚Äúhiding‚Äù them from design changes.¬†",integrative,,,
+4,2,all,3,A  _____  component¬†provides¬†a¬†service¬†embodying the intended theme of a software.¬†,thematic,,,
+4,2,all,3,A _____ component¬†provides a service¬†that is seen in¬†many other software of its kind.¬†,standard,,,
+4,3,frontend,1,Entity-Control-Boundary¬†(ECB) pattern is used to create business-oriented components that are¬†_________.,easier to unit-test¬†,Control,Entity,Persistent
+4,3,frontend,1,"Entity is a _______, passive class holding system data.¬†",Entity,Controller,Scheduler,Handler
+4,3,frontend,1,________ manages the boundary and entity classes and their interactions.¬†,Control,Driver,Controller,Handler
+4,3,frontend,1,"________ interacts with external class, and internal control classes.¬†",Boundary,Driver,Scheduler,Controller
+4,3,all,1,________ is the component¬†in the operating system/system software that allows the OS to connect and communicate with a device.¬†,Driver,Driver,Scheduler,Controller
+4,3,all,1,________ is¬†the form of control effected when the current time and date reach some preset values.¬†,Scheduler¬†,Driver,Scheduler,Controller
+4,3,all,1,________ is¬†the form of control effected when certain steps/actions are triggered.¬†,Handler¬†,Driver,Scheduler,Handler
+4,3,all,1,"________ is the ‚Äúbrain‚Äù of all or a large part of some software, which often manages a group of schedulers or handlers.¬†",Manager,3-layer,client-server,networked
+4,3,all,1,________ is the ‚Äúfront-end‚Äù that manages a database and handles queries to the database.¬†,Database Manager ,View,Controller,Presentation
+4,3,frontend,1,________ is the one-to-one¬†‚Äúsoftware interface‚Äù¬†to a hardware device that typically is installed directly into the device.¬†,Controller,Model,Controller,Presentation
+4,3,frontend,1,_______¬†architecture style¬†is commonly used for an application‚Äôs first-level decomposition.¬†,Model-View-Controller,View,Model,Presentation
+4,3,frontend,1,"_____ takes current state of the application and environmental conditions as inputs, applies rules and formulations to analyses and selects the most appropriate responses.¬†",Model,,,
+4,3,frontend,1,_____ outputs information in a unique perspective.¬†,View,,,
+4,3,frontend,1,"_____  controls operations of the MVC such as sending input parameters to model, launching views, and synchronizing views and model.¬†",Controller,,,
+4,3,frontend,2,________ manages the boundary and entity classes and their interactions.¬†,Control,,,
+4,3,all,2,________ is the component¬†in the operating system/system software that allows the OS to connect and communicate with a device.¬†,Driver,,,
+4,3,all,2,"________ is the ‚Äúbrain‚Äù of all or a large part of some software, which often manages a group of schedulers or handlers.¬†",Manager,,,
+4,3,all,2,A  _____  component¬†provides¬†a¬†service¬†embodying the intended theme of a software.¬†,thematic,,,
+4,3,all,2,A _____ component is¬†a clone/copy of design and implementation of some other component.¬†,reused,,,
+4,3,all,2,_______¬†architecture style¬†is commonly used for an application‚Äôs first-level decomposition.¬†,Model-View-Controller,,,
+4,3,all,3,"_____  controls operations of the MVC such as sending input parameters to model, launching views, and synchronizing views and model.¬†",Controller,,,
+4,3,all,3,____________ pattern is used to create business-oriented components that are¬†easier to unit-test¬†and have¬†a higher separation of concerns.¬†,Entity-Control-Boundary¬†(ECB),,,
+4,3,frontend,3,"________ interacts with external class, and internal control classes.¬†",Boundary,,,
+4,3,all,3,________ is¬†the form of control effected when the current time and date reach some preset values.¬†,Scheduler¬†,,,
+4,3,all,2,________ is the ‚Äúfront-end‚Äù that manages a database and handles queries to the database.¬†,Database Manager ,,,
+4,3,all,2,"Entity is a _______, passive class holding system data.¬†",persistent,,,
+4,3,all,2,________ is the one-to-one¬†‚Äúsoftware interface‚Äù¬†to a hardware device that typically is installed directly into the device.¬†,Controller,,,
+4,3,all,3,________ is¬†the form of control effected when certain steps/actions are triggered.¬†,Handler¬†,,,
+4,3,all,3,_____ design pattern¬†decouples the supply classes from direct access by the client.¬†,Fa√ßade ,,,
+4,3,all,3,_____ outputs information in a unique perspective.¬†,View,,,
+5,1,all,1,"With¬†_____, the¬†reusable code and problem-specific are developed independently, even though they operate together in the program.¬†",Common¬†framework¬†,Documentation,Class diagram,Context Diagram
+5,1,all,1,______¬†are software element main reusables.¬†,Components and classes,Component,Classes,Modules
+5,1,backend,1,"______ describes a design where the¬†reusable¬†software dictates the overall flow of control, and not the custom-written portions.¬†",Inversion of control,architecture diagram,data flow diagram,class diagram
 5,1,all,1,"Which step of reusing software components is this: analyse the reusable for appropriateness in the design, including services offered, conditions of service, naming, and library usage. ",Qualify fitness of candidate components,Identify opportunities to reuse,Isolate unwanted service,Make architectural style
 5,1,all,1,______ is more difficult/risky for the software architect to design.,Backward compatibility,forward compatibility,reverse compatibility,straight compatibility
-5,1,all,1,What is not a definitive characteristic of software reliability?,Failure could be quickly recovered,Failure is time independent,failure can occure without warning,software can continue to operate
-5,1,project manager,1,Which trend in reliability is: upgrades or new technology involving the software introduce new faults.,Claw back, weibull curve, Increase with time, drop with time
-5,1,all,2,_______is a collection of individual class compatible with a particular programming language that each provide reliable implantations for a variety of standard computer functions.†,Library,,,
-5,1,all,2,Effective and trustworthy sources of reusable software components:†CSBE repo and ________.,software frameworks ,,,
+5,1,all,1,_______is a collection of individual class compatible with a particular programming language that each provide reliable implantations for a variety of standard computer functions.¬†,Library,APIs,Scripts,Modules
+5,1,all,2,_______is a collection of individual class compatible with a particular programming language that each provide reliable implantations for a variety of standard computer functions.¬†,Library,,,
+5,1,all,2,Effective and trustworthy sources of reusable software components:¬†CSBE repo and ________.,software frameworks ,,,
 5,1,all,2,The step of reusing software components _____ is: uncover the parts of the architecture for which reuse is a possibility. Standard and integrative components are suitable for reuse; thematic are not,Identify opportunities to reuse,,,
-5,1,all,3,"The step of reusing software components _____ is: reinforce the reusableís reliability, and reduce integration effort, by putting into an architectural style. ",Make architectural style,,,
-5,1,project manager,3,"The trend in reliability over time _______ is: as faults are fixed, fewer new faults are found over time",Increase with time,,,
+5,1,all,3,"The step of reusing software components _____ is: reinforce the reusable‚Äôs reliability, and reduce integration effort, by putting into an architectural style. ",Make architectural style,,,
 5,1,project manager,3,"Most of the software produced today is a _____, with only a few exceptions ",product,,,
 5,1,all,3,"The core of most product certifications include reliability, safety, and _____. ",correctness,,,
-5,2,backend,1,_______is a collection of individual class compatible with a particular programming language that each provide reliable implantations for a variety of standard computer functions.†,Library,APIs,Scripts,Modules
-5,2,all,1,Steps to reusing software components:†identify opportunities to reuse; qualify fitness of candidate components; isolate any unwanted service; and make architectural style.†,All,†identify opportunities to reuse,qualify fitness of candidate components,isolate any unwanted service
-5,2,backend,1,"With†_____, the†reusable code and problem-specific are developed independently, even though they operate together in the program.†",Inversion of control,architecture diagram,data flow diagram,class diagram
-5,2,all,1,"Which step of reusing software components is this: shutoff with a wrapper or a terminator component, any offered services in the reusable that are not desired or detrimental to the rest of the design.",Isolate unwanted service,Identify opportunities to reuse,Qualify fitness of candidate components,Make architectural style
-5,2,all,1,______ is more the simplest for the software architect to design.,Forward compatibility,Backward compatibility,reverse compatibility,straight compatibility
-5,2,project manager,1,"Most of the software produced today is a _____, with only a few exceptions ",product,system,application,project
-5,2,project manager,1,"Which trend in reliability is: Fault accumulates. Over time, this dirt degrades portions of the software, until eventually the faults cascade and compound to crash the entire software.",Weilbull curve, claw back, Increase with time, drop with time
-5,2,all,2,_____is an application that provides a standard computer service.†,Toolkit†,,,
-5,2,backend,2,"______ describes a design where the†reusable†software dictates the overall flow of control, and not the custom-written portions.†",Inversion of control,,,
-5,2,all,2,"The step of reusing software components _____ is: analyse the reusable for appropriateness in the design, including services offered, conditions of service, naming, and library usage. ",Qualify fitness of candidate components,,,
-5,2,all,3,______ is more difficult/risky for the software architect to design.,Backward compatibility,,,
-5,2,project manager,3,The trend in reliability over time _______ is: upgrades or new technology involving the software introduce new faults.,Claw back,,,
-5,2,all,3,"The core of most product certifications include ______, safety, and correctness. ",reliability,,,
-5,3,backend,1,_____is an application that provides a standard computer service.†,Toolkit†,Toolbox,Toolbar,Toolpool
-5,3,all,1,Effective and trustworthy sources of reusable software components:†________.,Both,†software frameworks , CBSE repositories,Neither
+5,1,all,3,_____is an application that provides a standard computer service.¬†,Toolkit¬†,,,
+5,1,all,3,"With¬†_____, the¬†reusable code and problem-specific are developed independently, even though they operate together in the program.¬†",Common¬†framework¬†,,,
+5,1,all,3,______¬†are software element main reusables.¬†,Components and classes,,,
+5,2,all,1,Which trend in reliability is: upgrades or new technology involving the software introduce new faults.,Claw back, weibull curve, Increase with time, drop with time
+5,2,all,1,What is not a trend in reliability over time?,Drop with time,weilbull curve,Increase with time,Claw back
+5,2,all,1,"Which trend in reliability is:  as faults are fixed, fewer new faults are found over time",Increase with time, claw back, weibull curve, drop with time
+5,2,all,1,What is not a definitive characteristic of software reliability?,Failure could be quickly recovered,Failure is time independent,failure can occure without warning,software can continue to operate
+5,2,all,1,"Which trend in reliability is: Fault accumulates. Over time, this dirt degrades portions of the software, until eventually the faults cascade and compound to crash the entire software.",Weilbull curve, claw back, Increase with time, drop with time
+5,2,all,2,"The trend in reliability over time _______ is: as faults are fixed, fewer new faults are found over time",Increase with time,,,
+5,2,all,2,The trend in reliability over time _______ is: upgrades or new technology involving the software introduce new faults.,Claw back,,,
+5,2,all,2,"The core of most product certifications include ______, safety, and correctness. ",reliability,,,
+5,2,all,3,"The trend in reliability over time _______ is: Fault accumulates. Over time, this dirt degrades portions of the software, until eventually the faults cascade and compound to crash the entire software.",Weilbull curve,,,
+5,2,all,3,"The core of most product certifications include reliability, _____, and correctness. ",safety,,,
+5,2,all,3,______¬†are software element main reusables.¬†,Components and classes,,,
+5,3,backend,1,_____is an application that provides a standard computer service.¬†,Toolkit¬†,Toolbox,Toolbar,Toolpool
+5,3,all,1,Effective and trustworthy sources of reusable software components:¬†________.,Both,¬†software frameworks , CBSE repositories,Neither
 5,3,all,1,Which step of reusing software components is this: uncover the parts of the architecture for which reuse is a possibility. Standard and integrative components are suitable for reuse; thematic are not,Identify opportunities to reuse,Qualify fitness of candidate components,Isolate unwanted service,Make architectural style
-5,3,all,1,"Which step of reusing software components is this: reinforce the reusableís reliability, and reduce integration effort, by putting into an architectural style. ",Make architectural style,Identify opportunities to reuse,Isolate unwanted service,Qualify fitness of candidate components
-5,3,all,1,What is not a trend in reliability over time?,Drop with time,weilbull curve,Increase with time,Claw back
-5,3,project manager,1,"Which trend in reliability is:  as faults are fixed, fewer new faults are found over time",Increase with time, claw back, weibull curve, drop with time
-5,3,all,2,"With†_____, the†reusable code and problem-specific are developed independently, even though they operate together in the program.†",Common†framework†,,,
-5,3,backend,2,______†are software element main reusables.†,Components and classes,,,
-5,3,backend,2,"With†_____, the†reusable code and problem-specific are developed independently, even though they operate together in the program.†",Inversion of control,,,
+5,3,all,1,"Which step of reusing software components is this: reinforce the reusable‚Äôs reliability, and reduce integration effort, by putting into an architectural style. ",Make architectural style,Identify opportunities to reuse,Isolate unwanted service,Qualify fitness of candidate components
+5,3,all,1,Steps to reusing software components:¬†identify opportunities to reuse; qualify fitness of candidate components; isolate any unwanted service; and make architectural style.¬†,All,¬†identify opportunities to reuse,qualify fitness of candidate components,isolate any unwanted service
+5,3,all,1,"With¬†_____, the¬†reusable code and problem-specific are developed independently, even though they operate together in the program.¬†",Inversion of control,architecture diagram,data flow diagram,class diagram
+5,3,all,1,"Which step of reusing software components is this: shutoff with a wrapper or a terminator component, any offered services in the reusable that are not desired or detrimental to the rest of the design.",Isolate unwanted service,Identify opportunities to reuse,Qualify fitness of candidate components,Make architectural style
+5,3,all,1,______ is more the simplest for the software architect to design.,Forward compatibility,Backward compatibility,reverse compatibility,straight compatibility
+5,3,all,1,"Most of the software produced today is a _____, with only a few exceptions ",product,system,application,project
+5,3,all,2,"______ describes a design where the¬†reusable¬†software dictates the overall flow of control, and not the custom-written portions.¬†",Inversion of control,,,
+5,3,all,2,"The step of reusing software components _____ is: analyse the reusable for appropriateness in the design, including services offered, conditions of service, naming, and library usage. ",Qualify fitness of candidate components,,,
+5,3,all,2,______ is more difficult/risky for the software architect to design.,Backward compatibility,,,
+5,3,all,3,"With¬†_____, the¬†reusable code and problem-specific are developed independently, even though they operate together in the program.¬†",Inversion of control,,,
 5,3,all,3,"The step of reusing software components _____ is: shutoff with a wrapper or a terminator component, any offered services in the reusable that are not desired or detrimental to the rest of the design.",Isolate unwanted service,,,
 5,3,all,3,______ is more the simplest for the software architect to design.,Forward compatibility,,,
-5,3,project manager,3,"The trend in reliability over time _______ is: Fault accumulates. Over time, this dirt degrades portions of the software, until eventually the faults cascade and compound to crash the entire software.",Weilbull curve,,,
-5,3,all,3,"The core of most product certifications include reliability, _____, and correctness. ",safety,,,
