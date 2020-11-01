@@ -1,5 +1,4 @@
-# Set up Backend Server
-## Two ways are provided to set up the backend server
+# Two ways are provided to set up the backend server
 ## 1. Running server on local computer
 ### Requirements
 1. Python 3.7
