@@ -5,7 +5,7 @@ import json
 '''List of task to be included for stress and peformance test '''
 class UserBehaviour(TaskSet):
     """ user authentication """
-    header = {"authorization" : "Token 60708f93f200848e33f3b433f91f7df77a2991a0"}
+    header = {"authorization" : "Token e2c7d5894a539f0c823dadb077fe8db17a237efe"}
     student = {"email":"jy@gmail.com", "password":"password"}
     
 
