@@ -19,6 +19,7 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 from rest_framework.schemas import get_schema_view
 
+
 urlpatterns = [
     path('', admin.site.urls),
     path('nested_admin', include('nested_admin.urls')),
@@ -32,4 +33,9 @@ urlpatterns = [
         template_name='documentation.html',
         extra_context={'schema_url':'openapi-schema'}
     ), name='swagger-ui'),
+
+
 ]
+
+admin.site.site_header = 'Mazerunner Administration'
+admin.site.index_title = 'Teacher Administration Site '
