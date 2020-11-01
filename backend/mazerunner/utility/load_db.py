@@ -16,16 +16,16 @@ from questions.models import Questions_answer
 
 ''' function to create users and load into the database'''
 def load_users_data(): 
-    User.objects.create_user(email = 'John@mail.com',password = 'password',name = 'John',distanceToNPC = 0,overallScore = 0,containBonus = False),
-    User.objects.create_user(email = 'Marry@mail.com',password = 'password',name = 'Mary',distanceToNPC = 0,overallScore = 0,containBonus = False),
-    User.objects.create_user(email = 'James@mail.com',password = 'password',name = 'James',distanceToNPC = 0,overallScore = 0,containBonus = False),
-    User.objects.create_user(email = 'Jayce@mail.com',password = 'password',name = 'Jayce',distanceToNPC = 0,overallScore = 0,containBonus = False),
-    User.objects.create_user(email = 'Annie@mail.com',password = 'password',name = 'Annie',distanceToNPC = 0,overallScore = 0,containBonus = False),
-    User.objects.create_user(email = 'Ian@mail.com',password = 'password',name = 'Ian',distanceToNPC = 0,overallScore = 0,containBonus = False),
-    User.objects.create_user(email = 'Ethan@mail.com',password = 'password',name = 'Ethan',distanceToNPC = 0,overallScore = 0,containBonus = False),
-    User.objects.create_user(email = 'Jolene@mail.com',password = 'password',name = 'Jolene',distanceToNPC = 0,overallScore = 0,containBonus = False),
-    User.objects.create_user(email = 'Sandy@mail.com',password = 'password',name = 'Sandy',distanceToNPC = 0,overallScore = 0,containBonus = False),
-    User.objects.create_user(email = 'Sarah@mail.com',password = 'password',name = 'Sarah',distanceToNPC = 0,overallScore = 0,containBonus = False),
+    User.objects.create_user(email = 'John@mail.com',password = 'password',name = 'John',overallScore = 50)
+    User.objects.create_user(email = 'Marry@mail.com',password = 'password',name = 'Mary',overallScore = 100)
+    User.objects.create_user(email = 'James@mail.com',password = 'password',name = 'James',overallScore = 250)
+    User.objects.create_user(email = 'Jayce@mail.com',password = 'password',name = 'Jayce',overallScore = 300)
+    User.objects.create_user(email = 'Annie@mail.com',password = 'password',name = 'Annie',overallScore = 211)
+    User.objects.create_user(email = 'Ian@mail.com',password = 'password',name = 'Ian',overallScore = 39)
+    User.objects.create_user(email = 'Ethan@mail.com',password = 'password',name = 'Ethan',overallScore = 80)
+    User.objects.create_user(email = 'Jolene@mail.com',password = 'password',name = 'Jolene',overallScore = 90)
+    User.objects.create_user(email = 'Sandy@mail.com',password = 'password',name = 'Sandy',overallScore = 33)
+    User.objects.create_user(email = 'Sarah@mail.com',password = 'password',name = 'Sarah',overallScore = 34)
 
 ''' function to create worlds and load into the database'''
 def load_worlds_data():

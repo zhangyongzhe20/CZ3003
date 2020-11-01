@@ -16,7 +16,7 @@ class UserCreationForm(forms.ModelForm):
     password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
     class Meta:
         model = User
-        fields = ('email', 'name','distanceToNPC','overallScore','containBonus','role' , 'is_staff')
+        fields = ('email', 'name','overallScore' , 'is_staff')
     def clean_password2(self):
         # Check that the two password entries match
         password1 = self.cleaned_data.get("password1")
@@ -41,7 +41,7 @@ class UserChangeForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('email', 'password', 'name', 'distanceToNPC','overallScore','containBonus','role','is_active', 'is_staff')
+        fields = ('email', 'password', 'name','overallScore','is_active', 'is_staff')
 
 class UserAdmin(BaseUserAdmin):
     # The forms to add and change user instances
@@ -63,11 +63,11 @@ class UserAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ('email', 'password', 'name', 'distanceToNPC','overallScore','containBonus','role','is_active', 'is_staff')
+    list_display = ('email', 'password', 'name','overallScore','is_active', 'is_staff')
     list_filter = ('is_staff',)
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        ('Personal info', {'fields': ('name', 'distanceToNPC','overallScore','containBonus','role',)}),
+        ('Personal info', {'fields': ('name','overallScore',)}),
         ('Permissions', {'fields': ('is_staff',)}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
@@ -75,7 +75,7 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'name', 'distanceToNPC','overallScore','containBonus','role','is_staff', 'password1', 'password2')}
+            'fields': ('email', 'name','overallScore','is_staff', 'password1', 'password2')}
         ),
     )
     search_fields = ('email',)

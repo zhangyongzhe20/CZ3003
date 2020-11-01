@@ -21,9 +21,7 @@ class ModelTests(TestCase):
             email = 'student1@mail.com',
             password = 'student1',
             name = 'student1',
-            distanceToNPC = 0,
-            overallScore = 0,
-            containBonus = False
+            overallScore = 0,  
             )
 
         """ Create a teacher account """
@@ -68,9 +66,8 @@ class ModelTests(TestCase):
         """ check all atributes of student are correct """
         self.assertEqual(student.name, 'student1')
         self.assertTrue(student.check_password('student1'))
-        self.assertEqual(student.distanceToNPC, 0)
         self.assertEqual(student.overallScore, 0)
-        self.assertEqual(student.containBonus, False)
+        
 
     def test_create_teacher(self):
         """ test a teacher account is created """

@@ -1,19 +1,27 @@
-from django.shortcuts import render
+import statistics
+
+from django.db import IntegrityError
+from django.db.models import Avg, Count, Max, Min
 from django.http import HttpResponse, JsonResponse
-from django.db.models import Count, Max, Min, Avg
-from rest_framework.parsers import JSONParser
+from django.http.response import HttpResponseRedirect
+from django.shortcuts import render
+from gameHistory.models import Section, World, questionHistory
+from questions.models import Questions, Questions_answer, Questions_teacher
+from rest_framework import generics, status
+from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view
-from rest_framework import generics
+from rest_framework.parsers import JSONParser
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-from rest_framework import status
 from rest_framework.views import APIView
 from users.models import User
-from .serializers import LoginSerializer ,StudentAccountSerializer ,QuestionTeacherSerializer, QuestionHistorySerializer, QuestionStudentSerializer, gameSummarySerializer , LeaderBoardSerializer, overallSummarySerializer
-from questions.models import Questions_teacher , Questions , Questions_answer
-from gameHistory.models import World , Section, questionHistory
-from rest_framework.authtoken.models import Token
-from rest_framework.permissions import AllowAny
-import statistics
+
+from .forms import signupForm
+from .serializers import (LeaderBoardSerializer, LoginSerializer,
+                          QuestionHistorySerializer, QuestionStudentSerializer,
+                          QuestionTeacherSerializer, StudentAccountSerializer,
+                          gameSummarySerializer, overallSummarySerializer)
+
 
 #Login
 class LoginAPIView(APIView):
@@ -57,14 +65,13 @@ class StudentAPIView(APIView):
 class LeaderBoardAPIView(APIView):
     serializer_class = LeaderBoardSerializer
     def get(self , request):
-        students = User.objects.filter(is_staff = False).order_by("overallScore")
+        students = User.objects.filter(is_staff = False).order_by("-overallScore")
         serializer = LeaderBoardSerializer(students , many = True)
         return Response(serializer.data)
 
 class QuestionAPIView(APIView):
     def post(self , request):
         try:
-            print(request.data)
             world = World.objects.get(name = request.data['world'])
             section = Section.objects.get(name = request.data['section'])
 
@@ -75,7 +82,6 @@ class QuestionAPIView(APIView):
                 role = 'frontend'
             if(request.data["role"] == "3"):
                 role = 'backend'
-            print(role)
             if(int(request.data["questionLevel"])  == 1):
                 questions = Questions_teacher.objects.filter(worldID = world , sectionID  = section , role = role, questionLevel = request.data["questionLevel"] ).order_by('?')[:5]   
             else:
@@ -92,7 +98,6 @@ class QuestionSubmitAPIView(APIView):
             world = World.objects.get(name = request.data['world'])
             section = Section.objects.get(name = request.data['section'])
             point = int(request.data['pointGain'])
-            print(point)
             data = {
             "worldID" : world.id,
             "sectionID" : section.id,
@@ -170,6 +175,11 @@ class overallSummaryView(APIView):
         else:
             queryset = questionHistory.objects.all()
 
+        if queryset.count() == 0:
+            return render(request, 'dashboard.html', {
+                'data': None
+            })
+
         objList = dict()
 
         labels = ['Correct', 'Incorrect']
@@ -222,4 +232,32 @@ class overallSummaryView(APIView):
             'orderedStudentList': orderedStudentList,
             'orderedScoreList': orderedScoreList,
             'scoreLevel': scoreLevel
+        })
+
+class signup(APIView):
+    """
+    View for Signup form
+
+    Returns:
+        HttpResponse: Response that contains all the variables used by sign_up.html template
+    """
+    authentication_classes = []
+    permission_classes = []
+    def get(self, request):
+        form = signupForm()
+
+        return render(request, 'sign_up.html', {
+            'form': form
+        })
+    
+    def post(self, request):
+        form = signupForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            User.objects.create_superuser(email, password)
+            return HttpResponseRedirect('/')
+        
+        return render(request, 'sign_up.html', {
+            'form': form
         })

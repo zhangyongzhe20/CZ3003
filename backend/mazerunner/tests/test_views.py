@@ -30,7 +30,6 @@ class TestViews(APITestCase):
         self.questions_submit_url = reverse('questions_submit')
         self.create_questions_url = reverse('create-questions')
         self.game_summary_url = reverse('gameSummary')
-
         """create a user"""
         self.credentials = {
             'email': 'testuser@mail.com',
@@ -331,7 +330,7 @@ class TestViews(APITestCase):
         world = World.objects.get(name='1')
         section = Section.objects.get(name='1')
         questions = Questions_teacher.objects.filter(
-            worldID=world, sectionID=section, role='frontend', questionLevel=1)
+            worldID=world, sectionID=section, role='frontend', questionLevel=1).order_by('?')[:5]
 
         self.assertEqual(res.status_code, 200)
         self.assertEqual(res_data, QuestionTeacherSerializer(
@@ -342,7 +341,7 @@ class TestViews(APITestCase):
         """ test post question answer with data is successful """
         self.client.force_authenticate(user=self.user)
         data = {'world': self.question.worldID.name, 'section': self.question.sectionID.name,
-                'questionID': self.question.id, 'studentID': self.user.id,  'studentAnswer': '2',  'isAnsweredCorrect': True}
+                'questionID': self.question.id, 'studentID': self.user.id,  'studentAnswer': '2',  'isAnsweredCorrect': True , 'pointGain':1}
         res = self.client.post(self.questions_submit_url, data=data, format='json')
         res_data = json.loads(res.content)
 
