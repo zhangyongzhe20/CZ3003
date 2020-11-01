@@ -20,6 +20,6 @@ def test_template(self):
 
 def test_has_view(self):
     overallView = overallSummaryView
-    view = self.response.context['overallView']
+    view = self.response.context[overallView]
     expected_html = render_to_string('dashboard.html', context)
     self.assertEqual(view, expected_html)
