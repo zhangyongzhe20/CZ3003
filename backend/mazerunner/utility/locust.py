@@ -14,7 +14,7 @@ class UserBehaviour(TaskSet):
         : get_Dashboard : post_question_create (depends): login (one time per user) '''
     ''' 10 : 4 : 3 : 3 : 2 : 2 : 1'''
     '''function to call api login for stress and peformance test '''
-    @task(1)
+    @task#(1)
     def login(self):
         res = self.client.post("/api/login/", json={"email":"jy@gmail.com", "password":"password"})
         print(res.content)
@@ -22,19 +22,19 @@ class UserBehaviour(TaskSet):
         self.header = {"authorization" : "Token " +res_data['token']}
     
     '''function to call api get list of students for stress and peformance test '''
-    @task(3)
+    @task#(3)
     def get_student_list(self):
         res = self.client.get("/api/students", headers=self.header)
         print(res.content)
     
     '''function to call api get leaderboard datas for stress and peformance test '''
-    @task(3)
+    @task#(3)
     def get_leaderboard(self):
         res = self.client.get("/api/students/leaderboard", headers=self.header)
         print(res.content)
 
     '''function to call api get list of questions based on world , section , role and question level for stress and peformance test '''
-    @task(4)
+    @task#(4)
     def post_query_for_question_list(self):
         data = {'world': '1', 'section': '1', 'role': '1', 'questionLevel': 1}
         res = self.client.post("/api/questions",headers=self.header, json=data)
@@ -50,7 +50,7 @@ class UserBehaviour(TaskSet):
     
 
     '''function to call api to create question history based on question and student for stress and peformance test '''
-    @task(10)
+    @task#(10)
     def post_question_ans(self):
         data = {'world': '1','section':'1',
         'questionID': 1, 'studentID': 1,  'studentAnswer': '2',  'isAnsweredCorrect': True , 'pointGain' : 3 }  
@@ -59,7 +59,7 @@ class UserBehaviour(TaskSet):
 
 
     '''function to call api to create question based on student for stress and peformance test '''
-    @task(2)
+    @task#(2)
     def post_question_create(self):
         data ={ 'Proposer': self.student['email'] , 'isMCQ': True,  'questionBody': '10*10 = ?', 
         'questionAns'  : [
@@ -69,7 +69,7 @@ class UserBehaviour(TaskSet):
         res = self.client.post("/api/questions/create", headers = self.header , json = data)
         print(res.content)
 
-    @task(2)
+    @task#(2)
     def get_Dashboard(self):
         res = self.client.get("/dashboard", headers=self.header)
         print(res.content)
