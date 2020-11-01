@@ -1,3 +1,5 @@
 {
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+    "python.pythonPath": "C:\\Users\\Admin\\.virtualenvs\\CZ3003-SSAD-zFpCxb7C\\Scripts\\python.exe",
+    "python.linting.enabled": true
 }

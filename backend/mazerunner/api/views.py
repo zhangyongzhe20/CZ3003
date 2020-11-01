@@ -140,8 +140,6 @@ class overallSummaryView(APIView):
     Returns:
         HttpResponse: Response that contains all the variables used by dashboard.html template
     """
-    authentication_classes = []
-    permission_classes = []
     def get(self,request):
         currObjects = dict()
         noParams = True
