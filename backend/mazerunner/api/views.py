@@ -1,4 +1,5 @@
 import statistics
+import random
 
 from django.db import IntegrityError
 from django.db.models import Avg, Case, Count, Max, Min, TextField, Value, When
@@ -168,7 +169,7 @@ class overallSummaryView(APIView):
             currObjects["Question"] = None
         
         if currObjects["Student"] != None:
-            queryset = questionHistory.objects.filter(studentID__name = currObjects["Student"])
+            queryset = questionHistory.objects.filter(studentID__id = currObjects["Student"])
             noParams = False
         else:
             queryset = questionHistory.objects.all()
@@ -201,20 +202,32 @@ class overallSummaryView(APIView):
             When(studentID__name='', then='studentID__email'),
             default='studentID__name'
         ))
-        studentScore = {x['ident']: x['score'] for x in scoreQuery.values()}
+        studentScore = [(x['studentID_id'], x['ident'], x['score']) for x in scoreQuery.values()]
+        sortedScore = sorted(studentScore, key=lambda item: [2])
         
-        orderedStudentList = [k for k, v in sorted(studentScore.items(), key=lambda item: [1])]
-        orderedScoreList = [v for k, v in sorted(studentScore.items(), key=lambda item: [1])]
+        orderedStudentIDList = [x[0] for x in sortedScore]
+        orderedStudentList = [x[1] for x in sortedScore]
+        orderedScoreList = [x[2] for x in sortedScore]
 
         scoreLevel = dict()
         scoreLevel["Max"] = max(orderedScoreList)
         scoreLevel["Min"] = min(orderedScoreList)
         scoreLevel["Mean"] = round(statistics.mean(orderedScoreList), 2)
         scoreLevel["Median"] = statistics.median(orderedScoreList)
-
         
         data[0] = queryset.filter(isAnsweredCorrect=True).count()
         data[1] = queryset.filter(isAnsweredCorrect=False).count()
+
+        colorList = list()
+
+        for i in range(len(orderedStudentList)):
+            letters = '0123456789ABCDEF'
+            color = '#'
+            for j in range(6):
+                color += letters[random.randint(0, len(letters) - 1)]
+            colorList.append(color)
+
+        studentScore = zip(colorList, orderedStudentIDList, orderedStudentList, orderedScoreList)
     
         return render(request, 'dashboard.html', {
             'labels': labels,
@@ -226,7 +239,8 @@ class overallSummaryView(APIView):
             'studentScore': studentScore,
             'orderedStudentList': orderedStudentList,
             'orderedScoreList': orderedScoreList,
-            'scoreLevel': scoreLevel
+            'scoreLevel': scoreLevel,
+            'colorList': colorList
         })
 
 class signup(APIView):
