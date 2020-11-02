@@ -1,5 +1,5 @@
 import statistics
-
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from django.db import IntegrityError
 from django.db.models import Avg, Count, Max, Min
 from django.http import HttpResponse, JsonResponse
@@ -23,7 +23,7 @@ from .serializers import (LeaderBoardSerializer, LoginSerializer,
                           gameSummarySerializer, overallSummarySerializer)
 
 
-#Login
+# TokenAuthentication 
 class LoginAPIView(APIView):
     serializer_class = LoginSerializer
     authentication_classes = []
@@ -140,6 +140,7 @@ class overallSummaryView(APIView):
     Returns:
         HttpResponse: Response that contains all the variables used by dashboard.html template
     """
+    authentication_classes = [SessionAuthentication]
     def get(self,request):
         currObjects = dict()
         noParams = True
