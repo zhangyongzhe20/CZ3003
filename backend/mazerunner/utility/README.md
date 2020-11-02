@@ -224,20 +224,20 @@ class User(HttpUser):
 The detailed results are saved as *.html in our `test` folder. The below two pictures are used to support our observations.
 * 1. Simulate `400 users` with `spawned rate 40` users per second.
 
-![alt text](https://github.com/FrankLeeeee/CZ3003-SSAD/blob/master/backend/mazerunner/results/weight/400_40_w.png)
+![alt text](https://github.com/FrankLeeeee/CZ3003-SSAD/tree/master/backend/mazerunner/utility/results/weight/400_40_w.png)
 
 * 2. Simulate `900 users` with `spawned rate 90` users per second.
 
-![alt text](https://github.com/FrankLeeeee/CZ3003-SSAD/blob/master/backend/mazerunner/resutls/weight/900_90_w.png)
+![alt text](https://github.com/FrankLeeeee/CZ3003-SSAD/tree/master/backend/mazerunner/utility/results/weight/900_90_w.png)
 
 ## Result with unweight task
 * 1. Simulate `400 users` with `spawned rate 40` users per second.
 
-![alt text](https://github.com/FrankLeeeee/CZ3003-SSAD/blob/master/backend/mazerunner/results/without_weight/400_40.png)
+![alt text](https://github.com/FrankLeeeee/CZ3003-SSAD/tree/master/backend/mazerunner/utility/results/without_weight/400_40.png)
 
 * 2. Simulate `900 users` with `spawned rate 90` users per second.
 
-![alt text](https://github.com/FrankLeeeee/CZ3003-SSAD/blob/master/backend/mazerunner/resutls/without_weight/900_90.png)
+![alt text](https://github.com/FrankLeeeee/CZ3003-SSAD/tree/master/backend/mazerunner/utility/results/without_weight/900_90.png)
 
 
 ## Observations
