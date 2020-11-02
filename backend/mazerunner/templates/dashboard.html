@@ -62,10 +62,8 @@
 				<a class="btn btn-outline-primary" href="{% url 'dashboard' %}?worldID={{world}}&studentID={{currObjects.Student}}" method="post">World {{world}}</a>
 			{% endif %}
 		{% endfor %}
-		{% if currObjects.World == None %}
-			<a class="btn btn-outline-warning active">Reset World</a>
-		{% else %}
-			<a class="btn btn-outline-warning" href="{% url 'dashboard' %}" method="post">Reset World</a>
+		{% if noParams == False %}
+			<a class="btn btn-warning" href="{% url 'dashboard' %}" method="post">Reset</a>
 		{% endif %}
 	</div>
 	<div class="ml-5 mr-5 mb-3">
@@ -95,31 +93,37 @@
 		{% endif %}
 	</div>
 	<div class="ml-5 mr-5 mb-3">
-		{% for student, score in studentScore.items %}
+		{% for color, student_id, student, score in studentScore %}
 			{% if student == currObjects.Student %}
-				<a class="btn btn-light active">{{student}} {{score}}</a>
+				<a class="btn btn-light active"><span class="badge" style="background-color: {{color}};"> </span> {{student}} <span
+					{% if score == scoreLevel.Max %}
+						style="color:green;"
+					{% elif score == scoreLevel.Min %}
+						style="color:crimson;"
+					{% endif %}
+					>{{score}}</span></a>
 			{% elif noParams %}
-				<a class="btn btn-light" href="{{ request.path }}?studentID={{student}}" method="post">{{student}} {{score}}</a>
+				<a class="btn btn-light" href="{{ request.path }}?studentID={{student_id}}" method="post"><span class="badge" style="background-color: {{color}};"> </span> {{student}} <span
+					{% if score == scoreLevel.Max %}
+						style="color:green;"
+					{% elif score == scoreLevel.Min %}
+						style="color:crimson;"
+					{% endif %}
+					>{{score}}</span></a>
 			{% else %}
-				<a class="btn btn-light" href="{{ request.get_full_path }}&studentID={{student}}" method="post">{{student}} {{score}}</a>
+				<a class="btn btn-light" href="{{ request.get_full_path }}&studentID={{student_id}}" method="post"><span class="badge" style="background-color: {{color}};"> </span> {{student}} <span
+					{% if score == scoreLevel.Max %}
+						style="color:green;"
+					{% elif score == scoreLevel.Min %}
+						style="color:crimson;"
+					{% endif %}
+					>{{score}}</span></a>
 			{% endif %}
 		{% endfor %}
 	</div>
 
 	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 	<script>
-
-		function getRandomColor() {
-            var letters = '0123456789ABCDEF'.split('');
-            var color = '#';
-            for (var i = 0; i < 6; i++ ) {
-                color += letters[Math.floor(Math.random() * 16)];
-            }
-            return color;
-		}
-
-		var scoreArray = {{ orderedScoreList | safe }};
-		var colourArray = scoreArray.map(getRandomColor);
 
 		var config = {
 			type: 'pie',
@@ -135,7 +139,11 @@
 			  }],
 			},
 		options: {
-			responsive: true
+			responsive: true,
+			title: {
+				display:true,
+				text: 'Summary'
+			}
 		}
 		};
 		var scoreConfig = {
@@ -143,8 +151,8 @@
 			data: {
 				labels: {{ orderedStudentList | safe }},
 		datasets: [{
-			data: scoreArray,
-			backgroundColor: colourArray,
+			data: {{ orderedScoreList | safe }},
+			backgroundColor: {{ colorList | safe }},
 	          //   backgroundColor: [
 	          //     '#696969', '#808080', '#A9A9A9', '#C0C0C0', '#D3D3D3'
 	          //   ],
@@ -155,6 +163,10 @@
 			responsive: true,
 			legend: {
 				display: false
+			},
+			title: {
+				display:true,
+				text: 'Score'
 			}
 		}
 		};
