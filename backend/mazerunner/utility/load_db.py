@@ -45,7 +45,7 @@ def load_sections_data():
 
 ''' function to create questions and load into the database'''
 def load_questions_data():
-    with open(os.path.join(os.getcwd(),"" "utility","questions2.csv"),  encoding="utf-8") as f:
+    with open(os.path.join(os.getcwd(),"" "utility","questions.csv"),  encoding="utf-8") as f:
         reader = csv.reader(f)
         for row in reader:
             if row[0] != 'world':
