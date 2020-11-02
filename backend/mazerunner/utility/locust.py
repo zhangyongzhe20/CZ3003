@@ -5,7 +5,7 @@ import json
 '''List of task to be included for stress and peformance test '''
 class UserBehaviour(TaskSet):
     """ user authentication """
-    header = {"authorization" : "Token e2c7d5894a539f0c823dadb077fe8db17a237efe"}
+    header = {"authorization" : "Token bbd943870729ffbc9683862bcc3ce41e1960180d"}
     student = {"email":"jy@gmail.com", "password":"password"}
     
 
@@ -25,20 +25,20 @@ class UserBehaviour(TaskSet):
     @task(3)
     def get_student_list(self):
         res = self.client.get("/api/students", headers=self.header)
-        print(res.content)
+       # print(res.content)
     
     '''function to call api get leaderboard datas for stress and peformance test '''
     @task(3)
     def get_leaderboard(self):
         res = self.client.get("/api/students/leaderboard", headers=self.header)
-        print(res.content)
+      #  print(res.content)
 
     '''function to call api get list of questions based on world , section , role and question level for stress and peformance test '''
     @task(4)
     def post_query_for_question_list(self):
         data = {'world': '1', 'section': '1', 'role': '1', 'questionLevel': 1}
         res = self.client.post("/api/questions",headers=self.header, json=data)
-        print(res.content)
+      #  print(res.content)
 
 
     # '''function to call api to get game summary based on student email for stress and peformance test '''
@@ -55,7 +55,7 @@ class UserBehaviour(TaskSet):
         data = {'world': '1','section':'1',
         'questionID': 1, 'studentID': 1,  'studentAnswer': '2',  'isAnsweredCorrect': True , 'pointGain' : 3 }  
         res = self.client.post("/api/questions/submit",headers = self.header , json = data)
-        print(res.content)
+      #  print(res.content)
 
 
     '''function to call api to create question based on student for stress and peformance test '''
@@ -67,12 +67,12 @@ class UserBehaviour(TaskSet):
             { 'questionText': '10', 'isCorrect' : False },
             {'questionText': '10', 'isCorrect' : False  },  {'questionText': '100', 'isCorrect' : True }]} 
         res = self.client.post("/api/questions/create", headers = self.header , json = data)
-        print(res.content)
+       # print(res.content)
 
     @task(2)
     def get_Dashboard(self):
         res = self.client.get("/dashboard", headers=self.header)
-        print(res.content)
+      #  print(res.content)
 
 ''' driver program '''
 class User(HttpUser):

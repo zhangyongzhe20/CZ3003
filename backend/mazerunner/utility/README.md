@@ -20,16 +20,16 @@ from questions.models import Questions_answer
 
 ''' function to create users and load into the database'''
 def load_users_data(): 
-    User.objects.create_user(email = 'John@mail.com',password = 'password',name = 'John',distanceToNPC = 0,overallScore = 0,containBonus = False),
-    User.objects.create_user(email = 'Marry@mail.com',password = 'password',name = 'Mary',distanceToNPC = 0,overallScore = 0,containBonus = False),
-    User.objects.create_user(email = 'James@mail.com',password = 'password',name = 'James',distanceToNPC = 0,overallScore = 0,containBonus = False),
-    User.objects.create_user(email = 'Jayce@mail.com',password = 'password',name = 'Jayce',distanceToNPC = 0,overallScore = 0,containBonus = False),
-    User.objects.create_user(email = 'Annie@mail.com',password = 'password',name = 'Annie',distanceToNPC = 0,overallScore = 0,containBonus = False),
-    User.objects.create_user(email = 'Ian@mail.com',password = 'password',name = 'Ian',distanceToNPC = 0,overallScore = 0,containBonus = False),
-    User.objects.create_user(email = 'Ethan@mail.com',password = 'password',name = 'Ethan',distanceToNPC = 0,overallScore = 0,containBonus = False),
-    User.objects.create_user(email = 'Jolene@mail.com',password = 'password',name = 'Jolene',distanceToNPC = 0,overallScore = 0,containBonus = False),
-    User.objects.create_user(email = 'Sandy@mail.com',password = 'password',name = 'Sandy',distanceToNPC = 0,overallScore = 0,containBonus = False),
-    User.objects.create_user(email = 'Sarah@mail.com',password = 'password',name = 'Sarah',distanceToNPC = 0,overallScore = 0,containBonus = False),
+    User.objects.create_user(email = 'John@e.ntu.edu.sg',password = 'password',name = 'John',overallScore = 50)
+    User.objects.create_user(email = 'Marry@e.ntu.edu.sg',password = 'password',name = 'Mary',overallScore = 100)
+    User.objects.create_user(email = 'James@e.ntu.edu.sg',password = 'password',name = 'James',overallScore = 250)
+    User.objects.create_user(email = 'Jayce@e.ntu.edu.sg',password = 'password',name = 'Jayce',overallScore = 300)
+    User.objects.create_user(email = 'Annie@e.ntu.edu.sg',password = 'password',name = 'Annie',overallScore = 211)
+    User.objects.create_user(email = 'Ian@e.ntu.edu.sg',password = 'password',name = 'Ian',overallScore = 39)
+    User.objects.create_user(email = 'Ethan@e.ntu.edu.sg',password = 'password',name = 'Ethan',overallScore = 80)
+    User.objects.create_user(email = 'Jolene@e.ntu.edu.sg',password = 'password',name = 'Jolene',overallScore = 90)
+    User.objects.create_user(email = 'Sandy@e.ntu.edu.sg',password = 'password',name = 'Sandy',overallScore = 33)
+    User.objects.create_user(email = 'Sarah@e.ntu.edu.sg',password = 'password',name = 'Sarah',overallScore = 34)
 
 ''' function to create worlds and load into the database'''
 def load_worlds_data():
@@ -49,20 +49,52 @@ def load_sections_data():
 
 ''' function to create questions and load into the database'''
 def load_questions_data():
-    with open(os.path.join(os.getcwd(),"" "utility","questions.csv")) as f:
+    with open(os.path.join(os.getcwd(),"" "utility","questions2.csv"),  encoding="utf-8") as f:
         reader = csv.reader(f)
         for row in reader:
-            if row[0] != "world":
+            if row[0] != 'world':
                 world, created = World.objects.get_or_create(name = row[0])
                 section, created = Section.objects.get_or_create(name = row[1])
-                question = Questions_teacher.objects.create(worldID= world , sectionID = section , role = row[2] ,
-                questionLevel = row[3] , questionBody = row[4])
-                Questions_answer.objects.create(questionID = question , questionText =row[5] , isCorrect = True)
 
-                if(question.questionLevel !='3'):
-                    Questions_answer.objects.create(questionID = question ,questionText= row[6] ,isCorrect = False)
-                    Questions_answer.objects.create(questionID = question ,questionText= row[7] ,isCorrect = False)
-                    Questions_answer.objects.create(questionID = question , questionText=row[8] ,isCorrect = False)
+                if row[2] != "all":
+                    question = Questions_teacher.objects.create(worldID= world , sectionID = section , role = row[2] ,
+                    questionLevel = row[3] , questionBody = row[4])
+
+                    Questions_answer.objects.create(questionID = question , questionText =row[5] , isCorrect = True)
+
+                    if(int(question.questionLevel) == 1):
+                        if(row[6] != None and row[6] != ""):
+                            Questions_answer.objects.create(questionID = question ,questionText= row[6] ,isCorrect = False)
+                        if(row[7] != None and row[7] != ""):
+                            Questions_answer.objects.create(questionID = question ,questionText= row[7] ,isCorrect = False)
+                        if(row[8] != None and row[8] != ""):
+                            Questions_answer.objects.create(questionID = question , questionText=row[8] ,isCorrect = False)
+
+                else :
+                    roles = ["project manager","backend","frontend"]
+
+                    for role in roles:
+                        question = Questions_teacher.objects.create(worldID= world , sectionID = section , role = role ,
+                    questionLevel = row[3] , questionBody = row[4])
+
+                    
+                        Questions_answer.objects.create(questionID = question , questionText =row[5] , isCorrect = True)
+
+        
+                        if(int(question.questionLevel) == 1):
+                        
+                            if(row[6] != None and row[6] != ""):
+                                Questions_answer.objects.create(questionID = question ,questionText= row[6] ,isCorrect = False)
+                        
+                            if(row[7] != None and row[7] != ""):              
+                                Questions_answer.objects.create(questionID = question ,questionText= row[7] ,isCorrect = False)
+                            if(row[8] != None and row[8] != ""):
+                                Questions_answer.objects.create(questionID = question , questionText=row[8] ,isCorrect = False)
+
+                    
+
+
+               
 
 '''loading of data function being called'''
 def load_db(): 
@@ -76,6 +108,7 @@ def load_db():
 ''' driver program '''
 if __name__ == "__main__":
     load_db()
+    print("done")
 ```
 
 
@@ -86,13 +119,13 @@ if __name__ == "__main__":
 LocustIO, an open source tool written in python, is used for load testing of web applications. It's used with web UI to view the test results.
 Locust emulates the users perfrom the testing tasks on the application and measure the performance of the number of requests for different tasks and analysis the success and failure of those requests.
 In our testings, we have 6 test cases:
-* get_student_list
-* get_leaderboard
-* get_question
-* get_gameSummary
-* post_question_ans
+* post_question_ans(every question)
+* post_query_for_question_list(every section)
+* get_leaderboard (depends)
+* get_student_list (same as get_leaderboard)  
+* get_Dashboard 
 * post_question_create
-
+* login
 ## How to Run locust
 * 1.Open new cmd and change directory to locust file
 * 2.Enter command - "locust -f locust.py"
@@ -101,53 +134,61 @@ In our testings, we have 6 test cases:
 * 4.Enter the number of `user` and the `spawn rate`
 
 
-## Testing script
+## Testing script with weight
 ``` python
+""" Using Locust lib for the load & performance test """
 from locust import TaskSet, task, between , HttpUser
 import json
 
-""" user authentication """
+'''List of task to be included for stress and peformance test '''
 class UserBehaviour(TaskSet):
-    header = {"authorization" : "Token bdfeedd723094892a05ab8bafb422c70ec00ae43"}
+    """ user authentication """
+    header = {"authorization" : "Token e2c7d5894a539f0c823dadb077fe8db17a237efe"}
     student = {"email":"jy@gmail.com", "password":"password"}
     
-    @task
+
+    ''' the weight ratio of task '''
+    ''' post_question_ans(every question)  : post_query_for_question_list(every section) : get_leaderboard (depends): get_student_list (same as get_leaderboard)  
+        : get_Dashboard : post_question_create (depends): login (one time per user) '''
+    ''' 10 : 4 : 3 : 3 : 2 : 2 : 1'''
+    '''function to call api login for stress and peformance test '''
+    @task(1)
     def login(self):
-        res = self.client.post("/api/login/", json=self.student)
+        res = self.client.post("/api/login/", json={"email":"jy@gmail.com", "password":"password"})
         print(res.content)
         res_data = json.loads(res.content)
         self.header = {"authorization" : "Token " +res_data['token']}
     
-    @task
+    '''function to call api get list of students for stress and peformance test '''
+    @task(3)
     def get_student_list(self):
         res = self.client.get("/api/students", headers=self.header)
         print(res.content)
-        
-    @task
+    
+    '''function to call api get leaderboard datas for stress and peformance test '''
+    @task(3)
     def get_leaderboard(self):
         res = self.client.get("/api/students/leaderboard", headers=self.header)
         print(res.content)
 
-    @task
-    def get_question(self):
-        data = {'world': 'World1', 'section': '1', 'role': '2', 'questionLevel': 1}
-        res = self.client.get("/api/questions",headers=self.header, json=data)
+    '''function to call api get list of questions based on world , section , role and question level for stress and peformance test '''
+    @task(4)
+    def post_query_for_question_list(self):
+        data = {'world': '1', 'section': '1', 'role': '1', 'questionLevel': 1}
+        res = self.client.post("/api/questions",headers=self.header, json=data)
         print(res.content)
 
-    @task
-    def get_gameSummary(self):
-        data = {'email' : 'jy@gmail.com'}
-        res = self.client.get("/api/gameSummary" , headers = self.header , json=data)
-        print(res.content)
-    
-    @task
+    '''function to call api to create question history based on question and student for stress and peformance test '''
+    @task(10)
     def post_question_ans(self):
-        data = {'world': 'World1','section':'1',
-        'questionID': 1, 'studentID': 1,  'studentAnswer': '2',  'isAnsweredCorrect': True }  
-        res = self.client.post("/api/questions",headers = self.header , json = data)
+        data = {'world': '1','section':'1',
+        'questionID': 1, 'studentID': 1,  'studentAnswer': '2',  'isAnsweredCorrect': True , 'pointGain' : 3 }  
+        res = self.client.post("/api/questions/submit",headers = self.header , json = data)
         print(res.content)
 
-    @task
+
+    '''function to call api to create question based on student for stress and peformance test '''
+    @task(2)
     def post_question_create(self):
         data ={ 'Proposer': self.student['email'] , 'isMCQ': True,  'questionBody': '10*10 = ?', 
         'questionAns'  : [
@@ -157,6 +198,12 @@ class UserBehaviour(TaskSet):
         res = self.client.post("/api/questions/create", headers = self.header , json = data)
         print(res.content)
 
+    @task(2)
+    def get_Dashboard(self):
+        res = self.client.get("/dashboard", headers=self.header)
+        print(res.content)
+
+''' driver program '''
 class User(HttpUser):
     tasks = [UserBehaviour]
     min_wait = 5000
@@ -173,22 +220,35 @@ class User(HttpUser):
 6. `Content size` - Size of requests data.
 7. `Request per second`.
 
-The detailed rsults are saved as *.html in our `test` folder. The below two pictures are used to support our observations.
-* 1. Simulate `700 users` with `spawned rate 70` users per second.
+## Result with weighted task
+The detailed results are saved as *.html in our `test` folder. The below two pictures are used to support our observations.
+* 1. Simulate `400 users` with `spawned rate 40` users per second.
 
-![alt text](https://github.com/FrankLeeeee/CZ3003-SSAD/blob/master/backend/mazerunner/tests/700users_70.png)
+![alt text](https://github.com/FrankLeeeee/CZ3003-SSAD/blob/master/backend/mazerunner/utility/results/weight/40_400_w.PNG)
 
-* 2. Simulate `800 users` with `spawned rate 80` users per second.
+* 2. Simulate `900 users` with `spawned rate 90` users per second.
 
-![alt text](https://github.com/FrankLeeeee/CZ3003-SSAD/blob/master/backend/mazerunner/tests/800users_80.png)
+![alt text](https://github.com/FrankLeeeee/CZ3003-SSAD/blob/master/backend/mazerunner/utility/results/weight/90_900_w.PNG)
+
+## Result without weighted task
+* 1. Simulate `400 users` with `spawned rate 40` users per second.
+
+![alt text](https://github.com/FrankLeeeee/CZ3003-SSAD/blob/master/backend/mazerunner/utility/results/without_weight/40_400.PNG)
+
+* 2. Simulate `900 users` with `spawned rate 90` users per second.
+
+![alt text](https://github.com/FrankLeeeee/CZ3003-SSAD/blob/master/backend/mazerunner/utility/results/without_weight/90_900.PNG)
+
 
 ## Observations
 ### Load testings
-* To test the load caopability of our server, we gradually increased the spawned rate from 10 to 100. Compare the result 1 and result 2, we can find that our server can response the requests from 70 users per second at most. Once the spawned rate increases to 80, our server will crash. 
+* To test the load caopability of our server, we gradually increased the spawned rate from 40 to 90. Compare the result 1 and result 2, we can find that our server can response the requests from 40 users per second at most with or without weighted task. Once the spawned rate increases from 50 to 90, our server are unable to handle all the request.
+
 * Most of the failures are at creating questions.
+
 ### Performance testings
-* When the spawned rate is below 80 users per second, 99 percentage of requests are reponsed within 1 second.
-* Among the 6 testing cases, `login` requests need more time to receive the reponse from server because of the authenticating process. 
+* When the spawned rate is below 40 users per second, 99 percentage of requests are reponsed within 1 second.
+* Among the 6 testing cases, `login` requests need more average time to receive the reponse from server because of the authenticating process when the server is able to handle all the request. 
 
 
 
