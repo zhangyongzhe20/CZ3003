@@ -2,7 +2,6 @@
 ## 1. Running server on local computer
 ### Requirements
 1. Python 3.7
-
 ### Steps
 1. Create an Python virtual environment and install dependencies
 ```python
@@ -20,18 +19,14 @@ python manage.py migrate
 ``` python
 python manage.py runserver
 ```
-
 4. In your browser, go to http://localhost:8000
-
 5. Press `control+C` to stop the local web server.
-
 
 ## 2. Running Server using Docker
 ### Reuquirements
 1. Docker
 2. docker-compose.yml
 3. Dockerfile
-
 ### Steps
 1. Change to the directory contains Dockerfile: `cd backend/deployment`
 1. Build a docker image: `docker-compose run app`
