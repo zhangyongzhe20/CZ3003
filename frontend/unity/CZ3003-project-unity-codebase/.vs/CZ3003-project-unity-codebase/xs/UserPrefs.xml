@@ -1,0 +1,27 @@
+﻿<Properties StartupConfiguration="{6D54D099-0800-CAB6-3985-32D7FE3D7CA6}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Forum.cs">
+    <Files>
+      <File FileName="Assets/Scripts/Forum.cs" Line="34" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="CZ3003-project-unity-codebase" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Scripts" expanded="True">
+                <Node name="Forum.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="916f012d-795b-42a3-a33a-d407e1ad4f9b" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
