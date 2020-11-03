@@ -28,7 +28,7 @@ python manage.py runserver
 2. docker-compose.yml
 3. Dockerfile
 ### Steps
-1. Change to the directory contains Dockerfile: `cd backend/deployment`
+1. Change to the directory contains Dockerfile: `cd backend`
 1. Build a docker image: `docker-compose run app`
 2. Run the server: `docker-compose up`
 3. In your browser, go to http://localhost:8000

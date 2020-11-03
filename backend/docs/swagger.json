@@ -1,0 +1,193 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+      "title": "MazeRunner",
+      "version": "",
+      "description": "Generated API documentation by Swagger"
+    },
+    "paths": {
+      "/api/students/leaderboard": {
+        "get": {
+          "operationId": "listLeaderBoards",
+          "description": "",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {}
+                  }
+                }
+              },
+              "description": ""
+            }
+          }
+        }
+      },
+      "/api/students": {
+        "get": {
+          "operationId": "listStudents",
+          "description": "",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {}
+                  }
+                }
+              },
+              "description": ""
+            }
+          }
+        }
+      },
+      "/api/gameSummary": {
+        "get": {
+          "operationId": "listgameSummarys",
+          "description": "",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {}
+                  }
+                }
+              },
+              "description": ""
+            }
+          }
+        }
+      },
+      "/dashboard/": {
+        "get": {
+          "operationId": "listoverallSummarys",
+          "description": "View for Dashboard",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {}
+                  }
+                }
+              },
+              "description": ""
+            }
+          }
+        }
+      },
+      "/signup/": {
+        "get": {
+          "operationId": "listsignups",
+          "description": "View for Signup form",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {}
+                  }
+                }
+              },
+              "description": ""
+            }
+          }
+        },
+        "post": {
+          "operationId": "Createsignup",
+          "description": "View for Signup form",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {}
+                }
+              },
+              "description": ""
+            }
+          }
+        }
+      },
+      "/api/login/": {
+        "post": {
+          "operationId": "CreateLogin",
+          "description": "",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {}
+                }
+              },
+              "description": ""
+            }
+          }
+        }
+      },
+      "/api/questions": {
+        "post": {
+          "operationId": "CreateQuestion",
+          "description": "",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {}
+                }
+              },
+              "description": ""
+            }
+          }
+        }
+      },
+      "/api/questions/submit": {
+        "post": {
+          "operationId": "CreateQuestionSubmit",
+          "description": "",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {}
+                }
+              },
+              "description": ""
+            }
+          }
+        }
+      },
+      "/api/questions/create": {
+        "post": {
+          "operationId": "CreateCreateQuestion",
+          "description": "",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {}
+                }
+              },
+              "description": ""
+            }
+          }
+        }
+      }
+    }
+  }

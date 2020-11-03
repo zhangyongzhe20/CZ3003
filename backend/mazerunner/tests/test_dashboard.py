@@ -12,7 +12,6 @@ class Dashboartest():
             email='SGX@123.com',
             password='11111111',
             name='sgx',
-            distanceToNPC=0,
             overallScore=0,
             containBonus=False
         )

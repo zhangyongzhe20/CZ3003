@@ -37,8 +37,6 @@ class User(AbstractBaseUser):
     USERNAME_FIELD = 'email'
 
 
-    # REQUIRED_FIELDS = ['distanceToNPC', 'overallScore', 'containBonus', 'role']
-
     def __str__(self):
         return self.email
 
