@@ -3,7 +3,7 @@ from rest_framework.authentication import SessionAuthentication, BasicAuthentica
 import random
 
 from django.db import IntegrityError
-from django.db.models import Avg, Case, Count, Max, Min, TextField, Value, When
+from django.db.models import Avg, Case, Count, Max, Min, Q, TextField, Value, When
 from django.http import HttpResponse, JsonResponse
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
@@ -103,7 +103,7 @@ class QuestionSubmitAPIView(APIView):
             data = {
             "worldID" : world.id,
             "sectionID" : section.id,
-            "questionID": request.data['questionID'],
+            "levelID": request.data['levelID'],
             "studentID" : request.data['studentID'],
             "studentAnswer" : request.data['studentAnswer'],
             "isAnsweredCorrect" : request.data['isAnsweredCorrect'],
@@ -164,6 +164,12 @@ class overallSummaryView(APIView):
         else:
             currObjects["Section"] = None
         
+        if "levelID" in request.query_params.keys():
+            currObjects["Level"] = request.query_params["levelID"]
+            noParams = False
+        else:
+            currObjects["Level"] = None
+            
         if "questionID" in request.query_params.keys():
             currObjects["Question"] = request.query_params["questionID"]
             noParams = False
@@ -187,24 +193,25 @@ class overallSummaryView(APIView):
         data = [0, 0]
         backgroundColor = ['#2A9D8F', '#F4A261']
 
-        objList["World"] = [str(x["worldID__name"]) for x in queryset.order_by().values("worldID__name").distinct()]
+        objList["World"] = [str(x["worldID__name"]) for x in queryset.values("worldID__name").distinct()]
         
         if currObjects["World"] != None:
             queryset = queryset.filter(worldID__name = currObjects["World"])
-            objList["Section"] = [str(x["sectionID__name"]) for x in queryset.order_by().values("sectionID__name").distinct()]
+            objList["Section"] = [str(x["sectionID__name"]) for x in queryset.values("sectionID__name").distinct()]
             if currObjects["Section"] != None:
                 queryset = queryset.filter(sectionID__name = currObjects["Section"])
-                objList["Question"] = [str(x["questionID__questionLevel"]) for x in queryset.order_by().values("questionID__questionLevel").distinct()]
-                if currObjects["Question"] != None:
-                    queryset = queryset.filter(questionID__questionLevel = currObjects["Question"])
+                objList["Level"] = [str(x["questionID__questionLevel"]) for x in queryset.values("questionID__questionLevel").distinct()]
+                if currObjects["Level"] != None:
+                    queryset = queryset.filter(questionID__questionLevel = currObjects["Level"])
+                    objList["Question"] = [str(x["questionID__id"]) for x in queryset.values("questionID__id").distinct()]
+                    if currObjects["Question"] != None:
+                        queryset = queryset.filter(questionID__id=currObjects["Question"])
 
-        scoreQuery = queryset.annotate(score=Count(Case(
-            When(isAnsweredCorrect=True, then=1)
-        )), ident=Case(
+        scoreQuery = queryset.values('studentID').annotate(score=Count('studentID', filter=Q(isAnsweredCorrect=True)), ident=Case(
             When(studentID__name='', then='studentID__email'),
             default='studentID__name'
         ))
-        studentScore = [(x['studentID_id'], x['ident'], x['score']) for x in scoreQuery.values()]
+        studentScore = [(x['studentID'], x['ident'], x['score']) for x in scoreQuery]
         sortedScore = sorted(studentScore, key=lambda item: [2])
         
         orderedStudentIDList = [x[0] for x in sortedScore]

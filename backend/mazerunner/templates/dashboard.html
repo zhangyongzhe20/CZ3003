@@ -81,13 +81,26 @@
 	</div>
 	<div class="ml-5 mr-5 mb-3">
 		{% if currObjects.Section != None %}
+			{% for level in objList.Level %}
+				{% if level == currObjects.Level %}
+					<a class="btn btn-outline-primary active">Level {{level}}</a>	
+				{% elif currObjects.Student == None %}
+					<a class="btn btn-outline-primary" href="{% url 'dashboard' %}?worldID={{currObjects.World}}&sectionID={{currObjects.Section}}&levelID={{level}}" method="post">Level {{level}}</a>
+				{% else %}
+					<a class="btn btn-outline-primary" href="{% url 'dashboard' %}?worldID={{currObjects.World}}&sectionID={{currObjects.Section}}&levelID={{level}}&studentID={{currObjects.Student}}" method="post">Level {{level}}</a>
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+	</div>
+	<div class="ml-5 mr-5 mb-3">
+		{% if currObjects.Section != None %}
 			{% for question in objList.Question %}
 				{% if question == currObjects.Question %}
 					<a class="btn btn-outline-primary active">Question {{question}}</a>	
 				{% elif currObjects.Student == None %}
-					<a class="btn btn-outline-primary" href="{% url 'dashboard' %}?worldID={{currObjects.World}}&sectionID={{currObjects.Section}}&questionID={{question}}" method="post">Question {{question}}</a>
+					<a class="btn btn-outline-primary" href="{% url 'dashboard' %}?worldID={{currObjects.World}}&sectionID={{currObjects.Section}}&levelID={{currObjects.Level}}&questionID={{question}}" method="post">Question {{question}}</a>
 				{% else %}
-					<a class="btn btn-outline-primary" href="{% url 'dashboard' %}?worldID={{currObjects.World}}&sectionID={{currObjects.Section}}&questionID={{question}}&studentID={{currObjects.Student}}" method="post">Question {{question}}</a>
+					<a class="btn btn-outline-primary" href="{% url 'dashboard' %}?worldID={{currObjects.World}}&sectionID={{currObjects.Section}}&levelID={{currObjects.Level}}&questionID={{question}}&studentID={{currObjects.Student}}" method="post">Question {{question}}</a>
 				{% endif %}
 			{% endfor %}
 		{% endif %}
