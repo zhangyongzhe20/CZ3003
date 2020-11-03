@@ -6,14 +6,14 @@ class World(models.Model):
     description = models.CharField(max_length=70,blank = True)
 
     def __str__(self):
-        return self.name
+        return "World " + self.name
 
 
 class Section(models.Model):
     name = models.CharField(max_length=100,unique=True)
     description = models.CharField(max_length=70, blank = True)
     def __str__(self):
-        return self.name
+        return "Section " + self.name
 
 
 class Questions(models.Model):
