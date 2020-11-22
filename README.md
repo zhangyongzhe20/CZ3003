@@ -1,2 +1,1 @@
-# CZ3003-SSAD
-Project Assignment for CZ3003
+Team Lead of the backend in the CZ3003 project work.
